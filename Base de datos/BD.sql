@@ -53,9 +53,8 @@ CREATE TABLE partes(
 	id_parte SERIAL PRIMARY KEY,
 	nombre_parte VARCHAR(20) NOT NULL,
 	cantidad_parte INTEGER DEFAULT 0,
+	valor_parte FLOAT DEFAULT 0.0,
 	id_sede SERIAL REFERENCES sedes(id_sede));
-
-
 
 CREATE TABLE comprador(
 	id_comprador CHAR(9) PRIMARY KEY,
