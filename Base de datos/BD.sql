@@ -38,7 +38,7 @@ CREATE TABLE vehiculos(
 	id_sede SERIAL REFERENCES sedes(id_sede));
 	
 CREATE TABLE usuarios(
-	id_usuario CHAR(9) PRIMARY KEY,
+	id_usuario CHAR(10) PRIMARY KEY,
 	password_usuario VARCHAR(15) NOT NULL,
 	nombre_usuario VARCHAR(50) NOT NULL,
 	estado_usuario BOOLEAN NOT NULL,
