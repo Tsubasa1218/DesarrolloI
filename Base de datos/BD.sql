@@ -64,7 +64,8 @@ CREATE TABLE comprador(
 	email_comprador VARCHAR(50) NOT NULL);
 
 CREATE TABLE cotizaciones(
-	id_cotizacion SERIAL PRIMARY KEY);
+	id_cotizacion SERIAL PRIMARY KEY,
+	valor_cotizacion FLOAT NOT NULL);
 
 CREATE TABLE cotizaciones_realizadas(
 	id_cotizacion SERIAL REFERENCES cotizaciones(id_cotizacion),
@@ -75,7 +76,8 @@ CREATE TABLE cotizaciones_realizadas(
 	CONSTRAINT pk_cotizaciones_realizadas PRIMARY KEY(id_cotizacion, fecha_cotizacion, id_usuario, id_vehiculo, id_comprador));
 
 CREATE TABLE ventas(
-	id_venta SERIAL PRIMARY KEY
+	id_venta SERIAL PRIMARY KEY,
+	valor_venta FLOAT NOT NULL
 	);
 
 CREATE TABLE ordenes(
