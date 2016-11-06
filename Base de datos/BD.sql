@@ -103,4 +103,4 @@ CREATE TABLE ventas_vehiculos(
 	CONSTRAINT pk_ventas_vehiculos PRIMARY KEY (id_venta, id_usuario, id_vehiculo, id_comprador, fecha_venta));
 
 INSERT INTO sedes(nombre_sede, direccion_sede, telefono_sede, email_sede) VALUES('Londres', 'Calle 4D','1234567', 'sede01@abc.com');
-INSERT INTO usuarios(id_usuario, password_usuario, nombre_usuario, estado_usuario, email_usuario, telefono_usuario, tipo_usuario, fecha_ingreso_usuario, id_sede) VALUES ('114408514', '12345', 'Juan Suaza', TRUE, 'xd@xd.com', '1234567', 'Gerente', '2016-12-12', 1);
+INSERT INTO usuarios(id_usuario, password_usuario, nombre_usuario, estado_usuario, email_usuario, telefono_usuario, tipo_usuario, fecha_ingreso_usuario, id_sede) VALUES ('1144085141', '12345', 'Juan Suaza', TRUE, 'xd@xd.com', '1234567', 'Gerente', '2016-12-12', 1);
