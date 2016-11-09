@@ -24,7 +24,13 @@ public class Operaciones {
     public Operaciones(){
         
     }
-    
+    /*
+    Nombre: agregarItemCombo
+    @param: ResultSet, &JComboBox
+    Objetivo: Agregar los elementos de un resultadop de una consulta con una sola columna a un
+                combo box
+    Autor: Juan David Suaza Cruz
+    */
     public void agregarItemCombo(ResultSet resultado, javax.swing.JComboBox combo){
         combo.removeAllItems();
         try {
@@ -37,6 +43,12 @@ public class Operaciones {
         }
     }
     
+    /*
+    Nombre: codigoSedeDeNombre
+    @param: String
+    Objetivo: conocer el codigo de una sede a partir de su nombre
+    Autor: Juan David Suaza Cruz
+    */
     public String codigoSedeDeNombre(String nombre_sede) {
         System.out.println(nombre_sede);
         String consultaSQL = "SELECT id_sede FROM sedes WHERE nombre_sede LIKE '" + nombre_sede + "';";
@@ -54,6 +66,12 @@ public class Operaciones {
         return id;
     }
     
+    /*
+    Nombre: obtenerFecha
+    @param: Ninguno
+    Objetivo: Obtener la fecha del computador en el que se ejecuta el aplicativo
+    Autor: Juan David Suaza Cruz
+    */
     public String obtenerFecha(){
         DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
         Date date = new Date();
@@ -62,4 +80,54 @@ public class Operaciones {
         return fecha[0] + "-" + fecha[1] + "-" + fecha[2];
     }
     
+    /*
+    Nombre: obtenerUltimoCodigoSede
+    @param: Ninguno
+    Objetivo: Obtener el ultimo valorr almacenado en la sequencia que asigna los valores a los ids de las sedes
+    Autor: Juan David Suaza Cruz
+    */
+    public String obtenerUltimoCodigoSede(){
+        String consultaSQL = "SELECT last_value FROM sedes_id_sede_seq;";
+        int siguienteId = -1;
+        
+        ResultSet tabla = new OperacionesBD().consultas(consultaSQL);
+        
+        try {
+            while(tabla.next()){
+                siguienteId = tabla.getInt(1);
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();        
+        }
+        
+        siguienteId++;
+        return ""+siguienteId;
+    }
+    
+    /*
+    Nombre tieneGerente
+    @param: String 
+    Objetivo: Conocer si una sede que pertenece al sistema tiene al menos un empleado gerente
+    Autor: Juan David Suaza Cruz
+    */
+    public boolean tieneGerente(String nombre_sede){
+        String consultaSQL = "SELECT id_usuario FROM usuarios NATURAL JOIN sedes WHERE tipo_usuario LIKE 'Gerente' AND estado_usuario = TRUE AND nombre_sede LIKE '" + nombre_sede + "';";
+        ResultSet tabla = new OperacionesBD().consultas(consultaSQL);
+        int tiene = 0;
+        
+        try {
+            while(tabla.next()){
+                tiene++;
+            }
+            //System.out.println(""+tiene);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        
+        if(tiene != 0){
+            return true;
+        }
+        
+        return false;
+    }
 }

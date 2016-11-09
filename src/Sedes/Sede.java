@@ -32,8 +32,9 @@ public class Sede {
         }   
     }
     
-    public void modificarSede(String id_sede, String nombre_sede){
-        String consultaSQL = "UPDATE sedes SET nombre_sede = '" + nombre_sede + "' WHERE id_sede = '" + id_sede + "';"; 
+    public void modificarSede(String id_sede, String nombre_sede, String direccion, String telefono, String email){
+        String consultaSQL = "UPDATE sedes SET nombre_sede = '" + nombre_sede + "', direccion_sede = '" + direccion + "', telefono_sede = '" + telefono + 
+                "', email_sede = '" + email + "' WHERE id_sede = '" + id_sede + "';"; 
         int codigo = operaciones.updates(consultaSQL);
         if(codigo != 0){
             JOptionPane.showMessageDialog(null, "Sede modificada con exito!", "Exito!", JOptionPane.INFORMATION_MESSAGE);

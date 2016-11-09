@@ -34,9 +34,14 @@ public class Usuario {
             while(resultado.next()){
                 tipo_usuario = resultado.getString(1);
             }
+            
+            consultaSQL = "UPDATE usuarios SET activo_usuario = TRUE WHERE id_usuario = '" + id_usuario + "';";
+            
+            operacionesBD.consultas(consultaSQL);
+            
 
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al acceder a la base de datos", "Error!", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Error al validar el usuario \nRevisa la los datos ingresados", "Error!", JOptionPane.ERROR_MESSAGE);
         }
         return tipo_usuario;
     }
@@ -48,6 +53,23 @@ public class Usuario {
         if(codigo != 0){
             JOptionPane.showMessageDialog(null, "Usuario creado con exito!", "Exito!", JOptionPane.INFORMATION_MESSAGE);
         }
+    }
+    
+    public void modificarUsuario(String id_usuario, String password_usuario , String nombre_usuario, String email_usuario, String telefono_usuario , String tipo_usuario, String id_sede, String estado_usuario ){
+        String consultaSQL = "UPDATE usuarios SET "
+                    + " password_usuario = '" + password_usuario  + "', "
+                    + " nombre_usuario = '" + nombre_usuario + "', "
+                    + " email_usuario = '" + email_usuario + "', "
+                    + " telefono_usuario  = '" + telefono_usuario  + "', "
+                    + " tipo_usuario  = '" + tipo_usuario  + "', "
+                    + "estado_usuario  = " + estado_usuario   + ", "
+                    + " id_sede = '" + id_sede + "' "
+                    + " WHERE id_usuario = '" + id_usuario + "';";
+        
+        int codigo = operacionesBD.updates(consultaSQL);
+        if(codigo != 0){
+            JOptionPane.showMessageDialog(null, "Usuario modificado con exito!", "Exito!", JOptionPane.INFORMATION_MESSAGE);
+        }  
     }
     
 }

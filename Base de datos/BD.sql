@@ -38,7 +38,7 @@ CREATE TABLE vehiculos(
 	id_sede SERIAL REFERENCES sedes(id_sede));
 	
 CREATE TABLE usuarios(
-	id_usuario CHAR(10) PRIMARY KEY,
+	id_usuario CHAR(9) PRIMARY KEY,
 	password_usuario VARCHAR(15) NOT NULL,
 	nombre_usuario VARCHAR(50) NOT NULL,
 	estado_usuario BOOLEAN NOT NULL,
@@ -53,31 +53,30 @@ CREATE TABLE partes(
 	id_parte SERIAL PRIMARY KEY,
 	nombre_parte VARCHAR(20) NOT NULL,
 	cantidad_parte INTEGER DEFAULT 0,
-	valor_parte FLOAT DEFAULT 0.0,
 	id_sede SERIAL REFERENCES sedes(id_sede));
 
+
+
 CREATE TABLE comprador(
-	id_comprador CHAR(10) PRIMARY KEY,
+	id_comprador CHAR(9) PRIMARY KEY,
 	nombre_comprador VARCHAR(30) NOT NULL,
 	direccion_comprador VARCHAR(50) NOT NULL,
 	telefono_comprador CHAR(7) NOT NULL,
 	email_comprador VARCHAR(50) NOT NULL);
 
 CREATE TABLE cotizaciones(
-	id_cotizacion SERIAL PRIMARY KEY,
-	valor_cotizacion FLOAT NOT NULL);
+	id_cotizacion SERIAL PRIMARY KEY);
 
 CREATE TABLE cotizaciones_realizadas(
 	id_cotizacion SERIAL REFERENCES cotizaciones(id_cotizacion),
-	id_usuario CHAR(10)  REFERENCES usuarios(id_usuario),
+	id_usuario CHAR(9)  REFERENCES usuarios(id_usuario),
 	id_vehiculo SERIAL  REFERENCES vehiculos(id_vehiculo),
-	id_comprador CHAR(10)  REFERENCES comprador(id_comprador),
+	id_comprador CHAR(9)  REFERENCES comprador(id_comprador),
 	fecha_cotizacion DATE NOT NULL,
 	CONSTRAINT pk_cotizaciones_realizadas PRIMARY KEY(id_cotizacion, fecha_cotizacion, id_usuario, id_vehiculo, id_comprador));
 
 CREATE TABLE ventas(
-	id_venta SERIAL PRIMARY KEY,
-	valor_venta FLOAT NOT NULL
+	id_venta SERIAL PRIMARY KEY
 	);
 
 CREATE TABLE ordenes(
@@ -86,7 +85,7 @@ CREATE TABLE ordenes(
 	);
 
 CREATE TABLE ordenes_emitidas(
-	id_usuario CHAR(10)  REFERENCES usuarios(id_usuario),
+	id_usuario CHAR(9)  REFERENCES usuarios(id_usuario),
 	id_orden SERIAL  REFERENCES ordenes(id_orden),
 	id_vehiculo SERIAL REFERENCES vehiculos(id_vehiculo),
 	id_parte SERIAL REFERENCES partes(id_parte),
@@ -96,11 +95,11 @@ CREATE TABLE ordenes_emitidas(
 
 CREATE TABLE ventas_vehiculos(
 	id_venta SERIAL REFERENCES ventas(id_venta),
-	id_usuario CHAR(10)  REFERENCES usuarios(id_usuario),
+	id_usuario CHAR(9)  REFERENCES usuarios(id_usuario),
 	id_vehiculo SERIAL  REFERENCES vehiculos(id_vehiculo),
-	id_comprador CHAR(10) REFERENCES comprador(id_comprador),
+	id_comprador CHAR(9) REFERENCES comprador(id_comprador),
 	fecha_venta DATE NOT NULL,
 	CONSTRAINT pk_ventas_vehiculos PRIMARY KEY (id_venta, id_usuario, id_vehiculo, id_comprador, fecha_venta));
 
 INSERT INTO sedes(nombre_sede, direccion_sede, telefono_sede, email_sede) VALUES('Londres', 'Calle 4D','1234567', 'sede01@abc.com');
-INSERT INTO usuarios(id_usuario, password_usuario, nombre_usuario, estado_usuario, email_usuario, telefono_usuario, tipo_usuario, fecha_ingreso_usuario, id_sede) VALUES ('1144085141', '12345', 'Juan Suaza', TRUE, 'xd@xd.com', '1234567', 'Gerente', '2016-12-12', 1);
+INSERT INTO usuarios(id_usuario, password_usuario, nombre_usuario, estado_usuario, email_usuario, telefono_usuario, tipo_usuario, fecha_ingreso_usuario, id_sede) VALUES ('114408514', '12345', 'Juan Suaza', TRUE, 'xd@xd.com', '1234567', 'Gerente', '2016-12-12', 1);

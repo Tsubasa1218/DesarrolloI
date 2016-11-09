@@ -29,6 +29,19 @@ public class Partes {
         }       
     }
     
+    public void modificarParte(String id_parte, String nombre_parte, String cantidad_parte, String valor_parte, String id_sede){
+            String consultaSQL = "UPDATE vehiculos SET "
+                    + "nombre_parte = '" + nombre_parte + "', "
+                    + "cantidad_parte = '" + cantidad_parte + "', "
+                    + "valor_parte = '" + valor_parte + "', "
+                    + "id_sede = '" + id_sede + "' "
+                    + " WHERE id_vehiculo = '" + id_parte + "';";
+        int codigo = operacionesBD.updates(consultaSQL);
+        if(codigo != 0){
+            JOptionPane.showMessageDialog(null, "Parte modificado con exito!", "Exito!", JOptionPane.INFORMATION_MESSAGE);
+        }
+    }
+    
     
     
 }

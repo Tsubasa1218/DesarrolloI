@@ -5,6 +5,7 @@
  */
 package interfazGrafica;
 
+import Reportes.Reporte;
 import Usuarios.Usuario;
 import javax.swing.JOptionPane;
 import dataBaseOperations.OperacionesBD;
@@ -14,14 +15,12 @@ import java.awt.CardLayout;
 import Sedes.Sede;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.ButtonGroup;
+import org.jfree.chart.ChartPanel;
 
 /**
  *
@@ -69,7 +68,7 @@ public class loginInterface extends javax.swing.JFrame {
         panelContenedor.add(panelAgregarPartes, "Agregar Partes");
         panelContenedor.add(panelGenerarReportes, "Generar reportes");
         panelContenedor.add(panelConsultas, "Consultas");
-        
+        panelContenedor.add(panelReporteFinal, "Reporte");
         
         cl = (CardLayout)(panelContenedor.getLayout());
         
@@ -179,8 +178,6 @@ public class loginInterface extends javax.swing.JFrame {
         jLabel17 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
         modificarCodigoUsuarioTF = new javax.swing.JTextField();
-        modificarContraseñaTF = new javax.swing.JTextField();
-        modificarConfirmarContraseñaTF = new javax.swing.JTextField();
         modificarNombreTF = new javax.swing.JTextField();
         modificarActivoRB = new javax.swing.JRadioButton();
         modificarInactivoRB = new javax.swing.JRadioButton();
@@ -191,6 +188,8 @@ public class loginInterface extends javax.swing.JFrame {
         emailUsuarioModificarTF = new javax.swing.JTextField();
         jLabel78 = new javax.swing.JLabel();
         telefonoUsuarioModificarTF = new javax.swing.JTextField();
+        modificarConfirmarContraseñaTF = new javax.swing.JPasswordField();
+        modificarContraseñaTF = new javax.swing.JPasswordField();
         panelCrearSede = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         codigoSedeTF = new javax.swing.JTextField();
@@ -255,6 +254,14 @@ public class loginInterface extends javax.swing.JFrame {
         modificarValorParteTF = new javax.swing.JTextField();
         parteModificarCB = new javax.swing.JComboBox<String>();
         panelGenerarReportes = new javax.swing.JPanel();
+        jPanel1 = new javax.swing.JPanel();
+        reportePersonal = new javax.swing.JButton();
+        jPanel2 = new javax.swing.JPanel();
+        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        jPanel3 = new javax.swing.JPanel();
+        jButton4 = new javax.swing.JButton();
+        jButton5 = new javax.swing.JButton();
         panelModificarVehiculo = new javax.swing.JPanel();
         modificarSedeVehiculoCB = new javax.swing.JComboBox<String>();
         jLabel27 = new javax.swing.JLabel();
@@ -270,6 +277,8 @@ public class loginInterface extends javax.swing.JFrame {
         jLabel34 = new javax.swing.JLabel();
         modificarColorVehiculoTF = new javax.swing.JTextField();
         confirmarModificarVehiculoB = new javax.swing.JButton();
+        jLabel19 = new javax.swing.JLabel();
+        modificarValorVehiculoTF = new javax.swing.JTextField();
         panelCrearOrden = new javax.swing.JPanel();
         jLabel45 = new javax.swing.JLabel();
         jLabel46 = new javax.swing.JLabel();
@@ -321,6 +330,9 @@ public class loginInterface extends javax.swing.JFrame {
         tableCrearCot1 = new javax.swing.JTable();
         venderBuscarCotButton = new javax.swing.JButton();
         panelConsultas = new javax.swing.JPanel();
+        panelReporteFinal = new javax.swing.JPanel();
+        panelReporte = new javax.swing.JPanel();
+        exportarButton = new javax.swing.JButton();
         jPanelCampos = new javax.swing.JPanel();
         jLabelUsuario = new javax.swing.JLabel();
         jLabelPassword = new javax.swing.JLabel();
@@ -600,9 +612,7 @@ public class loginInterface extends javax.swing.JFrame {
         );
 
         jefeJFrame.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        jefeJFrame.setMaximumSize(new java.awt.Dimension(830, 715));
         jefeJFrame.setMinimumSize(new java.awt.Dimension(830, 715));
-        jefeJFrame.setPreferredSize(new java.awt.Dimension(830, 715));
 
         jefeJPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Bienvenido Jefe de taller!"));
 
@@ -699,9 +709,7 @@ public class loginInterface extends javax.swing.JFrame {
         );
 
         vendedorJFrame.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        vendedorJFrame.setMaximumSize(new java.awt.Dimension(830, 715));
         vendedorJFrame.setMinimumSize(new java.awt.Dimension(830, 715));
-        vendedorJFrame.setPreferredSize(new java.awt.Dimension(830, 715));
 
         vendedorJPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Bienvenido Vendedor!"));
 
@@ -858,6 +866,12 @@ public class loginInterface extends javax.swing.JFrame {
             }
         });
 
+        CrearUsuarioSedesCB.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                CrearUsuarioSedesCBItemStateChanged(evt);
+            }
+        });
+
         tipoUsuarioCB.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Gerente", "Jefe de taller", "Vendedor" }));
         tipoUsuarioCB.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -997,7 +1011,6 @@ public class loginInterface extends javax.swing.JFrame {
                             .addComponent(jLabel12))
                         .addGap(32, 32, 32)
                         .addGroup(panelModificarUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(modificarConfirmarContraseñaTF)
                             .addComponent(modificarNombreTF)
                             .addComponent(emailUsuarioModificarTF)
                             .addComponent(telefonoUsuarioModificarTF)
@@ -1006,14 +1019,17 @@ public class loginInterface extends javax.swing.JFrame {
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelModificarUsuarioLayout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
                                 .addComponent(confirmarModificarUsuarioB))
-                            .addGroup(panelModificarUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addGroup(panelModificarUsuarioLayout.createSequentialGroup()
-                                    .addComponent(modificarActivoRB)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(modificarInactivoRB)
-                                    .addGap(54, 54, 54))
-                                .addComponent(modificarCodigoUsuarioTF, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(modificarContraseñaTF, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addGroup(panelModificarUsuarioLayout.createSequentialGroup()
+                                .addGroup(panelModificarUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelModificarUsuarioLayout.createSequentialGroup()
+                                        .addComponent(modificarActivoRB)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(modificarInactivoRB)
+                                        .addGap(54, 54, 54))
+                                    .addComponent(modificarCodigoUsuarioTF, javax.swing.GroupLayout.DEFAULT_SIZE, 184, Short.MAX_VALUE)
+                                    .addComponent(modificarConfirmarContraseñaTF)
+                                    .addComponent(modificarContraseñaTF))
+                                .addGap(0, 0, Short.MAX_VALUE)))))
                 .addGap(270, 270, 270))
         );
         panelModificarUsuarioLayout.setVerticalGroup(
@@ -1065,6 +1081,8 @@ public class loginInterface extends javax.swing.JFrame {
         panelCrearSede.setMinimumSize(new java.awt.Dimension(617, 579));
 
         jLabel7.setText("Código de la sede:");
+
+        codigoSedeTF.setEditable(false);
 
         jLabel8.setText("Nombre:");
 
@@ -1145,11 +1163,22 @@ public class loginInterface extends javax.swing.JFrame {
         panelModificarSede.setMinimumSize(new java.awt.Dimension(617, 579));
         panelModificarSede.setPreferredSize(new java.awt.Dimension(617, 579));
 
+        modificarSedeSedesCB.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                modificarSedeSedesCBItemStateChanged(evt);
+            }
+        });
+
         jLabel9.setText("Sede:");
 
         jLabel10.setText("Nombre:");
 
         confirmarModificarSede.setText("Aceptar");
+        confirmarModificarSede.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                confirmarModificarSedeActionPerformed(evt);
+            }
+        });
 
         jLabel72.setText("Dirección:");
 
@@ -1438,7 +1467,11 @@ public class loginInterface extends javax.swing.JFrame {
         panelModificarPartesLayout.setVerticalGroup(
             panelModificarPartesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelModificarPartesLayout.createSequentialGroup()
-                .addGap(16, 16, 16)
+                .addContainerGap()
+                .addGroup(panelModificarPartesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel43)
+                    .addComponent(modificarParteSedeCB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addGroup(panelModificarPartesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel44)
                     .addComponent(parteModificarCB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -1455,26 +1488,113 @@ public class loginInterface extends javax.swing.JFrame {
                     .addComponent(jLabel55)
                     .addComponent(modificarValorParteTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(panelModificarPartesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel43)
-                    .addComponent(modificarParteSedeCB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(21, 21, 21)
                 .addComponent(confirmarModificarParteB)
-                .addContainerGap(347, Short.MAX_VALUE))
+                .addContainerGap(355, Short.MAX_VALUE))
         );
 
         panelGenerarReportes.setMaximumSize(new java.awt.Dimension(617, 579));
         panelGenerarReportes.setMinimumSize(new java.awt.Dimension(617, 579));
 
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Usuarios"));
+
+        reportePersonal.setText("Personal");
+        reportePersonal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                reportePersonalActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(reportePersonal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(reportePersonal)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Inventario"));
+
+        jButton2.setText("Vehiculos por sede");
+
+        jButton3.setText("Vehiculos añadidos");
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, 162, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addComponent(jButton2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton3))
+        );
+
+        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Ventas"));
+
+        jButton4.setText("Ventas");
+
+        jButton5.setText("Aporte por sede");
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jButton4)
+                .addGap(18, 18, 18)
+                .addComponent(jButton5)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout panelGenerarReportesLayout = new javax.swing.GroupLayout(panelGenerarReportes);
         panelGenerarReportes.setLayout(panelGenerarReportesLayout);
         panelGenerarReportesLayout.setHorizontalGroup(
             panelGenerarReportesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 617, Short.MAX_VALUE)
+            .addGroup(panelGenerarReportesLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(panelGenerarReportesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(413, Short.MAX_VALUE))
         );
         panelGenerarReportesLayout.setVerticalGroup(
             panelGenerarReportesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 579, Short.MAX_VALUE)
+            .addGroup(panelGenerarReportesLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(275, Short.MAX_VALUE))
         );
 
         panelModificarVehiculo.setMaximumSize(new java.awt.Dimension(617, 579));
@@ -1500,6 +1620,13 @@ public class loginInterface extends javax.swing.JFrame {
         jLabel34.setText("Color vehiculo:");
 
         confirmarModificarVehiculoB.setText("Aceptar");
+        confirmarModificarVehiculoB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                confirmarModificarVehiculoBActionPerformed(evt);
+            }
+        });
+
+        jLabel19.setText("Valor:");
 
         javax.swing.GroupLayout panelModificarVehiculoLayout = new javax.swing.GroupLayout(panelModificarVehiculo);
         panelModificarVehiculo.setLayout(panelModificarVehiculoLayout);
@@ -1532,10 +1659,12 @@ public class loginInterface extends javax.swing.JFrame {
                                     .addComponent(modificarColorVehiculoTF, javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(modificarMarcaVehiculoTF, javax.swing.GroupLayout.Alignment.LEADING)))
                             .addGroup(panelModificarVehiculoLayout.createSequentialGroup()
-                                .addGap(0, 116, Short.MAX_VALUE)
-                                .addGroup(panelModificarVehiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(modificarSedeVehiculoCB, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(confirmarModificarVehiculoB))))
+                                .addComponent(jLabel19)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(panelModificarVehiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(confirmarModificarVehiculoB, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(modificarSedeVehiculoCB, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(modificarValorVehiculoTF, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(319, 319, 319))))
         );
         panelModificarVehiculoLayout.setVerticalGroup(
@@ -1567,8 +1696,12 @@ public class loginInterface extends javax.swing.JFrame {
                     .addComponent(jLabel33)
                     .addComponent(modificarSedeVehiculoCB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
+                .addGroup(panelModificarVehiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel19)
+                    .addComponent(modificarValorVehiculoTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(23, 23, 23)
                 .addComponent(confirmarModificarVehiculoB)
-                .addContainerGap(321, Short.MAX_VALUE))
+                .addContainerGap(278, Short.MAX_VALUE))
         );
 
         panelCrearOrden.setMaximumSize(new java.awt.Dimension(617, 579));
@@ -1930,6 +2063,48 @@ public class loginInterface extends javax.swing.JFrame {
             .addGap(0, 579, Short.MAX_VALUE)
         );
 
+        panelReporteFinal.setMaximumSize(new java.awt.Dimension(617, 579));
+        panelReporteFinal.setMinimumSize(new java.awt.Dimension(617, 579));
+
+        panelReporte.setMaximumSize(new java.awt.Dimension(597, 365));
+        panelReporte.setMinimumSize(new java.awt.Dimension(597, 365));
+
+        javax.swing.GroupLayout panelReporteLayout = new javax.swing.GroupLayout(panelReporte);
+        panelReporte.setLayout(panelReporteLayout);
+        panelReporteLayout.setHorizontalGroup(
+            panelReporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        panelReporteLayout.setVerticalGroup(
+            panelReporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 365, Short.MAX_VALUE)
+        );
+
+        exportarButton.setText("Exportar");
+
+        javax.swing.GroupLayout panelReporteFinalLayout = new javax.swing.GroupLayout(panelReporteFinal);
+        panelReporteFinal.setLayout(panelReporteFinalLayout);
+        panelReporteFinalLayout.setHorizontalGroup(
+            panelReporteFinalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelReporteFinalLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(panelReporteFinalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(panelReporte, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelReporteFinalLayout.createSequentialGroup()
+                        .addGap(0, 522, Short.MAX_VALUE)
+                        .addComponent(exportarButton)))
+                .addContainerGap())
+        );
+        panelReporteFinalLayout.setVerticalGroup(
+            panelReporteFinalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelReporteFinalLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(panelReporte, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(exportarButton)
+                .addContainerGap(162, Short.MAX_VALUE))
+        );
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabelUsuario.setText("Nombre de usuario:");
@@ -2021,23 +2196,22 @@ public class loginInterface extends javax.swing.JFrame {
            password += pass_usuario[i];
        }
        Usuario user = new Usuario();
+             
        String tipo = user.validarUsuario(id_usuario, password);
        if(tipo.equalsIgnoreCase("Gerente")){
             gerenteJFrame.setEnabled(true);
             gerenteJFrame.setVisible(true);
             gerenteJFrame.pack();
             this.setVisible(false);
-       }else if(tipo.equalsIgnoreCase("Vendedor")){
+        }else if(tipo.equalsIgnoreCase("Jefe")){
             jefeJFrame.setEnabled(true);
             jefeJFrame.setVisible(true);
             this.setVisible(false);;
             
-       }else if(tipo.equalsIgnoreCase("Jefe")){
+       }else if(tipo.equalsIgnoreCase("Vendedor")){
             vendedorJFrame.setEnabled(true);
             vendedorJFrame.setVisible(true);
             this.setVisible(false);
-       }else{
-           JOptionPane.showMessageDialog(null,"No existe el usuario", "Error", JOptionPane.ERROR_MESSAGE);
        }
         
        /*
@@ -2093,6 +2267,9 @@ public class loginInterface extends javax.swing.JFrame {
 
     private void crearSedeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crearSedeButtonActionPerformed
         panelContenedor.setVisible(true);
+        Operaciones oper = new Operaciones();
+        String id = oper.obtenerUltimoCodigoSede();
+        codigoSedeTF.setText(id);
         cl.show(panelContenedor, "Crear Sede");
     }//GEN-LAST:event_crearSedeButtonActionPerformed
 
@@ -2124,6 +2301,28 @@ public class loginInterface extends javax.swing.JFrame {
         new Operaciones().agregarItemCombo(listaSedes, modificarSedeUsuarioCB);
         panelContenedor.setVisible(true);
         cl.show(panelContenedor, "Modificar Usuario");
+        
+        String codigo = JOptionPane.showInputDialog("Codigo del usuario");
+        OperacionesBD usuario = new OperacionesBD();
+        ResultSet consulta = usuario.consultas("SELECT * FROM usuarios WHERE id_usuario = '" + codigo + "';");
+        try {
+            while (consulta.next()){
+                modificarCodigoUsuarioTF.setText(consulta.getString("id_usuario"));
+                modificarContraseñaTF.setText(consulta.getString("password_usuario"));
+                if(consulta.getBoolean("estado_usuario") == true){
+                    modificarActivoRB.setSelected(true);
+                }else{
+                    modificarInactivoRB.setSelected(true);
+                }
+                modificarNombreTF.setText(consulta.getString("nombre_usuario"));
+                emailUsuarioModificarTF.setText(consulta.getString("email_usuario"));
+                telefonoUsuarioModificarTF.setText(consulta.getString("telefono_usuario"));
+                consulta.close();
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(loginInterface.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }//GEN-LAST:event_modificarUsuarioButtonActionPerformed
 
     private void modificarSedeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modificarSedeButtonActionPerformed
@@ -2132,6 +2331,9 @@ public class loginInterface extends javax.swing.JFrame {
         new Operaciones().agregarItemCombo(listaSedes, modificarSedeSedesCB);
         panelContenedor.setVisible(true);       
         cl.show(panelContenedor, "Modificar Sede");
+        
+        
+        
     }//GEN-LAST:event_modificarSedeButtonActionPerformed
 
     private void agregarVehiculosButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarVehiculosButtonActionPerformed
@@ -2139,13 +2341,18 @@ public class loginInterface extends javax.swing.JFrame {
         ResultSet listaSedes = sedes.consultas("SELECT nombre_sede FROM sedes;");
         new Operaciones().agregarItemCombo(listaSedes, crearSedeVehiculoCB);
         panelContenedor.setVisible(true);
+                
         cl.show(panelContenedor, "Agregar Vehiculo");
+        
     }//GEN-LAST:event_agregarVehiculosButtonActionPerformed
 
     private void modificarVehiculosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modificarVehiculosActionPerformed
         panelContenedor.setVisible(true);
         cl.show(panelContenedor, "Modificar Vehiculo");
-        
+        OperacionesBD sedes = new OperacionesBD();
+        ResultSet listaSedes = sedes.consultas("SELECT nombre_sede FROM sedes;");
+        new Operaciones().agregarItemCombo(listaSedes, modificarSedeVehiculoCB);
+            
         String codigo = JOptionPane.showInputDialog("Codigo del vehiculo");
         OperacionesBD vehiculo = new OperacionesBD();
         ResultSet consulta = vehiculo.consultas("SELECT * FROM vehiculos WHERE id_vehiculo = '" + codigo + "';");
@@ -2162,22 +2369,12 @@ public class loginInterface extends javax.swing.JFrame {
                     modificarVehiculoNuevoRB.setSelected(false);
                     modificarVehiculoUsadoRB.setSelected(true);
                 }
-                /*
-                if("t".equals(consulta.getString(6))){
-                    modificarVehiculoEstadoActivoRB.setSelected(true);
-                    modificarVehiculoEstadoInactivoRB.setSelected(false);
-                }else if("f".equals(consulta.getString(6))){
-                    modificarVehiculoEstadoActivoRB.setSelected(false);
-                    modificarVehiculoEstadoInactivoRB.setSelected(true);
-                }*/
-                
+                modificarValorVehiculoTF.setText(consulta.getString(7));
                 consulta.close();
             }
         
         
-            OperacionesBD sedes = new OperacionesBD();
-            ResultSet listaSedes = sedes.consultas("SELECT nombre_sede FROM sedes;");
-            new Operaciones().agregarItemCombo(listaSedes, modificarSedeVehiculoCB);
+            
         } catch (SQLException ex) {
             Logger.getLogger(loginInterface.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -2237,37 +2434,32 @@ public class loginInterface extends javax.swing.JFrame {
     }//GEN-LAST:event_generarReporteButtonActionPerformed
 
     private void confirmarAgregarVehiculoBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmarAgregarVehiculoBActionPerformed
-
-        String marca_vehiculo = crearMarcaVehiculoTF.getText();
-        String modelo_vehiculo = crearModeloVehiculoTF.getText();
-        String color_vehiculo = crearColorVehiculoTF.getText();
-        String nuevo_vehiculo = null;
+        try{
+            String marca_vehiculo = crearMarcaVehiculoTF.getText();
+            String modelo_vehiculo = crearModeloVehiculoTF.getText();
+            String color_vehiculo = crearColorVehiculoTF.getText();
+            String nuevo_vehiculo = "";
         
-        if(crearVehiculoNuevoRB.isSelected()){
-            nuevo_vehiculo = "true";
-        }else if(crearVehiculoUsadoRB.isSelected()){
-            nuevo_vehiculo = "false";
-        }
+            if(crearVehiculoNuevoRB.isSelected()){
+                nuevo_vehiculo = "true";
+            }else{
+                nuevo_vehiculo = "false";
+            }
+            int cantidad = Integer.parseInt(crearCantidadVehiculoTF.getText());
+            int valor = Integer.parseInt(crearValorVehiculoTF.getText());
+            String nombre_sede = (String)crearSedeVehiculoCB.getSelectedItem();
         
-        String cantidad = crearCantidadVehiculoTF.getText();
-        String nombre_sede = (String)crearSedeVehiculoCB.getSelectedItem();
-        String id_sede = "";
+            Operaciones op = new Operaciones();
+            String fecha = op.obtenerFecha();
+            String id_sede = op.codigoSedeDeNombre(nombre_sede);     
+            Vehiculo vehiculo = new Vehiculo();
         
-        OperacionesBD sedes = new OperacionesBD();
-        ResultSet consulta = sedes.consultas("SELECT id_sede FROM sedes WHERE nombre_sede = '" + nombre_sede + "';");
-        try {
-            while (consulta.next()){
-                id_sede = consulta.getString(1);
-            }  
-            consulta.close();
-        } catch (SQLException ex) {
-            Logger.getLogger(loginInterface.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-        
-        Vehiculo vehiculo = new Vehiculo();
-        vehiculo.agregarVehiculo(marca_vehiculo, modelo_vehiculo, color_vehiculo, nuevo_vehiculo, cantidad, id_sede);
-
+            for(int i = 0; i < cantidad; i++){
+                vehiculo.agregarVehiculo(marca_vehiculo, modelo_vehiculo, color_vehiculo, nuevo_vehiculo, "1", valor, fecha, id_sede);
+            }
+        }catch(NumberFormatException ex){
+            JOptionPane.showMessageDialog(null, "La cantidad y el valor deben ser numeros", "Error", JOptionPane.ERROR_MESSAGE);
+        }            
     }//GEN-LAST:event_confirmarAgregarVehiculoBActionPerformed
 
     private void confirmarCrearSedeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmarCrearSedeActionPerformed
@@ -2332,6 +2524,37 @@ public class loginInterface extends javax.swing.JFrame {
 
     private void confirmarModificarUsuarioBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmarModificarUsuarioBActionPerformed
         // TODO add your handling code here:
+        panelContenedor.setVisible(true);
+        cl.show(panelContenedor, "Modificar Usuario");
+        
+        String id_usuario = modificarCodigoUsuarioTF.getText();
+        char[] password = modificarContraseñaTF.getPassword();
+        char[] password_2 =  modificarContraseñaTF.getPassword();
+        String nombre_usuario = modificarNombreTF.getText();
+        String tipo_usuario = (String)modificarTipoUsuarioCB.getSelectedItem();
+        String sede = (String)modificarSedeUsuarioCB.getSelectedItem();
+        String email_usuario = emailUsuarioModificarTF.getText();
+        String telefono_usuario = telefonoUsuarioModificarTF.getText();
+        
+        String password_usuario = "";
+        String password_usuario2 = "";
+        
+        for(int i = 0; i<password.length; i++){
+            password_usuario += password[i];
+            password_usuario2 += password_2[i];
+        }
+        String estado = "false";
+        if(modificarActivoRB.isSelected()){
+            estado = "true";
+        }
+        if(!password_usuario.equals(password_usuario2)){
+            JOptionPane.showMessageDialog(null, "Contraseñas no coinciden");
+        }else{
+            Operaciones operaciones = new Operaciones();
+            String id_sede = operaciones.codigoSedeDeNombre(sede);
+            Usuario usuario = new Usuario();
+            usuario.modificarUsuario(id_usuario, password_usuario, nombre_usuario, email_usuario, telefono_usuario, tipo_usuario, id_sede, estado);
+        } 
         
     }//GEN-LAST:event_confirmarModificarUsuarioBActionPerformed
 
@@ -2393,6 +2616,89 @@ public class loginInterface extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_consultarSedesActionPerformed
+
+    private void reportePersonalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reportePersonalActionPerformed
+        // TODO add your handling code here:
+        panelReporte.removeAll();
+        ChartPanel panel = new Reporte().generarReportePersonal();
+        cl.show(panelContenedor, "Reporte");
+        panelReporte.add(panel);
+        panelReporte.updateUI();
+    }//GEN-LAST:event_reportePersonalActionPerformed
+
+    private void CrearUsuarioSedesCBItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_CrearUsuarioSedesCBItemStateChanged
+        // TODO add your handling code here:
+        tipoUsuarioCB.removeAllItems();
+        boolean tiene =  new Operaciones().tieneGerente((String)CrearUsuarioSedesCB.getSelectedItem());
+        if(tiene){
+            tipoUsuarioCB.addItem("Vendedor");
+            tipoUsuarioCB.addItem("Jefe de taller");
+        }else{
+            tipoUsuarioCB.addItem("Gerente");
+            tipoUsuarioCB.addItem("Vendedor");
+            tipoUsuarioCB.addItem("Jefe de taller");
+        }
+        
+    }//GEN-LAST:event_CrearUsuarioSedesCBItemStateChanged
+
+    private void confirmarModificarSedeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmarModificarSedeActionPerformed
+        // TODO add your handling code here:
+        String id = new Operaciones().codigoSedeDeNombre((String)modificarSedeSedesCB.getSelectedItem());
+        String nombre = nuevoNombreTF.getText();
+        String direccion = direccionSedeModificarTF.getText();
+        String telefono = telefonoSedeModificarTF.getText();
+        String email = emailSedeModificarTF.getText();
+        
+        Sede sede = new Sede();
+        sede.modificarSede(id, nombre, direccion, telefono, email);
+        
+    }//GEN-LAST:event_confirmarModificarSedeActionPerformed
+
+    private void confirmarModificarVehiculoBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmarModificarVehiculoBActionPerformed
+        // TODO add your handling code here:
+        String codigo_vehiculo = modificarCodigoVehiculoTF.getText();
+        String marca_vehiculo = modificarMarcaVehiculoTF.getText();
+        String modelo_vehiculo = modificarModeloVehiculoTF.getText();
+        String color_vehiculo = modificarColorVehiculoTF.getText();
+        String nuevo_vehiculo = "";
+        
+        if(modificarVehiculoNuevoRB.isSelected()){
+            nuevo_vehiculo = "true";
+        }else if(modificarVehiculoUsadoRB.isSelected()){
+            nuevo_vehiculo = "false";
+        }
+        
+        
+        //int cantidad = Integer.parseInt(modificarCantidadVehiculoTF.getText());
+        //int id = Integer.parseInt(codigo_vehiculo);
+        String nombre_sede = (String)modificarSedeVehiculoCB.getSelectedItem();
+        String valor = modificarValorVehiculoTF.getText();
+        //String id_vehiculo = modificarCantidadVehiculoTF.getText();
+
+        Operaciones op = new Operaciones();
+
+        String id_sede = op.codigoSedeDeNombre(nombre_sede);
+        
+        Vehiculo vehiculo = new Vehiculo();       
+        vehiculo.modificarVehiculo(codigo_vehiculo, marca_vehiculo, modelo_vehiculo, color_vehiculo, nuevo_vehiculo, valor, id_sede);
+        
+    }//GEN-LAST:event_confirmarModificarVehiculoBActionPerformed
+
+    private void modificarSedeSedesCBItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_modificarSedeSedesCBItemStateChanged
+        // TODO add your handling code here:
+        String consultaSQL = "SELECT * FROM sedes WHERE nombre_sede LIKE '" + (String)modificarSedeSedesCB.getSelectedItem() + "';";
+        ResultSet tabla = new OperacionesBD().consultas(consultaSQL);
+        try {
+            while(tabla.next()){
+                nuevoNombreTF.setText(tabla.getString(2));
+                direccionSedeModificarTF.setText(tabla.getString(3));
+                telefonoSedeModificarTF.setText(tabla.getString(4));
+                emailSedeModificarTF.setText(tabla.getString(5));
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }//GEN-LAST:event_modificarSedeSedesCBItemStateChanged
     
     
     
@@ -2491,11 +2797,16 @@ public class loginInterface extends javax.swing.JFrame {
     private javax.swing.JTextField emailSedeModificarTF;
     private javax.swing.JTextField emailUsuarioCrearTF;
     private javax.swing.JTextField emailUsuarioModificarTF;
+    private javax.swing.JButton exportarButton;
     private javax.swing.JButton generarReporteButton;
     private javax.swing.JFrame gerenteJFrame;
     private javax.swing.JPanel gerenteJPanel;
     private javax.swing.JTextField id_usuarioCrear;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
     private javax.swing.JButton jButtonLogin;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -2507,6 +2818,7 @@ public class loginInterface extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
@@ -2566,6 +2878,9 @@ public class loginInterface extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JLabel jLabelPassword;
     private javax.swing.JLabel jLabelUsuario;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanelCampos;
     private javax.swing.JPasswordField jPasswordField;
     private javax.swing.JScrollPane jScrollPane1;
@@ -2586,8 +2901,8 @@ public class loginInterface extends javax.swing.JFrame {
     private javax.swing.JTextField modificarCodigoUsuarioTF;
     private javax.swing.JTextField modificarCodigoVehiculoTF;
     private javax.swing.JTextField modificarColorVehiculoTF;
-    private javax.swing.JTextField modificarConfirmarContraseñaTF;
-    private javax.swing.JTextField modificarContraseñaTF;
+    private javax.swing.JPasswordField modificarConfirmarContraseñaTF;
+    private javax.swing.JPasswordField modificarContraseñaTF;
     private javax.swing.JRadioButton modificarInactivoRB;
     private javax.swing.JTextField modificarMarcaVehiculoTF;
     private javax.swing.JTextField modificarModeloVehiculoTF;
@@ -2602,6 +2917,7 @@ public class loginInterface extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> modificarTipoUsuarioCB;
     private javax.swing.JButton modificarUsuarioButton;
     private javax.swing.JTextField modificarValorParteTF;
+    private javax.swing.JTextField modificarValorVehiculoTF;
     private javax.swing.JRadioButton modificarVehiculoNuevoRB;
     private javax.swing.JRadioButton modificarVehiculoUsadoRB;
     private javax.swing.JButton modificarVehiculos;
@@ -2625,9 +2941,12 @@ public class loginInterface extends javax.swing.JFrame {
     private javax.swing.JPanel panelModificarSede;
     private javax.swing.JPanel panelModificarUsuario;
     private javax.swing.JPanel panelModificarVehiculo;
+    private javax.swing.JPanel panelReporte;
+    private javax.swing.JPanel panelReporteFinal;
     private javax.swing.JPanel panelVender;
     private javax.swing.JComboBox<String> parteModificarCB;
     private javax.swing.JTextField passwordCrear;
+    private javax.swing.JButton reportePersonal;
     private javax.swing.JTextArea resumenCrearOrdenTA;
     private javax.swing.JTable tableCrearCot;
     private javax.swing.JTable tableCrearCot1;
