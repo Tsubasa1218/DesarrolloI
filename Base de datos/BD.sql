@@ -21,7 +21,7 @@ CREATE TABLE sedes(
 	id_sede SERIAL PRIMARY KEY,
 	nombre_sede VARCHAR(20) UNIQUE NOT NULL,
 	direccion_sede VARCHAR(50) NOT NULL,
-	telefono_sede CHAR(7) NOT NULL,
+	telefono_sede CHAR(7) NOT NULL UNIQUE,
 	email_sede VARCHAR(50) NOT NULL);
 
 CREATE TABLE vehiculos(
@@ -36,11 +36,11 @@ CREATE TABLE vehiculos(
 	id_sede SERIAL REFERENCES sedes(id_sede));
 	
 CREATE TABLE usuarios(
-	id_usuario CHAR(9) PRIMARY KEY,
+	id_usuario CHAR(10) PRIMARY KEY,
 	password_usuario VARCHAR(15) NOT NULL,
 	nombre_usuario VARCHAR(50) NOT NULL,
 	estado_usuario BOOLEAN NOT NULL,
-	email_usuario VARCHAR(50) NOT NULL,
+	email_usuario VARCHAR(50) NOT NULL UNIQUE,
 	telefono_usuario CHAR(7) NOT NULL,
 	tipo_usuario VARCHAR(15) NOT NULL,
 	fecha_ingreso_usuario DATE NOT NULL,
@@ -54,17 +54,15 @@ CREATE TABLE partes(
 	valor_parte FLOAT NOT NULL,
 	id_sede SERIAL REFERENCES sedes(id_sede));
 
-
-
 CREATE TABLE comprador(
-	id_comprador CHAR(9) PRIMARY KEY,
+	id_comprador CHAR(10) PRIMARY KEY,
 	nombre_comprador VARCHAR(30) NOT NULL,
 	direccion_comprador VARCHAR(50) NOT NULL,
 	telefono_comprador CHAR(7) NOT NULL,
-	email_comprador VARCHAR(50) NOT NULL);
+	email_comprador VARCHAR(50) NOT NULL UNIQUE);
 
 CREATE TABLE cotizaciones_realizadas(
-	id_usuario CHAR(9)  REFERENCES usuarios(id_usuario),
+	id_usuario CHAR(10)  REFERENCES usuarios(id_usuario),
 	id_vehiculo SERIAL  REFERENCES vehiculos(id_vehiculo),
 	id_comprador CHAR(9)  REFERENCES comprador(id_comprador),
 	fecha_cotizacion DATE NOT NULL,
@@ -76,7 +74,7 @@ CREATE TABLE ordenes(
 	);
 
 CREATE TABLE ordenes_emitidas(
-	id_usuario CHAR(9)  REFERENCES usuarios(id_usuario),
+	id_usuario CHAR(10)  REFERENCES usuarios(id_usuario),
 	id_orden SERIAL  REFERENCES ordenes(id_orden),
 	id_vehiculo SERIAL REFERENCES vehiculos(id_vehiculo),
 	id_parte SERIAL REFERENCES partes(id_parte),
@@ -85,9 +83,9 @@ CREATE TABLE ordenes_emitidas(
 	);
 
 CREATE TABLE ventas_vehiculos(
-	id_usuario CHAR(9)  REFERENCES usuarios(id_usuario),
+	id_usuario CHAR(10)  REFERENCES usuarios(id_usuario),
 	id_vehiculo SERIAL  REFERENCES vehiculos(id_vehiculo),
-	id_comprador CHAR(9) REFERENCES comprador(id_comprador),
+	id_comprador CHAR(10) REFERENCES comprador(id_comprador),
 	fecha_venta DATE NOT NULL,
 	CONSTRAINT pk_ventas_vehiculos PRIMARY KEY (id_usuario, id_vehiculo, id_comprador, fecha_venta));
 
