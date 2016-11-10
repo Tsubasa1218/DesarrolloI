@@ -21,8 +21,8 @@ CREATE TABLE sedes(
 	id_sede SERIAL PRIMARY KEY,
 	nombre_sede VARCHAR(20) UNIQUE NOT NULL,
 	direccion_sede VARCHAR(50) NOT NULL,
-	telefono_sede CHAR(7) NOT NULL UNIQUE,
-	email_sede VARCHAR(50) NOT NULL);
+	telefono_sede CHAR(7) NOT NULL,
+	email_sede VARCHAR(50) NOT NULL UNIQUE);
 
 CREATE TABLE vehiculos(
 	id_vehiculo SERIAL PRIMARY KEY,
