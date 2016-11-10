@@ -12,8 +12,6 @@ DROP TABLE if exists vehiculos CASCADE;
 DROP TABLE if exists partes CASCADE;
 DROP TABLE if exists usuarios CASCADE;
 DROP TABLE if exists comprador CASCADE;
-DROP TABLE if exists cotizaciones CASCADE;
-DROP TABLE if exists ventas CASCADE;
 DROP TABLE if exists ordenes CASCADE;
 DROP TABLE if exists ordenes_emitidas CASCADE;
 DROP TABLE if exists ventas_vehiculos CASCADE;
