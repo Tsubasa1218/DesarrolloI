@@ -62,11 +62,13 @@ CREATE TABLE comprador(
 	email_comprador VARCHAR(50) NOT NULL UNIQUE);
 
 CREATE TABLE cotizaciones_realizadas(
+	id_cotizaciones SERIAL,
 	id_usuario CHAR(10)  REFERENCES usuarios(id_usuario),
 	id_vehiculo SERIAL  REFERENCES vehiculos(id_vehiculo),
 	id_comprador CHAR(9)  REFERENCES comprador(id_comprador),
 	fecha_cotizacion DATE NOT NULL,
-	CONSTRAINT pk_cotizaciones_realizadas PRIMARY KEY(fecha_cotizacion, id_usuario, id_vehiculo, id_comprador));
+	CONSTRAINT pk_cotizaciones_realizadas PRIMARY KEY(id_cotizaciones),
+	CONSTRAINT unique_cotizaciones UNIQUE(fecha_cotizacion, id_usuario, id_vehiculo, id_comprador));
 
 CREATE TABLE ordenes(
 	id_orden SERIAL PRIMARY KEY,
@@ -83,11 +85,13 @@ CREATE TABLE ordenes_emitidas(
 	);
 
 CREATE TABLE ventas_vehiculos(
+	id_venta SERIAL,
 	id_usuario CHAR(10)  REFERENCES usuarios(id_usuario),
 	id_vehiculo SERIAL  REFERENCES vehiculos(id_vehiculo),
 	id_comprador CHAR(10) REFERENCES comprador(id_comprador),
 	fecha_venta DATE NOT NULL,
-	CONSTRAINT pk_ventas_vehiculos PRIMARY KEY (id_usuario, id_vehiculo, id_comprador, fecha_venta));
+	CONSTRAINT pk_ventas_vehiculos PRIMARY KEY (id_venta),
+	CONSTRAINT unique_ventas UNIQUE (id_usuario, id_vehiculo, id_comprador, fecha_venta));
 
 INSERT INTO sedes(nombre_sede, direccion_sede, telefono_sede, email_sede) VALUES('Londres', 'Calle 4D','1234567', 'sede01@abc.com');
 INSERT INTO usuarios(id_usuario, password_usuario, nombre_usuario, estado_usuario, email_usuario, telefono_usuario, tipo_usuario, fecha_ingreso_usuario, id_sede) VALUES ('114408514', '12345', 'Juan Suaza', TRUE, 'xd@xd.com', '1234567', 'Gerente', '2016-12-12', 1);
