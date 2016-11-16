@@ -43,4 +43,21 @@ public class BarChart {
         return panel;
     }
     
+    public ChartPanel reporteAportesVentas(DefaultCategoryDataset data){
+        JFreeChart chart = ChartFactory.createBarChart("Reporte de aporte por sede", "Sedes", "Aporte", data, PlotOrientation.VERTICAL, true, true, true);
+        
+        ChartPanel panel = new ChartPanel(chart, true, true, true, false, false);
+        panel.setSize(ancho, alto);
+        
+        return panel;
+    }
+    
+    public ChartPanel reporteCantidadVehiculosPorSede(DefaultCategoryDataset data){
+        JFreeChart chart = ChartFactory.createBarChart("Reporte de cantidad de vehiculos por sede", "Sedes", "Cantidad", data, PlotOrientation.VERTICAL, true, true, true);
+        
+        ChartPanel panel = new ChartPanel(chart, true, true, true, false, false);
+        panel.setSize(ancho, alto);
+        
+        return panel;
+    }
 }

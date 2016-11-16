@@ -13,6 +13,7 @@ import inventario.Vehiculo;
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import Sedes.Sede;
+import inventario.Partes;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -66,6 +67,7 @@ public class loginInterface extends javax.swing.JFrame {
         panelContenedor.add(panelAgregarVehiculos, "Agregar Vehiculo");
         panelContenedor.add(panelModificarVehiculo, "Modificar Vehiculo");
         panelContenedor.add(panelAgregarPartes, "Agregar Partes");
+        panelContenedor.add(panelModificarPartes, "Modificar Partes");
         panelContenedor.add(panelGenerarReportes, "Generar reportes");
         panelContenedor.add(panelConsultas, "Consultas");
         panelContenedor.add(panelReporteFinal, "Reporte");
@@ -150,6 +152,21 @@ public class loginInterface extends javax.swing.JFrame {
         manejoOrdenesJPanel2 = new javax.swing.JPanel();
         venderButton = new javax.swing.JButton();
         panelContenedorVendedor = new javax.swing.JPanel();
+        frameOpcionesReporte = new javax.swing.JFrame();
+        jLabel29 = new javax.swing.JLabel();
+        sedesOpcionesReportes = new javax.swing.JRadioButton();
+        empresaOpcionesReportes = new javax.swing.JRadioButton();
+        jLabel31 = new javax.swing.JLabel();
+        sedesOpcionesReporte = new javax.swing.JComboBox();
+        semanalOpcionesReportes = new javax.swing.JRadioButton();
+        todoOpcionesReportes = new javax.swing.JRadioButton();
+        jLabel37 = new javax.swing.JLabel();
+        jLabel41 = new javax.swing.JLabel();
+        jLabel56 = new javax.swing.JLabel();
+        diaOpcionesReportes = new javax.swing.JTextField();
+        mesOpcionesReportes = new javax.swing.JTextField();
+        yearOpcionesReportes = new javax.swing.JTextField();
+        generarReporteOpcionesButon = new javax.swing.JButton();
         panelCrearUsuario = new javax.swing.JPanel();
         confirmarCrearUsuarioB = new javax.swing.JButton();
         botonCancelarCrear = new javax.swing.JButton();
@@ -253,15 +270,21 @@ public class loginInterface extends javax.swing.JFrame {
         jLabel55 = new javax.swing.JLabel();
         modificarValorParteTF = new javax.swing.JTextField();
         parteModificarCB = new javax.swing.JComboBox<String>();
+        modificarParteID = new javax.swing.JTextField();
+        jLabel24 = new javax.swing.JLabel();
         panelGenerarReportes = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         reportePersonal = new javax.swing.JButton();
-        jPanel2 = new javax.swing.JPanel();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        inventarioReportesPanel = new javax.swing.JPanel();
+        vehiculosPorSedeBoton = new javax.swing.JButton();
+        vehiculosAgregadosBoton = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
+        ventasReporteBoton = new javax.swing.JButton();
+        aportePorSedeReportesBoton = new javax.swing.JButton();
+        cotizacionesReportePanel = new javax.swing.JPanel();
+        cotizacionesReporteBoton = new javax.swing.JButton();
+        ordenesReportePanel = new javax.swing.JPanel();
+        ordenesReporteBoton = new javax.swing.JButton();
         panelModificarVehiculo = new javax.swing.JPanel();
         modificarSedeVehiculoCB = new javax.swing.JComboBox<String>();
         jLabel27 = new javax.swing.JLabel();
@@ -552,10 +575,10 @@ public class loginInterface extends javax.swing.JFrame {
                             .addComponent(manejoSedesJPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(14, 14, 14))
                     .addGroup(gerenteJPanelLayout.createSequentialGroup()
-                        .addGroup(gerenteJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(manejoVehiculosJPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(manejoPartes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(manejoReportesJPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(gerenteJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(manejoPartes, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(manejoReportesJPanel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(manejoVehiculosJPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 0, Short.MAX_VALUE))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         gerenteJPanelLayout.setVerticalGroup(
@@ -833,6 +856,102 @@ public class loginInterface extends javax.swing.JFrame {
                         .addComponent(vendedorJPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 456, Short.MAX_VALUE)))
                 .addContainerGap())
+        );
+
+        frameOpcionesReporte.setMaximumSize(new java.awt.Dimension(229, 235));
+        frameOpcionesReporte.setMinimumSize(new java.awt.Dimension(229, 235));
+
+        jLabel29.setText("Opciones:");
+
+        sedesOpcionesReportes.setText("Sede");
+
+        empresaOpcionesReportes.setText("Empresa");
+
+        jLabel31.setText("Sedes:");
+
+        semanalOpcionesReportes.setText("Semanal");
+
+        todoOpcionesReportes.setText("Todos los tiempos");
+
+        jLabel37.setText("Dia:");
+
+        jLabel41.setText("Mes:");
+
+        jLabel56.setText("Año:");
+
+        generarReporteOpcionesButon.setText("Generar");
+        generarReporteOpcionesButon.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                generarReporteOpcionesButonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout frameOpcionesReporteLayout = new javax.swing.GroupLayout(frameOpcionesReporte.getContentPane());
+        frameOpcionesReporte.getContentPane().setLayout(frameOpcionesReporteLayout);
+        frameOpcionesReporteLayout.setHorizontalGroup(
+            frameOpcionesReporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(frameOpcionesReporteLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(frameOpcionesReporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(frameOpcionesReporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(frameOpcionesReporteLayout.createSequentialGroup()
+                            .addComponent(sedesOpcionesReportes)
+                            .addGap(18, 18, 18)
+                            .addComponent(empresaOpcionesReportes))
+                        .addComponent(jLabel29)
+                        .addGroup(frameOpcionesReporteLayout.createSequentialGroup()
+                            .addComponent(jLabel31)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(sedesOpcionesReporte, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(frameOpcionesReporteLayout.createSequentialGroup()
+                        .addGroup(frameOpcionesReporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(semanalOpcionesReportes)
+                            .addGroup(frameOpcionesReporteLayout.createSequentialGroup()
+                                .addComponent(jLabel37)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(diaOpcionesReportes, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel41)))
+                        .addGap(4, 4, 4)
+                        .addGroup(frameOpcionesReporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(generarReporteOpcionesButon)
+                            .addGroup(frameOpcionesReporteLayout.createSequentialGroup()
+                                .addComponent(mesOpcionesReportes, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel56)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(yearOpcionesReportes, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(todoOpcionesReportes, javax.swing.GroupLayout.Alignment.LEADING))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        frameOpcionesReporteLayout.setVerticalGroup(
+            frameOpcionesReporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(frameOpcionesReporteLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel29)
+                .addGap(18, 18, 18)
+                .addGroup(frameOpcionesReporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(sedesOpcionesReportes)
+                    .addComponent(empresaOpcionesReportes))
+                .addGap(18, 18, 18)
+                .addGroup(frameOpcionesReporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel31)
+                    .addComponent(sedesOpcionesReporte, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(frameOpcionesReporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(semanalOpcionesReportes)
+                    .addComponent(todoOpcionesReportes))
+                .addGap(18, 18, 18)
+                .addGroup(frameOpcionesReporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel37)
+                    .addComponent(jLabel41)
+                    .addComponent(jLabel56)
+                    .addComponent(diaOpcionesReportes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(mesOpcionesReportes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(yearOpcionesReportes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(generarReporteOpcionesButon)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         panelCrearUsuario.setMaximumSize(new java.awt.Dimension(617, 579));
@@ -1366,6 +1485,11 @@ public class loginInterface extends javax.swing.JFrame {
         jLabel39.setText("Sede:");
 
         confirmarCrearParteB.setText("Aceptar");
+        confirmarCrearParteB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                confirmarCrearParteBActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout panelAgregarPartesLayout = new javax.swing.GroupLayout(panelAgregarPartes);
         panelAgregarPartes.setLayout(panelAgregarPartesLayout);
@@ -1432,7 +1556,24 @@ public class loginInterface extends javax.swing.JFrame {
             }
         });
 
+        modificarParteSedeCB.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                modificarParteSedeCBItemStateChanged(evt);
+            }
+        });
+
         jLabel55.setText("Valor parte:");
+
+        parteModificarCB.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                parteModificarCBItemStateChanged(evt);
+            }
+        });
+
+        modificarParteID.setEditable(false);
+        modificarParteID.setEnabled(false);
+
+        jLabel24.setText("ID parte:");
 
         javax.swing.GroupLayout panelModificarPartesLayout = new javax.swing.GroupLayout(panelModificarPartes);
         panelModificarPartes.setLayout(panelModificarPartesLayout);
@@ -1446,17 +1587,17 @@ public class loginInterface extends javax.swing.JFrame {
                         .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelModificarPartesLayout.createSequentialGroup()
                         .addGroup(panelModificarPartesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(panelModificarPartesLayout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(confirmarModificarParteB))
-                            .addGroup(panelModificarPartesLayout.createSequentialGroup()
+                            .addComponent(confirmarModificarParteB)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelModificarPartesLayout.createSequentialGroup()
                                 .addGroup(panelModificarPartesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel44)
                                     .addComponent(jLabel40)
                                     .addComponent(jLabel42)
-                                    .addComponent(jLabel43))
+                                    .addComponent(jLabel43)
+                                    .addComponent(jLabel24))
                                 .addGap(33, 33, 33)
                                 .addGroup(panelModificarPartesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(modificarParteID, javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(modificarParteSedeCB, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(modificarValorParteTF, javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(modificarCantidadPartesTF, javax.swing.GroupLayout.DEFAULT_SIZE, 176, Short.MAX_VALUE)
@@ -1468,28 +1609,33 @@ public class loginInterface extends javax.swing.JFrame {
             panelModificarPartesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelModificarPartesLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(panelModificarPartesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel43)
-                    .addComponent(modificarParteSedeCB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(panelModificarPartesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel44)
-                    .addComponent(parteModificarCB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(panelModificarPartesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel40)
-                    .addComponent(modificarNombreParteTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(panelModificarPartesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel42)
-                    .addComponent(modificarCantidadPartesTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(panelModificarPartesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel55)
-                    .addComponent(modificarValorParteTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(panelModificarPartesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(panelModificarPartesLayout.createSequentialGroup()
+                        .addGroup(panelModificarPartesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel43)
+                            .addComponent(modificarParteSedeCB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(panelModificarPartesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel44)
+                            .addComponent(parteModificarCB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(panelModificarPartesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel40)
+                            .addComponent(modificarNombreParteTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(panelModificarPartesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel42)
+                            .addComponent(modificarCantidadPartesTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(panelModificarPartesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel55)
+                            .addComponent(modificarValorParteTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addComponent(modificarParteID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel24))
                 .addGap(18, 18, 18)
                 .addComponent(confirmarModificarParteB)
-                .addContainerGap(355, Short.MAX_VALUE))
+                .addContainerGap(317, Short.MAX_VALUE))
         );
 
         panelGenerarReportes.setMaximumSize(new java.awt.Dimension(617, 579));
@@ -1521,36 +1667,51 @@ public class loginInterface extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Inventario"));
+        inventarioReportesPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Inventario"));
 
-        jButton2.setText("Vehiculos por sede");
+        vehiculosPorSedeBoton.setText("Cantidad de vehiculos");
+        vehiculosPorSedeBoton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                vehiculosPorSedeBotonActionPerformed(evt);
+            }
+        });
 
-        jButton3.setText("Vehiculos añadidos");
+        vehiculosAgregadosBoton.setText("Vehiculos añadidos");
+        vehiculosAgregadosBoton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                vehiculosAgregadosBotonActionPerformed(evt);
+            }
+        });
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
+        javax.swing.GroupLayout inventarioReportesPanelLayout = new javax.swing.GroupLayout(inventarioReportesPanel);
+        inventarioReportesPanel.setLayout(inventarioReportesPanelLayout);
+        inventarioReportesPanelLayout.setHorizontalGroup(
+            inventarioReportesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(inventarioReportesPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, 162, Short.MAX_VALUE))
+                .addGroup(inventarioReportesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(vehiculosPorSedeBoton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(vehiculosAgregadosBoton, javax.swing.GroupLayout.DEFAULT_SIZE, 162, Short.MAX_VALUE))
                 .addContainerGap())
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(jButton2)
+        inventarioReportesPanelLayout.setVerticalGroup(
+            inventarioReportesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(inventarioReportesPanelLayout.createSequentialGroup()
+                .addComponent(vehiculosPorSedeBoton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton3))
+                .addComponent(vehiculosAgregadosBoton))
         );
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Ventas"));
 
-        jButton4.setText("Ventas");
+        ventasReporteBoton.setText("Ventas");
 
-        jButton5.setText("Aporte por sede");
+        aportePorSedeReportesBoton.setText("Aporte por sede");
+        aportePorSedeReportesBoton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                aportePorSedeReportesBotonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -1559,17 +1720,62 @@ public class loginInterface extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(ventasReporteBoton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(aportePorSedeReportesBoton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButton4)
+                .addComponent(ventasReporteBoton)
                 .addGap(18, 18, 18)
-                .addComponent(jButton5)
+                .addComponent(aportePorSedeReportesBoton)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        cotizacionesReportePanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Cotizaciones"));
+
+        cotizacionesReporteBoton.setText("Cotizaciones");
+
+        javax.swing.GroupLayout cotizacionesReportePanelLayout = new javax.swing.GroupLayout(cotizacionesReportePanel);
+        cotizacionesReportePanel.setLayout(cotizacionesReportePanelLayout);
+        cotizacionesReportePanelLayout.setHorizontalGroup(
+            cotizacionesReportePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(cotizacionesReportePanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(cotizacionesReporteBoton, javax.swing.GroupLayout.DEFAULT_SIZE, 162, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        cotizacionesReportePanelLayout.setVerticalGroup(
+            cotizacionesReportePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(cotizacionesReportePanelLayout.createSequentialGroup()
+                .addComponent(cotizacionesReporteBoton)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        ordenesReportePanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Ordenes de trabajo"));
+
+        ordenesReporteBoton.setText("Ordenes de trabajo");
+        ordenesReporteBoton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ordenesReporteBotonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout ordenesReportePanelLayout = new javax.swing.GroupLayout(ordenesReportePanel);
+        ordenesReportePanel.setLayout(ordenesReportePanelLayout);
+        ordenesReportePanelLayout.setHorizontalGroup(
+            ordenesReportePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(ordenesReportePanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(ordenesReporteBoton, javax.swing.GroupLayout.DEFAULT_SIZE, 162, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        ordenesReportePanelLayout.setVerticalGroup(
+            ordenesReportePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(ordenesReportePanelLayout.createSequentialGroup()
+                .addComponent(ordenesReporteBoton)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -1581,8 +1787,10 @@ public class loginInterface extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(panelGenerarReportesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(inventarioReportesPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(cotizacionesReportePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(ordenesReportePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(413, Short.MAX_VALUE))
         );
         panelGenerarReportesLayout.setVerticalGroup(
@@ -1591,10 +1799,14 @@ public class loginInterface extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(inventarioReportesPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(cotizacionesReportePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(ordenesReportePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(275, Short.MAX_VALUE))
+                .addContainerGap(125, Short.MAX_VALUE))
         );
 
         panelModificarVehiculo.setMaximumSize(new java.awt.Dimension(617, 579));
@@ -2188,7 +2400,7 @@ public class loginInterface extends javax.swing.JFrame {
     private void jButtonLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLoginActionPerformed
         // TODO add your handling code here:
         //JOptionPane.showMessageDialog(null,"Oprimiste login");
-        
+        /*
        String id_usuario = tfLogin.getText();
        char pass_usuario[] = jPasswordField.getPassword();
        String password = "";
@@ -2212,8 +2424,13 @@ public class loginInterface extends javax.swing.JFrame {
             vendedorJFrame.setEnabled(true);
             vendedorJFrame.setVisible(true);
             this.setVisible(false);
-       }
+       }*/
         
+       
+       gerenteJFrame.setEnabled(true);
+            gerenteJFrame.setVisible(true);
+            gerenteJFrame.pack();
+            this.setVisible(false);
        /*
        gerenteJFrame.setEnabled(true);
        gerenteJFrame.setVisible(true);
@@ -2257,7 +2474,7 @@ public class loginInterface extends javax.swing.JFrame {
         String fecha_ingreso_usuario = new Operaciones().obtenerFecha();
         nombre_usuario = nombre_usuario + " " + apellido;
         Usuario user = new Usuario();
-        System.out.println(nombre_sede);
+
         String id_sede = new Operaciones().codigoSedeDeNombre(nombre_sede);
         
         user.crearUsuario(id_usuario, password_usuario, nombre_usuario, tipo_usuario, email_usuario, telefono_usuario, fecha_ingreso_usuario, id_sede);
@@ -2389,43 +2606,11 @@ public class loginInterface extends javax.swing.JFrame {
     }//GEN-LAST:event_agregarPartesActionPerformed
 
     private void modificarPartesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modificarPartesActionPerformed
-        panelContenedor.setVisible(true);
-        cl.show(panelContenedor, "Modificar partes");
-        
-        String codigo = JOptionPane.showInputDialog("Codigo de la parte");
-        OperacionesBD parte = new OperacionesBD();
-        ResultSet consulta = parte.consultas("SELECT * FROM partes WHERE id_parte = '" + codigo + "';");
-        String codigo_sede = "";
-        try {
-             codigo_sede = consulta.getString(5);
-        } catch (SQLException ex) {
-            Logger.getLogger(loginInterface.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        String sede_parte = JOptionPane.showInputDialog("Codigo de la parte");
-        OperacionesBD parteS = new OperacionesBD();
-        ResultSet consultaSede = parteS.consultas("SELECT nombre_sede FROM sedes WHERE id_sede = '" + codigo_sede + "';");
-        try {
-            while (consulta.next()){
-
-                modificarNombreParteTF.setText(consulta.getString(2));
-                if("t".equals(consulta.getString(3))){
-                    modificarVehiculoNuevoRB.setSelected(true);
-                    modificarVehiculoUsadoRB.setSelected(false);
-                }else if("f".equals(consulta.getString(3))){
-                    modificarVehiculoNuevoRB.setSelected(false);
-                    modificarVehiculoUsadoRB.setSelected(true);
-                }
-                modificarCantidadPartesTF.setText(consulta.getString(4));
-                modificarParteSedeCB.setSelectedItem(consultaSede.getString(1));
-                consulta.close();
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(loginInterface.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
         OperacionesBD sedes = new OperacionesBD();
         ResultSet listaSedes = sedes.consultas("SELECT nombre_sede FROM sedes;");
         new Operaciones().agregarItemCombo(listaSedes, modificarParteSedeCB);
+        panelContenedor.setVisible(true);
+        cl.show(panelContenedor, "Modificar Partes");
     }//GEN-LAST:event_modificarPartesActionPerformed
 
     private void generarReporteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_generarReporteButtonActionPerformed
@@ -2446,16 +2631,21 @@ public class loginInterface extends javax.swing.JFrame {
                 nuevo_vehiculo = "false";
             }
             int cantidad = Integer.parseInt(crearCantidadVehiculoTF.getText());
-            int valor = Integer.parseInt(crearValorVehiculoTF.getText());
+            float valor = Float.parseFloat(crearValorVehiculoTF.getText());
             String nombre_sede = (String)crearSedeVehiculoCB.getSelectedItem();
         
             Operaciones op = new Operaciones();
             String fecha = op.obtenerFecha();
             String id_sede = op.codigoSedeDeNombre(nombre_sede);     
             Vehiculo vehiculo = new Vehiculo();
-        
+            
+            int codigo = 0;
             for(int i = 0; i < cantidad; i++){
-                vehiculo.agregarVehiculo(marca_vehiculo, modelo_vehiculo, color_vehiculo, nuevo_vehiculo, "1", valor, fecha, id_sede);
+                codigo = vehiculo.agregarVehiculo(marca_vehiculo, modelo_vehiculo, color_vehiculo, nuevo_vehiculo, "1", valor, fecha, id_sede);
+            }
+            
+            if(codigo != 0){
+                JOptionPane.showMessageDialog(null, "Vehículo(s) modificado con exito!", "Exito!", JOptionPane.INFORMATION_MESSAGE);
             }
         }catch(NumberFormatException ex){
             JOptionPane.showMessageDialog(null, "La cantidad y el valor deben ser numeros", "Error", JOptionPane.ERROR_MESSAGE);
@@ -2488,7 +2678,6 @@ public class loginInterface extends javax.swing.JFrame {
                 count++;
             }
             
-            System.out.println(""+count);
             String[][] data = new String[count][4];
             int i = 0;
             tabla = new OperacionesBD().consultas(consultaSQL);
@@ -2523,10 +2712,7 @@ public class loginInterface extends javax.swing.JFrame {
     }//GEN-LAST:event_consultarUsuariosActionPerformed
 
     private void confirmarModificarUsuarioBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmarModificarUsuarioBActionPerformed
-        // TODO add your handling code here:
-        panelContenedor.setVisible(true);
-        cl.show(panelContenedor, "Modificar Usuario");
-        
+
         String id_usuario = modificarCodigoUsuarioTF.getText();
         char[] password = modificarContraseñaTF.getPassword();
         char[] password_2 =  modificarContraseñaTF.getPassword();
@@ -2559,7 +2745,20 @@ public class loginInterface extends javax.swing.JFrame {
     }//GEN-LAST:event_confirmarModificarUsuarioBActionPerformed
 
     private void confirmarModificarParteBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmarModificarParteBActionPerformed
-        // TODO add your handling code here:
+        
+        String id_parte = modificarParteID.getText();
+        String nombre_parte = modificarNombreParteTF.getText();
+        String cantidad_parte = modificarCantidadPartesTF.getText();
+        String valor_parte = modificarValorParteTF.getText();
+        String sede = (String)modificarParteSedeCB.getSelectedItem();
+        
+        
+        Operaciones operaciones = new Operaciones();
+        String id_sede = operaciones.codigoSedeDeNombre(sede);
+        Partes parte = new Partes();
+        
+        parte.modificarParte(id_parte, nombre_parte, cantidad_parte, valor_parte, id_sede);
+        
     }//GEN-LAST:event_confirmarModificarParteBActionPerformed
 
     private void consultarOrdenButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consultarOrdenButtonActionPerformed
@@ -2586,7 +2785,6 @@ public class loginInterface extends javax.swing.JFrame {
                 count++;
             }
             
-            System.out.println(""+count);
             String[][] data = new String[count][5];
             int i = 0;
             tabla = new OperacionesBD().consultas(consultaSQL);
@@ -2680,25 +2878,100 @@ public class loginInterface extends javax.swing.JFrame {
         String id_sede = op.codigoSedeDeNombre(nombre_sede);
         
         Vehiculo vehiculo = new Vehiculo();       
-        vehiculo.modificarVehiculo(codigo_vehiculo, marca_vehiculo, modelo_vehiculo, color_vehiculo, nuevo_vehiculo, valor, id_sede);
-        
+        int codigo = 0;
+        codigo = vehiculo.modificarVehiculo(codigo_vehiculo, marca_vehiculo, modelo_vehiculo, color_vehiculo, nuevo_vehiculo, valor, id_sede);
+        if(codigo != 0){
+            JOptionPane.showMessageDialog(null, "Vehículo modificado con exito!", "Exito!", JOptionPane.INFORMATION_MESSAGE);
+        }
     }//GEN-LAST:event_confirmarModificarVehiculoBActionPerformed
 
     private void modificarSedeSedesCBItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_modificarSedeSedesCBItemStateChanged
-        // TODO add your handling code here:
         String consultaSQL = "SELECT * FROM sedes WHERE nombre_sede LIKE '" + (String)modificarSedeSedesCB.getSelectedItem() + "';";
         ResultSet tabla = new OperacionesBD().consultas(consultaSQL);
         try {
             while(tabla.next()){
-                nuevoNombreTF.setText(tabla.getString(2));
-                direccionSedeModificarTF.setText(tabla.getString(3));
-                telefonoSedeModificarTF.setText(tabla.getString(4));
-                emailSedeModificarTF.setText(tabla.getString(5));
+                nuevoNombreTF.setText(tabla.getString("nombre_sede"));
+                direccionSedeModificarTF.setText(tabla.getString("direccion_sede"));
+                telefonoSedeModificarTF.setText(tabla.getString("telefono_sede"));
+                emailSedeModificarTF.setText(tabla.getString("email_sede"));
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
     }//GEN-LAST:event_modificarSedeSedesCBItemStateChanged
+
+    private void modificarParteSedeCBItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_modificarParteSedeCBItemStateChanged
+        //parteModificarCB.removeAllItems();
+        Operaciones operaciones = new Operaciones();
+        String consultaSQL = "";
+        String id_sede = operaciones.codigoSedeDeNombre((String)modificarParteSedeCB.getSelectedItem());
+        if(!id_sede.equals("")){
+            consultaSQL = "SELECT nombre_parte FROM partes WHERE id_sede = " + id_sede + ";";
+            ResultSet tabla = new OperacionesBD().consultas(consultaSQL);
+            operaciones.agregarItemCombo(tabla, parteModificarCB);
+        }
+        
+    }//GEN-LAST:event_modificarParteSedeCBItemStateChanged
+
+    private void parteModificarCBItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_parteModificarCBItemStateChanged
+        if(parteModificarCB.getSelectedItem() != null){
+            String consultaSQL = "SELECT * FROM partes WHERE nombre_parte LIKE '" + (String)parteModificarCB.getSelectedItem() + "';";
+        
+            ResultSet tabla = new OperacionesBD().consultas(consultaSQL);
+            try {
+                while(tabla.next()){
+                    modificarParteID.setText(tabla.getString("id_parte"));
+                    modificarNombreParteTF.setText(tabla.getString("nombre_parte"));
+                    modificarCantidadPartesTF.setText(tabla.getString("cantidad_parte"));
+                    modificarValorParteTF.setText(tabla.getString("valor_parte"));
+                }   
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        }      
+    }//GEN-LAST:event_parteModificarCBItemStateChanged
+
+    private void confirmarCrearParteBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmarCrearParteBActionPerformed
+        Partes parte = new Partes();
+        Operaciones operaciones = new Operaciones();
+        String nombre_parte = crearNombreParteTF.getText();
+        String cantidad_parte = crearCantidadPartesTF.getText();
+        String valor_parte = crearValorParteTF.getText();
+        String id_sede_parte = operaciones.codigoSedeDeNombre((String)crearParteSedeCB.getSelectedItem());
+        parte.agregarPartes(nombre_parte, cantidad_parte, valor_parte, id_sede_parte);
+    }//GEN-LAST:event_confirmarCrearParteBActionPerformed
+
+    private void aportePorSedeReportesBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aportePorSedeReportesBotonActionPerformed
+        // TODO add your handling code here:
+        panelReporte.removeAll();
+        ChartPanel panel = new Reporte().generarReporteAportePorSede();
+        cl.show(panelContenedor, "Reporte");
+        panelReporte.add(panel);
+        panelReporte.updateUI();
+    }//GEN-LAST:event_aportePorSedeReportesBotonActionPerformed
+
+    private void vehiculosPorSedeBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_vehiculosPorSedeBotonActionPerformed
+        // TODO add your handling code here:
+        panelReporte.removeAll();
+        ChartPanel panel = new Reporte().generarReporteCantidadVehiculos();
+        cl.show(panelContenedor, "Reporte");
+        panelReporte.add(panel);
+        panelReporte.updateUI();
+    }//GEN-LAST:event_vehiculosPorSedeBotonActionPerformed
+
+    private void generarReporteOpcionesButonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_generarReporteOpcionesButonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_generarReporteOpcionesButonActionPerformed
+
+    private void ordenesReporteBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ordenesReporteBotonActionPerformed
+        // TODO add your handling code here:
+        frameOpcionesReporte.setVisible(true);
+    }//GEN-LAST:event_ordenesReporteBotonActionPerformed
+
+    private void vehiculosAgregadosBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_vehiculosAgregadosBotonActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_vehiculosAgregadosBotonActionPerformed
     
     
     
@@ -2745,6 +3018,7 @@ public class loginInterface extends javax.swing.JFrame {
     private javax.swing.JButton agregarPartes;
     private javax.swing.JButton agregarVehiculosButton;
     private javax.swing.JTextField apellidosCrear;
+    private javax.swing.JButton aportePorSedeReportesBoton;
     private javax.swing.JButton botonCancelarCrear;
     private javax.swing.JButton botonCrearOrden;
     private javax.swing.JTextField codCompradorCrearCot;
@@ -2774,6 +3048,8 @@ public class loginInterface extends javax.swing.JFrame {
     private javax.swing.JButton consultarOrdenButton;
     private javax.swing.JButton consultarSedes;
     private javax.swing.JButton consultarUsuarios;
+    private javax.swing.JButton cotizacionesReporteBoton;
+    private javax.swing.JPanel cotizacionesReportePanel;
     private javax.swing.JButton cotizarCrearCotButton1;
     private javax.swing.JTextField crearCantidadPartesTF;
     private javax.swing.JTextField crearCantidadVehiculoTF;
@@ -2791,22 +3067,23 @@ public class loginInterface extends javax.swing.JFrame {
     private javax.swing.JTextField crearValorVehiculoTF;
     private javax.swing.JRadioButton crearVehiculoNuevoRB;
     private javax.swing.JRadioButton crearVehiculoUsadoRB;
+    private javax.swing.JTextField diaOpcionesReportes;
     private javax.swing.JTextField direccionSedeCrearTF;
     private javax.swing.JTextField direccionSedeModificarTF;
     private javax.swing.JTextField emailSedeCrearTF;
     private javax.swing.JTextField emailSedeModificarTF;
     private javax.swing.JTextField emailUsuarioCrearTF;
     private javax.swing.JTextField emailUsuarioModificarTF;
+    private javax.swing.JRadioButton empresaOpcionesReportes;
     private javax.swing.JButton exportarButton;
+    private javax.swing.JFrame frameOpcionesReporte;
     private javax.swing.JButton generarReporteButton;
+    private javax.swing.JButton generarReporteOpcionesButon;
     private javax.swing.JFrame gerenteJFrame;
     private javax.swing.JPanel gerenteJPanel;
     private javax.swing.JTextField id_usuarioCrear;
+    private javax.swing.JPanel inventarioReportesPanel;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
     private javax.swing.JButton jButtonLogin;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -2824,21 +3101,26 @@ public class loginInterface extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel28;
+    private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel30;
+    private javax.swing.JLabel jLabel31;
     private javax.swing.JLabel jLabel32;
     private javax.swing.JLabel jLabel33;
     private javax.swing.JLabel jLabel34;
     private javax.swing.JLabel jLabel35;
     private javax.swing.JLabel jLabel36;
+    private javax.swing.JLabel jLabel37;
     private javax.swing.JLabel jLabel38;
     private javax.swing.JLabel jLabel39;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel40;
+    private javax.swing.JLabel jLabel41;
     private javax.swing.JLabel jLabel42;
     private javax.swing.JLabel jLabel43;
     private javax.swing.JLabel jLabel44;
@@ -2854,6 +3136,7 @@ public class loginInterface extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel53;
     private javax.swing.JLabel jLabel54;
     private javax.swing.JLabel jLabel55;
+    private javax.swing.JLabel jLabel56;
     private javax.swing.JLabel jLabel58;
     private javax.swing.JLabel jLabel59;
     private javax.swing.JLabel jLabel6;
@@ -2879,7 +3162,6 @@ public class loginInterface extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelPassword;
     private javax.swing.JLabel jLabelUsuario;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanelCampos;
     private javax.swing.JPasswordField jPasswordField;
@@ -2896,6 +3178,7 @@ public class loginInterface extends javax.swing.JFrame {
     private javax.swing.JPanel manejoSedesJPanel;
     private javax.swing.JPanel manejoUsuariosJPanel;
     private javax.swing.JPanel manejoVehiculosJPanel;
+    private javax.swing.JTextField mesOpcionesReportes;
     private javax.swing.JRadioButton modificarActivoRB;
     private javax.swing.JTextField modificarCantidadPartesTF;
     private javax.swing.JTextField modificarCodigoUsuarioTF;
@@ -2908,6 +3191,7 @@ public class loginInterface extends javax.swing.JFrame {
     private javax.swing.JTextField modificarModeloVehiculoTF;
     private javax.swing.JTextField modificarNombreParteTF;
     private javax.swing.JTextField modificarNombreTF;
+    private javax.swing.JTextField modificarParteID;
     private javax.swing.JComboBox<String> modificarParteSedeCB;
     private javax.swing.JButton modificarPartes;
     private javax.swing.JButton modificarSedeButton;
@@ -2924,6 +3208,8 @@ public class loginInterface extends javax.swing.JFrame {
     private javax.swing.JTextField nombreSedeTF;
     private javax.swing.JTextField nombresCrear;
     private javax.swing.JTextField nuevoNombreTF;
+    private javax.swing.JButton ordenesReporteBoton;
+    private javax.swing.JPanel ordenesReportePanel;
     private javax.swing.JPanel panelAgregarPartes;
     private javax.swing.JPanel panelAgregarVehiculos;
     private javax.swing.JPanel panelConsultarCotizacion;
@@ -2948,6 +3234,9 @@ public class loginInterface extends javax.swing.JFrame {
     private javax.swing.JTextField passwordCrear;
     private javax.swing.JButton reportePersonal;
     private javax.swing.JTextArea resumenCrearOrdenTA;
+    private javax.swing.JComboBox sedesOpcionesReporte;
+    private javax.swing.JRadioButton sedesOpcionesReportes;
+    private javax.swing.JRadioButton semanalOpcionesReportes;
     private javax.swing.JTable tableCrearCot;
     private javax.swing.JTable tableCrearCot1;
     private javax.swing.JTextField telefonoSedeCrearTF;
@@ -2956,12 +3245,17 @@ public class loginInterface extends javax.swing.JFrame {
     private javax.swing.JTextField telefonoUsuarioModificarTF;
     private javax.swing.JTextField tfLogin;
     private javax.swing.JComboBox<String> tipoUsuarioCB;
+    private javax.swing.JRadioButton todoOpcionesReportes;
+    private javax.swing.JButton vehiculosAgregadosBoton;
     private javax.swing.JComboBox vehiculosDispCrearCot;
     private javax.swing.JComboBox vehiculosDispVender;
+    private javax.swing.JButton vehiculosPorSedeBoton;
     private javax.swing.JFrame vendedorJFrame;
     private javax.swing.JPanel vendedorJPanel;
     private javax.swing.JButton venderBuscarCotButton;
     private javax.swing.JButton venderButton;
+    private javax.swing.JButton ventasReporteBoton;
+    private javax.swing.JTextField yearOpcionesReportes;
     // End of variables declaration//GEN-END:variables
 
     

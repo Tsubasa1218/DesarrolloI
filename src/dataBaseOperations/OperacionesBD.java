@@ -30,6 +30,7 @@ public class OperacionesBD {
             Connection con = fachada.conectarBD();
             //se crea la instruccion que inserta el tema
             instruccion = con.createStatement();
+            
 
             //se ejecuta la instruccion
             consulta = instruccion.executeQuery(consultaSQL);

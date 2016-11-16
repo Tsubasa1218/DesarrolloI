@@ -35,6 +35,7 @@ public class Operaciones {
         combo.removeAllItems();
         try {
             while (resultado.next()){
+                //System.out.println(resultado.getString(1));
                 combo.addItem(resultado.getString(1));
             }
             resultado.close();
@@ -50,9 +51,9 @@ public class Operaciones {
     Autor: Juan David Suaza Cruz
     */
     public String codigoSedeDeNombre(String nombre_sede) {
-        System.out.println(nombre_sede);
+        //System.out.println(nombre_sede);
         String consultaSQL = "SELECT id_sede FROM sedes WHERE nombre_sede LIKE '" + nombre_sede + "';";
-        System.out.println(consultaSQL);
+        //System.out.println(consultaSQL);
         String id = "";
         OperacionesBD op = new OperacionesBD();
         ResultSet resultado = op.consultas(consultaSQL);

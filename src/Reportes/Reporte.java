@@ -97,19 +97,100 @@ public class Reporte {
     
     
     /*
-    Nombre: generarReporteVentasPorSede
+    Nombre: generarReporteAportePorSede
     @param: ninguno
     Objetivo: Obtener la cantidad de dinero que ha recaudado cada sede por ventas de vehiculos
     Autor: Juan David Suaza Cruz 1427841
     */
     
-    public ChartPanel generarReporteVentasPorSede(){
-        String consultaSQL = "";
+    public ChartPanel generarReporteAportePorSede(){
+        String consultaSQL = "SELECT nombre_sede, SUM(valor_vehiculo) FROM ventas_vehiculos NATURAL JOIN vehiculos NATURAL JOIN sedes GROUP BY nombre_sede;";
+        String[] nombreSedes;
+        float[] valorVentas;
+        int filas = 0;
         
-        //SELECT  FROM ventas_vehiculos NATURAL JOIN usuarios NATURAL JOIN vehiculos;
+        ResultSet tabla = new OperacionesBD().consultas(consultaSQL);
+        try {
+            while(tabla.next()){
+                filas++;
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
         
+        nombreSedes = new String[filas];
+        valorVentas = new float[filas];
         
-        return null;
+        tabla = new OperacionesBD().consultas(consultaSQL);
+        filas = 0;
+        try {
+            while(tabla.next()){
+                nombreSedes[filas] = tabla.getString(1);
+                valorVentas[filas] = tabla.getFloat(2);
+                filas++;
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        
+        DefaultCategoryDataset data = new DefaultCategoryDataset();
+        for (int i = 0; i < nombreSedes.length; i++) {
+            data.setValue((double)valorVentas[i], "Aporte por sede", nombreSedes[i]);
+        }
+        
+        ChartPanel panel = new BarChart().reporteAportesVentas(data);
+        return panel;
     }
+    
+    public ChartPanel generarReporteCantidadVehiculos(){
+        String consultaSQL = "SELECT nombre_sede, COUNT(id_sede) FROM vehiculos NATURAL JOIN sedes WHERE cantidad_disponible_vehiculo = 1 GROUP BY nombre_sede;";        
+        String[] nombreSedes;
+        int[] cantidadVehiculos;
+        int filas = 0;
+        
+        ResultSet tabla = new OperacionesBD().consultas(consultaSQL);
+        try {
+            while(tabla.next()){
+                filas++;
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        
+        nombreSedes = new String[filas];
+        cantidadVehiculos = new int[filas];
+        
+        tabla = new OperacionesBD().consultas(consultaSQL);
+        filas = 0;
+        try {
+            while(tabla.next()){
+                nombreSedes[filas] = tabla.getString(1);
+                cantidadVehiculos[filas] = tabla.getInt(2);
+                filas++;
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        
+        DefaultCategoryDataset data = new DefaultCategoryDataset();
+        for (int i = 0; i < nombreSedes.length; i++) {
+            data.setValue((double)cantidadVehiculos[i], "Cantidad de vehiculos/sede", nombreSedes[i]);
+        }
+        
+        consultaSQL = "SELECT nombre_sede FROM sedes EXCEPT SELECT nombre_sede FROM vehiculos NATURAL JOIN sedes;";
+        tabla  = new OperacionesBD().consultas(consultaSQL);
+        try {
+            while(tabla.next()){
+                data.setValue(0.0, "Cantidad de vehiculos/sede", tabla.getString(1));
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        
+        ChartPanel panel = new BarChart().reporteCantidadVehiculosPorSede(data);
+        return panel;
+    }
+    
+    
     
 }
