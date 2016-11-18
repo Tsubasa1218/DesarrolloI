@@ -65,7 +65,7 @@ CREATE TABLE cotizaciones_realizadas(
 	id_cotizaciones SERIAL,
 	id_usuario CHAR(10)  REFERENCES usuarios(id_usuario),
 	id_vehiculo SERIAL  REFERENCES vehiculos(id_vehiculo),
-	id_comprador CHAR(9)  REFERENCES comprador(id_comprador),
+	id_comprador CHAR(10)  REFERENCES comprador(id_comprador),
 	fecha_cotizacion DATE NOT NULL,
 	CONSTRAINT pk_cotizaciones_realizadas PRIMARY KEY(id_cotizaciones),
 	CONSTRAINT unique_cotizaciones UNIQUE(fecha_cotizacion, id_usuario, id_vehiculo, id_comprador));
