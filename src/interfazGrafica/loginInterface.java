@@ -5,6 +5,7 @@
  */
 package interfazGrafica;
 
+import Ordenes.Ordenes;
 import Reportes.Reporte;
 import Usuarios.Usuario;
 import javax.swing.JOptionPane;
@@ -13,15 +14,19 @@ import inventario.Vehiculo;
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import Sedes.Sede;
+import Ventas.Venta;
 import inventario.Partes;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Calendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.ButtonGroup;
+import javax.swing.table.DefaultTableModel;
 import org.jfree.chart.ChartPanel;
+
 
 /**
  *
@@ -34,14 +39,24 @@ public class loginInterface extends javax.swing.JFrame {
     ButtonGroup modUsuario;
     ButtonGroup agregarVehiculos;
     ButtonGroup modVehiculos;
-    
+    ButtonGroup tiempoReporte;
+    ButtonGroup espacioReporte;
+  
+    int tipoReporte;
+    final int COTIZACIONES_SEDE = 1;
+    final int COTIZACIONES_EMPRESA = 2;
+    final int ORDENES_SEDE = 3;
+    final int ORDENES_EMPRESA = 4;
+    final int VENTAS_SEDE = 5;
+    final int VENTAS_EMPRESA = 6;
     /**
      * Creates new form loginInterface
      */
 
     public loginInterface() {
         initComponents();
-   
+  
+        tipoReporte = -1;
         //Inicializacion de paneles como no visibles
         panelContenedor.setVisible(false);
         panelContenedorJefe.setVisible(false);
@@ -93,10 +108,13 @@ public class loginInterface extends javax.swing.JFrame {
         clJefe = (CardLayout)panelContenedorJefe.getLayout();
         
         
-         //Creacion de BittonGroups
+         //Creacion de ButtonGroups
         modUsuario = new ButtonGroup();
         agregarVehiculos = new ButtonGroup();
         modVehiculos = new ButtonGroup();
+        tiempoReporte = new ButtonGroup();
+        espacioReporte = new ButtonGroup();
+        
         modUsuario.add(modificarActivoRB);
         modUsuario.add(modificarInactivoRB);
         
@@ -105,6 +123,12 @@ public class loginInterface extends javax.swing.JFrame {
         
         modVehiculos.add(modificarVehiculoNuevoRB);
         modVehiculos.add(modificarVehiculoUsadoRB);
+        
+        tiempoReporte.add(semanalOpcionesReportes);
+        tiempoReporte.add(todoOpcionesReportes);
+        
+        espacioReporte.add(sedesOpcionesReportes);
+        espacioReporte.add(empresaOpcionesReportes);
             
         
         
@@ -167,6 +191,18 @@ public class loginInterface extends javax.swing.JFrame {
         mesOpcionesReportes = new javax.swing.JTextField();
         yearOpcionesReportes = new javax.swing.JTextField();
         generarReporteOpcionesButon = new javax.swing.JButton();
+        ingresarUsuarioFrame = new javax.swing.JFrame();
+        jLabel67 = new javax.swing.JLabel();
+        jLabel79 = new javax.swing.JLabel();
+        jLabel80 = new javax.swing.JLabel();
+        jLabel81 = new javax.swing.JLabel();
+        jLabel82 = new javax.swing.JLabel();
+        cedulaIngresarCliente = new javax.swing.JTextField();
+        nombreIngresarCliente = new javax.swing.JTextField();
+        direccionIngresarCliente = new javax.swing.JTextField();
+        emailIngresarCliente = new javax.swing.JTextField();
+        telefonoIngresarCliente = new javax.swing.JTextField();
+        ingresarUsuarioBoton = new javax.swing.JButton();
         panelCrearUsuario = new javax.swing.JPanel();
         confirmarCrearUsuarioB = new javax.swing.JButton();
         botonCancelarCrear = new javax.swing.JButton();
@@ -319,6 +355,13 @@ public class loginInterface extends javax.swing.JFrame {
         jLabel50 = new javax.swing.JLabel();
         codOrdenConsultarOrdenTF = new javax.swing.JTextField();
         aceptarConsultarOrden = new javax.swing.JButton();
+        jLabel57 = new javax.swing.JLabel();
+        nombreClienteConsultarOrden = new javax.swing.JTextField();
+        jLabel65 = new javax.swing.JLabel();
+        idClienteConsultarOrden = new javax.swing.JTextField();
+        jLabel66 = new javax.swing.JLabel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        descripcionConsultarOrden = new javax.swing.JTextArea();
         panelCrearCotizacion = new javax.swing.JPanel();
         jLabel52 = new javax.swing.JLabel();
         jLabel53 = new javax.swing.JLabel();
@@ -346,7 +389,7 @@ public class loginInterface extends javax.swing.JFrame {
         codVendedorVender = new javax.swing.JTextField();
         codCompradorVender = new javax.swing.JTextField();
         codVehiculoVender = new javax.swing.JTextField();
-        cotizarCrearCotButton1 = new javax.swing.JButton();
+        ventaCrearVentaButton = new javax.swing.JButton();
         jLabel64 = new javax.swing.JLabel();
         vehiculosDispVender = new javax.swing.JComboBox();
         jScrollPane3 = new javax.swing.JScrollPane();
@@ -365,6 +408,8 @@ public class loginInterface extends javax.swing.JFrame {
         jLabel15 = new javax.swing.JLabel();
 
         gerenteJFrame.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        gerenteJFrame.setTitle("ABC Corp. - Gerente");
+        gerenteJFrame.setLocation(new java.awt.Point(300, 100));
         gerenteJFrame.setMinimumSize(new java.awt.Dimension(830, 715));
 
         gerenteJPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Bienvenido Gerente!"));
@@ -635,6 +680,8 @@ public class loginInterface extends javax.swing.JFrame {
         );
 
         jefeJFrame.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        jefeJFrame.setTitle("ABC Corp. - Jefe de Taller");
+        jefeJFrame.setLocation(new java.awt.Point(300, 100));
         jefeJFrame.setMinimumSize(new java.awt.Dimension(830, 715));
 
         jefeJPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Bienvenido Jefe de taller!"));
@@ -732,6 +779,8 @@ public class loginInterface extends javax.swing.JFrame {
         );
 
         vendedorJFrame.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        vendedorJFrame.setTitle("ABC Corp. - Vendedor");
+        vendedorJFrame.setLocation(new java.awt.Point(300, 100));
         vendedorJFrame.setMinimumSize(new java.awt.Dimension(830, 715));
 
         vendedorJPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Bienvenido Vendedor!"));
@@ -858,20 +907,36 @@ public class loginInterface extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        frameOpcionesReporte.setMaximumSize(new java.awt.Dimension(229, 235));
-        frameOpcionesReporte.setMinimumSize(new java.awt.Dimension(229, 235));
+        frameOpcionesReporte.setTitle("ABC Corp. - Reportes");
+        frameOpcionesReporte.setLocation(new java.awt.Point(500, 300));
+        frameOpcionesReporte.setMinimumSize(new java.awt.Dimension(300, 300));
 
         jLabel29.setText("Opciones:");
 
         sedesOpcionesReportes.setText("Sede");
+        sedesOpcionesReportes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sedesOpcionesReportesActionPerformed(evt);
+            }
+        });
 
         empresaOpcionesReportes.setText("Empresa");
 
         jLabel31.setText("Sedes:");
 
         semanalOpcionesReportes.setText("Semanal");
+        semanalOpcionesReportes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                semanalOpcionesReportesActionPerformed(evt);
+            }
+        });
 
         todoOpcionesReportes.setText("Todos los tiempos");
+        todoOpcionesReportes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                todoOpcionesReportesActionPerformed(evt);
+            }
+        });
 
         jLabel37.setText("Dia:");
 
@@ -952,6 +1017,76 @@ public class loginInterface extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(generarReporteOpcionesButon)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        ingresarUsuarioFrame.setTitle("ABC Corp. - Registrar Cliente");
+        ingresarUsuarioFrame.setLocation(new java.awt.Point(500, 300));
+        ingresarUsuarioFrame.setMaximumSize(new java.awt.Dimension(282, 329));
+        ingresarUsuarioFrame.setMinimumSize(new java.awt.Dimension(282, 329));
+
+        jLabel67.setText("Cédula:");
+
+        jLabel79.setText("Nombre:");
+
+        jLabel80.setText("Dirección:");
+
+        jLabel81.setText("E-mail:");
+
+        jLabel82.setText("Teléfono:");
+
+        ingresarUsuarioBoton.setText("Aceptar");
+
+        javax.swing.GroupLayout ingresarUsuarioFrameLayout = new javax.swing.GroupLayout(ingresarUsuarioFrame.getContentPane());
+        ingresarUsuarioFrame.getContentPane().setLayout(ingresarUsuarioFrameLayout);
+        ingresarUsuarioFrameLayout.setHorizontalGroup(
+            ingresarUsuarioFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(ingresarUsuarioFrameLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(ingresarUsuarioFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel67)
+                    .addComponent(jLabel79)
+                    .addComponent(jLabel80)
+                    .addComponent(jLabel81)
+                    .addComponent(jLabel82))
+                .addGap(25, 25, 25)
+                .addGroup(ingresarUsuarioFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(cedulaIngresarCliente, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE)
+                    .addComponent(nombreIngresarCliente)
+                    .addComponent(direccionIngresarCliente)
+                    .addComponent(emailIngresarCliente)
+                    .addComponent(telefonoIngresarCliente))
+                .addContainerGap(65, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ingresarUsuarioFrameLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(ingresarUsuarioBoton)
+                .addContainerGap())
+        );
+        ingresarUsuarioFrameLayout.setVerticalGroup(
+            ingresarUsuarioFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(ingresarUsuarioFrameLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(ingresarUsuarioFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel67)
+                    .addComponent(cedulaIngresarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(ingresarUsuarioFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel79)
+                    .addComponent(nombreIngresarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(ingresarUsuarioFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel80)
+                    .addComponent(direccionIngresarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(ingresarUsuarioFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel81)
+                    .addComponent(emailIngresarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(ingresarUsuarioFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel82)
+                    .addComponent(telefonoIngresarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(ingresarUsuarioBoton)
+                .addContainerGap(105, Short.MAX_VALUE))
         );
 
         panelCrearUsuario.setMaximumSize(new java.awt.Dimension(617, 579));
@@ -1737,6 +1872,11 @@ public class loginInterface extends javax.swing.JFrame {
         cotizacionesReportePanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Cotizaciones"));
 
         cotizacionesReporteBoton.setText("Cotizaciones");
+        cotizacionesReporteBoton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cotizacionesReporteBotonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout cotizacionesReportePanelLayout = new javax.swing.GroupLayout(cotizacionesReportePanel);
         cotizacionesReportePanel.setLayout(cotizacionesReportePanelLayout);
@@ -1937,6 +2077,11 @@ public class loginInterface extends javax.swing.JFrame {
         jScrollPane1.setViewportView(resumenCrearOrdenTA);
 
         botonCrearOrden.setText("Aceptar");
+        botonCrearOrden.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonCrearOrdenActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout panelCrearOrdenLayout = new javax.swing.GroupLayout(panelCrearOrden);
         panelCrearOrden.setLayout(panelCrearOrdenLayout);
@@ -2008,6 +2153,26 @@ public class loginInterface extends javax.swing.JFrame {
         jLabel50.setText("Código de la orden:");
 
         aceptarConsultarOrden.setText("Aceptar");
+        aceptarConsultarOrden.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                aceptarConsultarOrdenActionPerformed(evt);
+            }
+        });
+
+        jLabel57.setText("Vehículo:");
+
+        nombreClienteConsultarOrden.setEditable(false);
+
+        jLabel65.setText("Parte:");
+
+        idClienteConsultarOrden.setEditable(false);
+
+        jLabel66.setText("Descripción:");
+
+        descripcionConsultarOrden.setEditable(false);
+        descripcionConsultarOrden.setColumns(20);
+        descripcionConsultarOrden.setRows(5);
+        jScrollPane4.setViewportView(descripcionConsultarOrden);
 
         javax.swing.GroupLayout panelConsultarOrdenLayout = new javax.swing.GroupLayout(panelConsultarOrden);
         panelConsultarOrden.setLayout(panelConsultarOrdenLayout);
@@ -2015,13 +2180,30 @@ public class loginInterface extends javax.swing.JFrame {
             panelConsultarOrdenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelConsultarOrdenLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(panelConsultarOrdenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(aceptarConsultarOrden)
+                .addGroup(panelConsultarOrdenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelConsultarOrdenLayout.createSequentialGroup()
-                        .addComponent(jLabel50)
+                        .addGroup(panelConsultarOrdenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel50)
+                            .addComponent(jLabel57))
                         .addGap(18, 18, 18)
-                        .addComponent(codOrdenConsultarOrdenTF, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(319, Short.MAX_VALUE))
+                        .addGroup(panelConsultarOrdenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(nombreClienteConsultarOrden, javax.swing.GroupLayout.DEFAULT_SIZE, 199, Short.MAX_VALUE)
+                            .addComponent(codOrdenConsultarOrdenTF))
+                        .addGap(18, 18, 18)
+                        .addComponent(aceptarConsultarOrden)
+                        .addGap(207, 207, 207))
+                    .addGroup(panelConsultarOrdenLayout.createSequentialGroup()
+                        .addGroup(panelConsultarOrdenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel65)
+                            .addComponent(jLabel66))
+                        .addGap(54, 54, 54)
+                        .addGroup(panelConsultarOrdenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(panelConsultarOrdenLayout.createSequentialGroup()
+                                .addComponent(idClienteConsultarOrden)
+                                .addGap(296, 296, 296))
+                            .addGroup(panelConsultarOrdenLayout.createSequentialGroup()
+                                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 402, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap(93, Short.MAX_VALUE))))))
         );
         panelConsultarOrdenLayout.setVerticalGroup(
             panelConsultarOrdenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2029,10 +2211,21 @@ public class loginInterface extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(panelConsultarOrdenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel50)
-                    .addComponent(codOrdenConsultarOrdenTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(codOrdenConsultarOrdenTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(aceptarConsultarOrden))
+                .addGap(16, 16, 16)
+                .addGroup(panelConsultarOrdenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel57)
+                    .addComponent(nombreClienteConsultarOrden, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(aceptarConsultarOrden)
-                .addContainerGap(507, Short.MAX_VALUE))
+                .addGroup(panelConsultarOrdenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel65)
+                    .addComponent(idClienteConsultarOrden, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(panelConsultarOrdenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel66)
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(194, Short.MAX_VALUE))
         );
 
         panelCrearCotizacion.setMaximumSize(new java.awt.Dimension(617, 579));
@@ -2172,9 +2365,20 @@ public class loginInterface extends javax.swing.JFrame {
         codCotVender.setForeground(new java.awt.Color(102, 102, 102));
         codCotVender.setText("(Opcional)");
 
-        cotizarCrearCotButton1.setText("Vender");
+        ventaCrearVentaButton.setText("Vender");
+        ventaCrearVentaButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ventaCrearVentaButtonActionPerformed(evt);
+            }
+        });
 
         jLabel64.setText("Marcas disponibles:");
+
+        vehiculosDispVender.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                vehiculosDispVenderItemStateChanged(evt);
+            }
+        });
 
         tableCrearCot1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -2188,6 +2392,11 @@ public class loginInterface extends javax.swing.JFrame {
         tableCrearCot1.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
 
         venderBuscarCotButton.setText("Buscar");
+        venderBuscarCotButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                venderBuscarCotButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout panelVenderLayout = new javax.swing.GroupLayout(panelVender);
         panelVender.setLayout(panelVenderLayout);
@@ -2222,7 +2431,7 @@ public class loginInterface extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelVenderLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(cotizarCrearCotButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(ventaCrearVentaButton, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         panelVenderLayout.setVerticalGroup(
@@ -2256,7 +2465,7 @@ public class loginInterface extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(cotizarCrearCotButton1)
+                .addComponent(ventaCrearVentaButton)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -2318,6 +2527,8 @@ public class loginInterface extends javax.swing.JFrame {
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("ABC Corp. - Log in");
+        setLocation(new java.awt.Point(500, 300));
 
         jLabelUsuario.setText("Nombre de usuario:");
 
@@ -2427,20 +2638,21 @@ public class loginInterface extends javax.swing.JFrame {
        }*/
         
        
-       gerenteJFrame.setEnabled(true);
-            gerenteJFrame.setVisible(true);
-            gerenteJFrame.pack();
-            this.setVisible(false);
+        gerenteJFrame.setEnabled(true);
+        gerenteJFrame.setVisible(true);
+        //gerenteJFrame.pack();
+        this.setVisible(false);
        /*
        gerenteJFrame.setEnabled(true);
        gerenteJFrame.setVisible(true);
        
-       vendedorJFrame.setEnabled(true);
-       vendedorJFrame.setVisible(true);
+       
+       */
+        
        
        jefeJFrame.setEnabled(true);
        jefeJFrame.setVisible(true);
-        */
+        
     }//GEN-LAST:event_jButtonLoginActionPerformed
 
     private void crearUsuarioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crearUsuarioButtonActionPerformed
@@ -2497,6 +2709,8 @@ public class loginInterface extends javax.swing.JFrame {
     private void crearOrdenButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crearOrdenButtonActionPerformed
         // TODO add your handling code here:
         panelContenedorJefe.setVisible(true);
+        String ultimoCod = new Ordenes().obtenerUltimoCodigoOrden();
+        codOrdenCrearOrdenTF.setText(ultimoCod);
         clJefe.show(panelContenedorJefe, "Crear orden");
     }//GEN-LAST:event_crearOrdenButtonActionPerformed
 
@@ -2508,8 +2722,12 @@ public class loginInterface extends javax.swing.JFrame {
 
     private void venderButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_venderButtonActionPerformed
         // TODO add your handling code here:
+        OperacionesBD marcas = new OperacionesBD();
+        ResultSet listaMarcas = marcas.consultas("SELECT V.marca_vehiculo FROM vehiculos V GROUP BY V.marca_vehiculo;");
+        new Operaciones().agregarItemCombo(listaMarcas, vehiculosDispVender);
         panelContenedorVendedor.setVisible(true);
         clVendedor.show(panelContenedorVendedor, "Vender");
+        
     }//GEN-LAST:event_venderButtonActionPerformed
 
     private void modificarUsuarioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modificarUsuarioButtonActionPerformed
@@ -2653,13 +2871,17 @@ public class loginInterface extends javax.swing.JFrame {
     }//GEN-LAST:event_confirmarAgregarVehiculoBActionPerformed
 
     private void confirmarCrearSedeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmarCrearSedeActionPerformed
-        String nombre = nombreSedeTF.getText();
-        String codigo = codigoSedeTF.getText();
+        String nombre = nombreSedeTF.getText();       
         String direccion = direccionSedeCrearTF.getText();
         String telefono = telefonoSedeCrearTF.getText();
         String email = emailSedeCrearTF.getText();
         Sede sede = new Sede();
-        sede.agregarSede(codigo, nombre, direccion, telefono, email);
+        sede.agregarSede(nombre, direccion, telefono, email);
+        
+        Operaciones oper = new Operaciones();
+        String id = oper.obtenerUltimoCodigoSede();
+        codigoSedeTF.setText(id);
+        
     }//GEN-LAST:event_confirmarCrearSedeActionPerformed
 
     private void telefonoSedeModificarTFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_telefonoSedeModificarTFActionPerformed
@@ -2961,17 +3183,223 @@ public class loginInterface extends javax.swing.JFrame {
 
     private void generarReporteOpcionesButonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_generarReporteOpcionesButonActionPerformed
         // TODO add your handling code here:
+        if(COTIZACIONES_SEDE == tipoReporte){
+            panelReporte.removeAll();
+            
+            if(semanalOpcionesReportes.isSelected() && sedesOpcionesReportes.isSelected()){
+                int dia = Integer.parseInt(diaOpcionesReportes.getText());
+                int mes = Integer.parseInt(mesOpcionesReportes.getText());
+                int year = Integer.parseInt(yearOpcionesReportes.getText());
+                Calendar c  = Calendar.getInstance();
+                c.set(year, --mes, dia);
+            
+                java.util.Date fechaInicial = c.getTime();
+            
+                String id_sede = new Operaciones().codigoSedeDeNombre((String)sedesOpcionesReporte.getSelectedItem());
+                ChartPanel panel = new Reporte().generarReporteCotizacionesSede(fechaInicial, id_sede);
+                cl.show(panelContenedor, "Reporte");
+                panelReporte.add(panel);
+                panelReporte.updateUI();
+            }else if(sedesOpcionesReportes.isSelected() && todoOpcionesReportes.isSelected()){
+                String id_sede = new Operaciones().codigoSedeDeNombre((String)sedesOpcionesReporte.getSelectedItem());
+                ChartPanel panel = new Reporte().generarReporteCotizacionesSedeAll(id_sede);
+                cl.show(panelContenedor, "Reporte");
+                panelReporte.add(panel);
+                panelReporte.updateUI();
+            }else if(empresaOpcionesReportes.isSelected() && semanalOpcionesReportes.isSelected()){
+                int dia = Integer.parseInt(diaOpcionesReportes.getText());
+                int mes = Integer.parseInt(mesOpcionesReportes.getText());
+                int year = Integer.parseInt(yearOpcionesReportes.getText());
+                Calendar c  = Calendar.getInstance();
+                c.set(year, --mes, dia);            
+                java.util.Date fechaInicial = c.getTime();
+            
+                ChartPanel panel = new Reporte().generarReporteCotizacionesEmpresa(fechaInicial);
+                cl.show(panelContenedor, "Reporte");
+                panelReporte.add(panel);
+                panelReporte.updateUI();
+            }else if(empresaOpcionesReportes.isSelected() && todoOpcionesReportes.isSelected()){
+                ChartPanel panel = new Reporte().generarReporteCotizacionesEmpresaAll();
+                cl.show(panelContenedor, "Reporte");
+                panelReporte.add(panel);
+                panelReporte.updateUI();
+            }else{
+                JOptionPane.showMessageDialog(null, "Hay campos vacios");
+            }
+            
+            
+            
+        }
+        
+        frameOpcionesReporte.setVisible(false);
+        //sedesOpcionesReportes.setSelected(false);
+        //empresaOpcionesReportes.setSelected(false);
+        //sedesOpcionesReporte.removeAllItems();
+        //semanalOpcionesReportes.setSelected(false);
+        //todoOpcionesReportes.setSelected(false);
+        diaOpcionesReportes.setText("");
+        mesOpcionesReportes.setText("");
+        yearOpcionesReportes.setText("");
+        diaOpcionesReportes.setEnabled(true);
+        mesOpcionesReportes.setEnabled(true);
+        yearOpcionesReportes.setEnabled(true);
     }//GEN-LAST:event_generarReporteOpcionesButonActionPerformed
 
     private void ordenesReporteBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ordenesReporteBotonActionPerformed
         // TODO add your handling code here:
         frameOpcionesReporte.setVisible(true);
+        if(sedesOpcionesReportes.isSelected()){
+            sedesOpcionesReportes.doClick();
+        }
+        if(semanalOpcionesReportes.isSelected()){
+            semanalOpcionesReportes.doClick();
+        }
+        
+        if(todoOpcionesReportes.isSelected()){
+            todoOpcionesReportes.doClick();
+        }
     }//GEN-LAST:event_ordenesReporteBotonActionPerformed
 
     private void vehiculosAgregadosBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_vehiculosAgregadosBotonActionPerformed
         // TODO add your handling code here:
         
     }//GEN-LAST:event_vehiculosAgregadosBotonActionPerformed
+
+    private void cotizacionesReporteBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cotizacionesReporteBotonActionPerformed
+        // TODO add your handling code here:
+        frameOpcionesReporte.setVisible(true);
+        tipoReporte = COTIZACIONES_SEDE;
+    }//GEN-LAST:event_cotizacionesReporteBotonActionPerformed
+
+    private void sedesOpcionesReportesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sedesOpcionesReportesActionPerformed
+        // TODO add your handling code here:
+        OperacionesBD sedes = new OperacionesBD();
+        ResultSet listaSedes = sedes.consultas("SELECT nombre_sede FROM sedes;");
+        new Operaciones().agregarItemCombo(listaSedes, sedesOpcionesReporte);
+        
+    }//GEN-LAST:event_sedesOpcionesReportesActionPerformed
+
+    private void todoOpcionesReportesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_todoOpcionesReportesActionPerformed
+        // TODO add your handling code here:
+        diaOpcionesReportes.setEnabled(false);
+        mesOpcionesReportes.setEnabled(false);
+        yearOpcionesReportes.setEnabled(false);
+    }//GEN-LAST:event_todoOpcionesReportesActionPerformed
+
+    private void semanalOpcionesReportesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_semanalOpcionesReportesActionPerformed
+        // TODO add your handling code here:
+        diaOpcionesReportes.setEnabled(true);
+        mesOpcionesReportes.setEnabled(true);
+        yearOpcionesReportes.setEnabled(true);
+    }//GEN-LAST:event_semanalOpcionesReportesActionPerformed
+
+    private void venderBuscarCotButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_venderBuscarCotButtonActionPerformed
+        // TODO add your handling code here:
+        String codigoCotizacion = codCotVender.getText();
+        OperacionesBD vehiculo = new OperacionesBD();
+        ResultSet consulta = vehiculo.consultas("SELECT * FROM cotizaciones_realizadas WHERE id_cotizaciones = '" + codigoCotizacion + "';");
+        try {
+            while (consulta.next()){
+                codCotVender.setText(codigoCotizacion);
+                codVendedorVender.setText(consulta.getString("id_usuario"));
+                codCompradorVender.setText(consulta.getString("id_comprador"));
+                
+                codVehiculoVender.setText(consulta.getString("id_vehiculo"));
+                
+                modificarValorVehiculoTF.setText(consulta.getString(7));
+                consulta.close();
+            }
+        
+        
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(loginInterface.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_venderBuscarCotButtonActionPerformed
+
+    private void ventaCrearVentaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ventaCrearVentaButtonActionPerformed
+        // TODO add your handling code here:
+        Venta venta = new Venta();
+        Operaciones operacion = new Operaciones();
+        String id_usuario = (String)codVendedorVender.getText();
+        String id_vehiculo = (String)codVehiculoVender.getText();
+        String id_comprador = (String)codCompradorVender.getText();
+        String fecha_venta = operacion.obtenerFecha();
+
+        venta.crearVenta(id_usuario, id_vehiculo, id_comprador, fecha_venta);
+    }//GEN-LAST:event_ventaCrearVentaButtonActionPerformed
+
+    private void vehiculosDispVenderItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_vehiculosDispVenderItemStateChanged
+        // TODO add your handling code here:
+        panelConsultas.removeAll();
+        panelContenedor.setVisible(true);
+        String consultaSQL = "SELECT id_vehiculo, marca_vehiculo, modelo_vehiculo, color_vehiculo, "
+                + "nuevo_vehiculo, valor_vehiculo, id_sede FROM vehiculos WHERE marca_vehiculo = '" + (String)vehiculosDispVender.getSelectedItem()
+                + "' AND cantidad_disponible_vehiculo = '1';";
+        ResultSet tabla = new OperacionesBD().consultas(consultaSQL);
+        DefaultTableModel dtm = new DefaultTableModel(0,0);
+        
+        try{
+            int count = 0;
+            while(tabla.next()){
+                count++;
+            }
+            
+            String[][] data = new String[count][7];
+            int i = 0;
+            tabla = new OperacionesBD().consultas(consultaSQL);
+            while(tabla.next()){
+                data[i][0] = "" + tabla.getInt("id_vehiculo");
+                data[i][1] = tabla.getString("marca_vehiculo");
+                data[i][2] = tabla.getString("modelo_vehiculo");
+                data[i][3] = tabla.getString("color_vehiculo");
+                data[i][4] = tabla.getString("nuevo_vehiculo");
+                data[i][5] = tabla.getString("valor_vehiculo");
+                data[i][6] = tabla.getString("id_sede");
+                i++;
+            }
+            String[] nombreColumnas = {"Codigo", "Marca", "Modelo", "Color", "Nuevo", "Valor", "Sede"};
+            dtm.setColumnIdentifiers(nombreColumnas);
+            tableCrearCot1.setModel(dtm);
+            for (int j = 0; j < count; j++) {
+                dtm.addRow(data[j]);
+            }
+            
+            
+        }catch(SQLException exc){
+            JOptionPane.showMessageDialog(null, "Error al acceder a la base de datos");
+            exc.printStackTrace();
+        }
+    }//GEN-LAST:event_vehiculosDispVenderItemStateChanged
+
+    private void botonCrearOrdenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCrearOrdenActionPerformed
+        // TODO add your handling code here:
+        String codigoVehiculo = codVehiculoCrearOrdenTF.getText();
+        String codigoParte = codParteCrearOrdenTF.getText();
+        String codigoJefe = codJefeTallerCrearOrdenTF.getText();
+        String resumen = resumenCrearOrdenTA.getText();
+        
+        if (!(codigoJefe.equals("") && codigoParte.equals("") && codigoVehiculo.equals("") && resumen.equals(""))) {
+            Ordenes objeto = new Ordenes();
+            if (objeto.generarOrden(codigoVehiculo, codigoParte, codigoJefe, resumen)) {
+                codVehiculoCrearOrdenTF.setText("");
+                codParteCrearOrdenTF.setText("");
+                codJefeTallerCrearOrdenTF.setText("");
+                resumenCrearOrdenTA.setText("");
+                JOptionPane.showMessageDialog(gerenteJPanel, "Orden generada con exito");
+                String ordenCod = objeto.obtenerUltimoCodigoOrden();
+                codOrdenCrearOrdenTF.setText(ordenCod);
+            } else {
+                JOptionPane.showMessageDialog(gerenteJPanel, "La orden no fue generada");
+            }
+        }      
+    }//GEN-LAST:event_botonCrearOrdenActionPerformed
+
+    private void aceptarConsultarOrdenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aceptarConsultarOrdenActionPerformed
+        // TODO add your handling code here:
+        Ordenes orden = new Ordenes();
+        
+    }//GEN-LAST:event_aceptarConsultarOrdenActionPerformed
     
     
     
@@ -3021,6 +3449,7 @@ public class loginInterface extends javax.swing.JFrame {
     private javax.swing.JButton aportePorSedeReportesBoton;
     private javax.swing.JButton botonCancelarCrear;
     private javax.swing.JButton botonCrearOrden;
+    private javax.swing.JTextField cedulaIngresarCliente;
     private javax.swing.JTextField codCompradorCrearCot;
     private javax.swing.JTextField codCompradorVender;
     private javax.swing.JTextField codCotConsultarCot;
@@ -3050,7 +3479,6 @@ public class loginInterface extends javax.swing.JFrame {
     private javax.swing.JButton consultarUsuarios;
     private javax.swing.JButton cotizacionesReporteBoton;
     private javax.swing.JPanel cotizacionesReportePanel;
-    private javax.swing.JButton cotizarCrearCotButton1;
     private javax.swing.JTextField crearCantidadPartesTF;
     private javax.swing.JTextField crearCantidadVehiculoTF;
     private javax.swing.JTextField crearColorVehiculoTF;
@@ -3067,9 +3495,12 @@ public class loginInterface extends javax.swing.JFrame {
     private javax.swing.JTextField crearValorVehiculoTF;
     private javax.swing.JRadioButton crearVehiculoNuevoRB;
     private javax.swing.JRadioButton crearVehiculoUsadoRB;
+    private javax.swing.JTextArea descripcionConsultarOrden;
     private javax.swing.JTextField diaOpcionesReportes;
+    private javax.swing.JTextField direccionIngresarCliente;
     private javax.swing.JTextField direccionSedeCrearTF;
     private javax.swing.JTextField direccionSedeModificarTF;
+    private javax.swing.JTextField emailIngresarCliente;
     private javax.swing.JTextField emailSedeCrearTF;
     private javax.swing.JTextField emailSedeModificarTF;
     private javax.swing.JTextField emailUsuarioCrearTF;
@@ -3081,7 +3512,10 @@ public class loginInterface extends javax.swing.JFrame {
     private javax.swing.JButton generarReporteOpcionesButon;
     private javax.swing.JFrame gerenteJFrame;
     private javax.swing.JPanel gerenteJPanel;
+    private javax.swing.JTextField idClienteConsultarOrden;
     private javax.swing.JTextField id_usuarioCrear;
+    private javax.swing.JButton ingresarUsuarioBoton;
+    private javax.swing.JFrame ingresarUsuarioFrame;
     private javax.swing.JPanel inventarioReportesPanel;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButtonLogin;
@@ -3137,6 +3571,7 @@ public class loginInterface extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel54;
     private javax.swing.JLabel jLabel55;
     private javax.swing.JLabel jLabel56;
+    private javax.swing.JLabel jLabel57;
     private javax.swing.JLabel jLabel58;
     private javax.swing.JLabel jLabel59;
     private javax.swing.JLabel jLabel6;
@@ -3145,6 +3580,9 @@ public class loginInterface extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel62;
     private javax.swing.JLabel jLabel63;
     private javax.swing.JLabel jLabel64;
+    private javax.swing.JLabel jLabel65;
+    private javax.swing.JLabel jLabel66;
+    private javax.swing.JLabel jLabel67;
     private javax.swing.JLabel jLabel68;
     private javax.swing.JLabel jLabel69;
     private javax.swing.JLabel jLabel7;
@@ -3157,7 +3595,11 @@ public class loginInterface extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel76;
     private javax.swing.JLabel jLabel77;
     private javax.swing.JLabel jLabel78;
+    private javax.swing.JLabel jLabel79;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel80;
+    private javax.swing.JLabel jLabel81;
+    private javax.swing.JLabel jLabel82;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JLabel jLabelPassword;
     private javax.swing.JLabel jLabelUsuario;
@@ -3168,6 +3610,7 @@ public class loginInterface extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JFrame jefeJFrame;
     private javax.swing.JPanel jefeJPanel;
     private javax.swing.JPanel manejoOrdenesJPanel;
@@ -3205,6 +3648,8 @@ public class loginInterface extends javax.swing.JFrame {
     private javax.swing.JRadioButton modificarVehiculoNuevoRB;
     private javax.swing.JRadioButton modificarVehiculoUsadoRB;
     private javax.swing.JButton modificarVehiculos;
+    private javax.swing.JTextField nombreClienteConsultarOrden;
+    private javax.swing.JTextField nombreIngresarCliente;
     private javax.swing.JTextField nombreSedeTF;
     private javax.swing.JTextField nombresCrear;
     private javax.swing.JTextField nuevoNombreTF;
@@ -3239,6 +3684,7 @@ public class loginInterface extends javax.swing.JFrame {
     private javax.swing.JRadioButton semanalOpcionesReportes;
     private javax.swing.JTable tableCrearCot;
     private javax.swing.JTable tableCrearCot1;
+    private javax.swing.JTextField telefonoIngresarCliente;
     private javax.swing.JTextField telefonoSedeCrearTF;
     private javax.swing.JTextField telefonoSedeModificarTF;
     private javax.swing.JTextField telefonoUsuarioCrearTF;
@@ -3254,6 +3700,7 @@ public class loginInterface extends javax.swing.JFrame {
     private javax.swing.JPanel vendedorJPanel;
     private javax.swing.JButton venderBuscarCotButton;
     private javax.swing.JButton venderButton;
+    private javax.swing.JButton ventaCrearVentaButton;
     private javax.swing.JButton ventasReporteBoton;
     private javax.swing.JTextField yearOpcionesReportes;
     // End of variables declaration//GEN-END:variables

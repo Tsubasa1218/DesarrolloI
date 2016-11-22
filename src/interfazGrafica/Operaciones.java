@@ -10,6 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -131,4 +132,27 @@ public class Operaciones {
         
         return false;
     }
+    
+    /*
+    Nombre aumentarFecha
+    @param: Date 
+    Objetivo: Aumentar 7 dias a la fecha que ingresa como parametro
+    Autor: Juan David Suaza Cruz
+    */
+    
+    public Date aumentarFecha(Date fechaInicial){
+        
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(fechaInicial);
+        cal.add(Calendar.DATE, 7);
+        
+        String output = sdf.format(cal.getTime());
+        System.out.println(sdf.format(fechaInicial));
+        System.out.println(output);
+        Date fechaFinal = cal.getTime();
+        return fechaFinal;
+    }
+    
+    
 }

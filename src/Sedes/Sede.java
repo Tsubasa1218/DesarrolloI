@@ -21,7 +21,7 @@ public class Sede {
     }
     
     
-    public void agregarSede(String id_sede, String nombre_sede, String direccion, String telefono, String email){      
+    public void agregarSede(String nombre_sede, String direccion, String telefono, String email){      
         String consultaSQL = "INSERT INTO sedes(nombre_sede, direccion_sede, telefono_sede, email_sede)"
                     + " VALUES('" + nombre_sede + "', '" + direccion + "', '" + telefono + "', '" +
                     email + "');";

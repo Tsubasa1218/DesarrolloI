@@ -7,8 +7,9 @@ package Reportes;
 import dataBaseOperations.OperacionesBD;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Calendar;
 import java.util.Date;
+import interfazGrafica.Operaciones;
+import java.text.SimpleDateFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.jfree.chart.ChartPanel;
@@ -142,6 +143,13 @@ public class Reporte {
         return panel;
     }
     
+    /*
+    Nombre: generarReporteCantidadVehiculos
+    @param: ninguno
+    Objetivo: Obtener la cantidad de vehiculos que posee cada sede 
+    Autor: Juan David Suaza Cruz 1427841
+    */
+    
     public ChartPanel generarReporteCantidadVehiculos(){
         String consultaSQL = "SELECT nombre_sede, COUNT(id_sede) FROM vehiculos NATURAL JOIN sedes WHERE cantidad_disponible_vehiculo = 1 GROUP BY nombre_sede;";        
         String[] nombreSedes;
@@ -191,6 +199,170 @@ public class Reporte {
         return panel;
     }
     
+    /*
+    Nombre: generarReporteCotizacionesSede
+    @param: Date, String
+    Objetivo: Obtener la cantidad de cotizaciones que ha hehco cada empleado en la sede
+    Autor: Juan David Suaza Cruz 1427841
+    */
     
+    public ChartPanel generarReporteCotizacionesSede(Date fechaInicio, String codigoSede){
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+        Operaciones oper = new Operaciones();        
+        Date fechaFinal = oper.aumentarFecha(fechaInicio);
+        
+        String fechaI = sdf.format(fechaInicio);
+        String fechaF = sdf.format(fechaFinal);
+        
+        System.out.println(fechaI);
+        System.out.println(fechaF);
+        
+        String consultaSQL = "SELECT usuarios.nombre_usuario, COUNT(usuarios.id_usuario) FROM cotizaciones_realizadas NATURAL JOIN usuarios WHERE id_sede = " + codigoSede +
+                "AND fecha_cotizacion BETWEEN '" + fechaI +"' AND '" + fechaF + "' GROUP BY usuarios.nombre_usuario;";
+        
+        ResultSet tabla = new OperacionesBD().consultas(consultaSQL);
+        DefaultCategoryDataset data = new DefaultCategoryDataset();
+        
+        try {
+            while(tabla.next()){
+                data.setValue(tabla.getInt(2), "Cantidad de cotizaciones/vendedor", tabla.getString(1));
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        
+        consultaSQL = "SELECT usuarios.nombre_usuario FROM usuarios WHERE tipo_usuario LIKE 'Vendedor' AND id_sede = " + codigoSede 
+                + "EXCEPT SELECT usuarios.nombre_usuario FROM cotizaciones_realizadas NATURAL JOIN usuarios WHERE id_sede = " + codigoSede + 
+                " AND fecha_cotizacion BETWEEN '" + fechaI +"' AND '" + fechaF + "';";
+        
+        ChartPanel panel = new BarChart().reporteCantidadCotizacionesSede(data);
+        
+        return panel;
+    }
     
+    /*
+    Nombre: generarReporteCotizacionesSedeAll
+    @param: int
+    Objetivo: Obtener la cantidad de cotizaciones que han hecho los vendedores de una sede
+    Autor: Juan David Suaza Cruz 1427841
+    */
+    
+    public ChartPanel generarReporteCotizacionesSedeAll(String codigoSede){
+                
+        String consultaSQL = "SELECT usuarios.nombre_usuario, COUNT(usuarios.id_usuario) FROM cotizaciones_realizadas NATURAL JOIN usuarios WHERE id_sede = " + codigoSede +
+                 " GROUP BY usuarios.nombre_usuario;";
+        
+        ResultSet tabla = new OperacionesBD().consultas(consultaSQL);
+        DefaultCategoryDataset data = new DefaultCategoryDataset();
+        
+        try {
+            while(tabla.next()){
+                data.setValue(tabla.getInt(2), "Cantidad de cotizaciones/vendedor", tabla.getString(1));
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        
+        consultaSQL = "SELECT usuarios.nombre_usuario FROM usuarios WHERE tipo_usuario LIKE 'Vendedor' AND id_sede = " + codigoSede 
+                + "EXCEPT SELECT usuarios.nombre_usuario FROM cotizaciones_realizadas NATURAL JOIN usuarios WHERE id_sede = " + codigoSede +";";
+        
+        tabla = new OperacionesBD().consultas(consultaSQL);
+        try {
+            while(tabla.next()){
+                data.setValue(0.0, "Cantidad de cotizaciones/vendedor", tabla.getString(1));
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        
+        ChartPanel panel = new BarChart().reporteCantidadCotizacionesSede(data);
+        
+        return panel;
+    }
+    
+    /*
+    Nombre: generarReporteCotizacionesEmpresa
+    @param: Date
+    Objetivo: Obtener la cantidad de cotizaciones que se han hecho en las sedes a partir de determinada fecha
+    Autor: Juan David Suaza Cruz 1427841
+    */
+    
+    public ChartPanel generarReporteCotizacionesEmpresa(Date fechaInicio){
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+        Operaciones oper = new Operaciones();        
+        Date fechaFinal = oper.aumentarFecha(fechaInicio);
+        
+        String fechaI = sdf.format(fechaInicio);
+        String fechaF = sdf.format(fechaFinal);
+        
+       // System.out.println(fechaI);
+        //System.out.println(fechaF);
+        
+        String consultaSQL = "SELECT sedes.nombre_sede,COUNT(sedes.nombre_sede) FROM cotizaciones_realizadas NATURAL JOIN usuarios NATURAL JOIN sedes WHERE fecha_cotizacion BETWEEN '"
+                + fechaI + "' AND '" + fechaF + "' GROUP BY sedes.nombre_sede;";
+        //System.out.println(consultaSQL);
+        ResultSet tabla = new OperacionesBD().consultas(consultaSQL);
+        DefaultCategoryDataset data = new DefaultCategoryDataset();
+        
+        try {
+            while(tabla.next()){
+                data.setValue(tabla.getInt(2), "Cantidad de cotizaciones/sede", tabla.getString(1));
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        
+        consultaSQL = "SELECT sedes.nombre_sede FROM sedes EXCEPT SELECT sedes.nombre_sede FROM cotizaciones_realizadas NATURAL JOIN usuarios NATURAL JOIN sedes WHERE fecha_cotizacion BETWEEN '"
+                + fechaI + "' AND '" + fechaF + "';";
+        
+        try {
+            while(tabla.next()){
+                data.setValue(0.0, "Cantidad de cotizaciones/sede", tabla.getString(1));
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        
+        ChartPanel panel = new BarChart().reporteCantidadCotizacionesEmpresa(data);
+        
+        return panel;
+    }
+    
+    /*
+    Nombre: generarReporteCotizacionesEmpresaAll
+    @param: ninguno
+    Objetivo: Obtener la cantidad de cotizaciones que se han hecho en las sedes
+    Autor: Juan David Suaza Cruz 1427841
+    */
+    
+    public ChartPanel generarReporteCotizacionesEmpresaAll(){
+                
+        String consultaSQL = "SELECT sedes.nombre_sede,COUNT(sedes.nombre_sede) FROM cotizaciones_realizadas NATURAL JOIN usuarios NATURAL JOIN sedes GROUP BY sedes.nombre_sede;";
+        
+        ResultSet tabla = new OperacionesBD().consultas(consultaSQL);
+        DefaultCategoryDataset data = new DefaultCategoryDataset();
+        
+        try {
+            while(tabla.next()){
+                data.setValue(tabla.getInt(2), "Cantidad de cotizaciones/sede", tabla.getString(1));
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        
+        consultaSQL = "SELECT sedes.nombre_sede FROM sedes EXCEPT SELECT sedes.nombre_sede FROM cotizaciones_realizadas NATURAL JOIN usuarios NATURAL JOIN sedes;";
+        tabla = new OperacionesBD().consultas(consultaSQL);
+        
+        try {
+            while(tabla.next()){
+                data.setValue(0.0, "Cantidad de cotizaciones/sede", tabla.getString(1));
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        
+        ChartPanel panel = new BarChart().reporteCantidadCotizacionesEmpresa(data);
+        
+        return panel;
+    }
 }

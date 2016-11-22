@@ -60,4 +60,22 @@ public class BarChart {
         
         return panel;
     }
+    
+    public ChartPanel reporteCantidadCotizacionesSede(DefaultCategoryDataset data){
+        JFreeChart chart = ChartFactory.createBarChart("Reporte de cantidad de cotizaciones por empleado", "Empleado", "Cantidad", data, PlotOrientation.VERTICAL, true, true, true);
+        
+        ChartPanel panel = new ChartPanel(chart, true, true, true, false, false);
+        panel.setSize(ancho, alto);
+        
+        return panel;
+    }
+    
+    public ChartPanel reporteCantidadCotizacionesEmpresa(DefaultCategoryDataset data){
+        JFreeChart chart = ChartFactory.createBarChart("Reporte de cantidad de cotizaciones por sede", "Sede", "Cantidad", data, PlotOrientation.VERTICAL, true, true, true);
+        
+        ChartPanel panel = new ChartPanel(chart, true, true, true, false, false);
+        panel.setSize(ancho, alto);
+        
+        return panel;
+    }
 }
