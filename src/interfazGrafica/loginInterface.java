@@ -262,6 +262,7 @@ public class loginInterface extends javax.swing.JFrame {
         telefonoUsuarioModificarTF = new javax.swing.JTextField();
         modificarConfirmarContraseñaTF = new javax.swing.JPasswordField();
         modificarContraseñaTF = new javax.swing.JPasswordField();
+        cancelarModUsuario = new javax.swing.JButton();
         panelCrearSede = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         codigoSedeTF = new javax.swing.JTextField();
@@ -274,6 +275,7 @@ public class loginInterface extends javax.swing.JFrame {
         telefonoSedeCrearTF = new javax.swing.JTextField();
         jLabel71 = new javax.swing.JLabel();
         emailSedeCrearTF = new javax.swing.JTextField();
+        cancelarCrearSede = new javax.swing.JButton();
         panelModificarSede = new javax.swing.JPanel();
         modificarSedeSedesCB = new javax.swing.JComboBox<String>();
         jLabel9 = new javax.swing.JLabel();
@@ -286,6 +288,7 @@ public class loginInterface extends javax.swing.JFrame {
         telefonoSedeModificarTF = new javax.swing.JTextField();
         emailSedeModificarTF = new javax.swing.JTextField();
         jLabel74 = new javax.swing.JLabel();
+        cancelarModSede = new javax.swing.JButton();
         panelAgregarVehiculos = new javax.swing.JPanel();
         jLabel20 = new javax.swing.JLabel();
         crearMarcaVehiculoTF = new javax.swing.JTextField();
@@ -303,6 +306,7 @@ public class loginInterface extends javax.swing.JFrame {
         confirmarAgregarVehiculoB = new javax.swing.JButton();
         jLabel51 = new javax.swing.JLabel();
         crearValorVehiculoTF = new javax.swing.JTextField();
+        cancelarAgregarVehiculo = new javax.swing.JButton();
         panelAgregarPartes = new javax.swing.JPanel();
         jLabel35 = new javax.swing.JLabel();
         crearValorParteTF = new javax.swing.JTextField();
@@ -313,6 +317,7 @@ public class loginInterface extends javax.swing.JFrame {
         crearCantidadPartesTF = new javax.swing.JTextField();
         confirmarCrearParteB = new javax.swing.JButton();
         crearParteSedeCB = new javax.swing.JComboBox<String>();
+        cancelarAgregarParte = new javax.swing.JButton();
         panelModificarPartes = new javax.swing.JPanel();
         jLabel40 = new javax.swing.JLabel();
         modificarNombreParteTF = new javax.swing.JTextField();
@@ -327,6 +332,7 @@ public class loginInterface extends javax.swing.JFrame {
         parteModificarCB = new javax.swing.JComboBox<String>();
         modificarParteID = new javax.swing.JTextField();
         jLabel24 = new javax.swing.JLabel();
+        cancelarModParte = new javax.swing.JButton();
         panelGenerarReportes = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         reportePersonal = new javax.swing.JButton();
@@ -357,6 +363,7 @@ public class loginInterface extends javax.swing.JFrame {
         confirmarModificarVehiculoB = new javax.swing.JButton();
         jLabel19 = new javax.swing.JLabel();
         modificarValorVehiculoTF = new javax.swing.JTextField();
+        cancelarModVehiculo = new javax.swing.JButton();
         panelCrearOrden = new javax.swing.JPanel();
         jLabel45 = new javax.swing.JLabel();
         jLabel46 = new javax.swing.JLabel();
@@ -370,6 +377,7 @@ public class loginInterface extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         resumenCrearOrdenTA = new javax.swing.JTextArea();
         botonCrearOrden = new javax.swing.JButton();
+        cancelarCrearOrden = new javax.swing.JButton();
         panelConsultarOrden = new javax.swing.JPanel();
         jLabel50 = new javax.swing.JLabel();
         codOrdenConsultarOrdenTF = new javax.swing.JTextField();
@@ -382,6 +390,8 @@ public class loginInterface extends javax.swing.JFrame {
         jScrollPane4 = new javax.swing.JScrollPane();
         descripcionConsultarOrden = new javax.swing.JTextArea();
         panelCrearCotizacion = new javax.swing.JPanel();
+        cancelarCrearCot = new javax.swing.JButton();
+        crearCotizacion = new javax.swing.JButton();
         jLabel52 = new javax.swing.JLabel();
         jLabel53 = new javax.swing.JLabel();
         codVendedorCrearCot = new javax.swing.JTextField();
@@ -392,11 +402,18 @@ public class loginInterface extends javax.swing.JFrame {
         vehiculosDispCrearCot = new javax.swing.JComboBox();
         jScrollPane2 = new javax.swing.JScrollPane();
         tableCrearCot = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
         panelConsultarCotizacion = new javax.swing.JPanel();
         jLabel58 = new javax.swing.JLabel();
         codCotConsultarCot = new javax.swing.JTextField();
         aceptarConsultarCot = new javax.swing.JButton();
+        jLabel86 = new javax.swing.JLabel();
+        codVendedorConsultarCot = new javax.swing.JTextField();
+        jLabel87 = new javax.swing.JLabel();
+        codCompradorConsultarCot = new javax.swing.JTextField();
+        jLabel88 = new javax.swing.JLabel();
+        codVehiculoConsultarCot = new javax.swing.JTextField();
+        jLabel89 = new javax.swing.JLabel();
+        valorTotalConsultarCot = new javax.swing.JLabel();
         panelVender = new javax.swing.JPanel();
         jLabel59 = new javax.swing.JLabel();
         jLabel60 = new javax.swing.JLabel();
@@ -414,6 +431,7 @@ public class loginInterface extends javax.swing.JFrame {
         jScrollPane3 = new javax.swing.JScrollPane();
         tableCrearCot1 = new javax.swing.JTable();
         venderBuscarCotButton = new javax.swing.JButton();
+        cancelarVender = new javax.swing.JButton();
         panelConsultas = new javax.swing.JPanel();
         panelReporteFinal = new javax.swing.JPanel();
         panelReporte = new javax.swing.JPanel();
@@ -1355,14 +1373,22 @@ public class loginInterface extends javax.swing.JFrame {
         panelCrearUsuario.setMinimumSize(new java.awt.Dimension(617, 579));
         panelCrearUsuario.setPreferredSize(new java.awt.Dimension(617, 579));
 
-        confirmarCrearUsuarioB.setText("Aceptar");
+        confirmarCrearUsuarioB.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfazGrafica/Imagenes/aceptar.png"))); // NOI18N
+        confirmarCrearUsuarioB.setBorder(null);
+        confirmarCrearUsuarioB.setMaximumSize(new java.awt.Dimension(160, 40));
+        confirmarCrearUsuarioB.setMinimumSize(new java.awt.Dimension(160, 40));
+        confirmarCrearUsuarioB.setPreferredSize(new java.awt.Dimension(160, 40));
         confirmarCrearUsuarioB.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 confirmarCrearUsuarioBActionPerformed(evt);
             }
         });
 
-        botonCancelarCrear.setText("Cancelar");
+        botonCancelarCrear.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfazGrafica/Imagenes/cancelar.png"))); // NOI18N
+        botonCancelarCrear.setBorder(null);
+        botonCancelarCrear.setMaximumSize(new java.awt.Dimension(160, 40));
+        botonCancelarCrear.setMinimumSize(new java.awt.Dimension(160, 40));
+        botonCancelarCrear.setPreferredSize(new java.awt.Dimension(160, 40));
 
         jLabel1.setText("Tipo de usuario:");
 
@@ -1404,40 +1430,42 @@ public class loginInterface extends javax.swing.JFrame {
         panelCrearUsuarioLayout.setHorizontalGroup(
             panelCrearUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelCrearUsuarioLayout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addGroup(panelCrearUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel6)
-                    .addComponent(jLabel75)
-                    .addComponent(jLabel76))
-                .addGap(33, 33, 33)
-                .addGroup(panelCrearUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelCrearUsuarioLayout.createSequentialGroup()
-                        .addComponent(confirmarCrearUsuarioB)
-                        .addGap(31, 31, 31)
-                        .addComponent(botonCancelarCrear))
-                    .addComponent(telefonoUsuarioCrearTF)
-                    .addComponent(emailUsuarioCrearTF)
-                    .addComponent(CrearUsuarioSedesCB, 0, 235, Short.MAX_VALUE)
-                    .addComponent(apellidosCrear)
-                    .addComponent(nombresCrear)
-                    .addComponent(passwordCrear)
-                    .addComponent(tipoUsuarioCB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(id_usuarioCrear))
-                .addContainerGap(239, Short.MAX_VALUE))
+                .addContainerGap()
+                .addGroup(panelCrearUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(panelCrearUsuarioLayout.createSequentialGroup()
+                        .addGroup(panelCrearUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel75)
+                            .addComponent(jLabel76))
+                        .addGap(51, 51, 51)
+                        .addGroup(panelCrearUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(id_usuarioCrear, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(passwordCrear, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(nombresCrear, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(apellidosCrear, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(CrearUsuarioSedesCB, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(emailUsuarioCrearTF, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(telefonoUsuarioCrearTF, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(tipoUsuarioCB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(panelCrearUsuarioLayout.createSequentialGroup()
+                        .addComponent(confirmarCrearUsuarioB, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(botonCancelarCrear, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(277, Short.MAX_VALUE))
         );
         panelCrearUsuarioLayout.setVerticalGroup(
             panelCrearUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelCrearUsuarioLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(panelCrearUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(panelCrearUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(tipoUsuarioCB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(21, 21, 21)
                 .addGroup(panelCrearUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2)
                     .addComponent(id_usuarioCrear, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -1458,18 +1486,18 @@ public class loginInterface extends javax.swing.JFrame {
                     .addComponent(jLabel6)
                     .addComponent(CrearUsuarioSedesCB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(panelCrearUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(panelCrearUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel75)
                     .addComponent(emailUsuarioCrearTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(panelCrearUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel76)
-                    .addComponent(telefonoUsuarioCrearTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(panelCrearUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(telefonoUsuarioCrearTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel76))
                 .addGap(18, 18, 18)
-                .addGroup(panelCrearUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(confirmarCrearUsuarioB)
-                    .addComponent(botonCancelarCrear))
-                .addContainerGap(241, Short.MAX_VALUE))
+                .addGroup(panelCrearUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(confirmarCrearUsuarioB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(botonCancelarCrear, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(221, Short.MAX_VALUE))
         );
 
         panelModificarUsuario.setBackground(new java.awt.Color(255, 255, 255));
@@ -1491,6 +1519,10 @@ public class loginInterface extends javax.swing.JFrame {
 
         jLabel18.setText("Sede:");
 
+        modificarCodigoUsuarioTF.setMaximumSize(new java.awt.Dimension(6, 20));
+
+        modificarNombreTF.setMaximumSize(new java.awt.Dimension(6, 20));
+
         modificarActivoRB.setBackground(new java.awt.Color(255, 255, 255));
         modificarActivoRB.setText("Activo");
 
@@ -1498,8 +1530,12 @@ public class loginInterface extends javax.swing.JFrame {
         modificarInactivoRB.setText("Inactivo");
 
         modificarTipoUsuarioCB.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Vendedor", "Jefe de taller", "Gerente" }));
+        modificarTipoUsuarioCB.setMaximumSize(new java.awt.Dimension(88, 20));
 
-        confirmarModificarUsuarioB.setText("Aceptar");
+        modificarSedeUsuarioCB.setMaximumSize(new java.awt.Dimension(28, 20));
+
+        confirmarModificarUsuarioB.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfazGrafica/Imagenes/aceptar.png"))); // NOI18N
+        confirmarModificarUsuarioB.setBorder(null);
         confirmarModificarUsuarioB.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 confirmarModificarUsuarioBActionPerformed(evt);
@@ -1508,7 +1544,18 @@ public class loginInterface extends javax.swing.JFrame {
 
         jLabel77.setText("Email:");
 
+        emailUsuarioModificarTF.setMaximumSize(new java.awt.Dimension(6, 20));
+
         jLabel78.setText("Telefono:");
+
+        telefonoUsuarioModificarTF.setMaximumSize(new java.awt.Dimension(6, 20));
+
+        modificarConfirmarContraseñaTF.setMaximumSize(new java.awt.Dimension(6, 20));
+
+        modificarContraseñaTF.setMaximumSize(new java.awt.Dimension(6, 20));
+
+        cancelarModUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfazGrafica/Imagenes/cancelar.png"))); // NOI18N
+        cancelarModUsuario.setBorder(null);
 
         javax.swing.GroupLayout panelModificarUsuarioLayout = new javax.swing.GroupLayout(panelModificarUsuario);
         panelModificarUsuario.setLayout(panelModificarUsuarioLayout);
@@ -1517,8 +1564,11 @@ public class loginInterface extends javax.swing.JFrame {
             .addGroup(panelModificarUsuarioLayout.createSequentialGroup()
                 .addGap(21, 21, 21)
                 .addGroup(panelModificarUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel77)
-                    .addComponent(jLabel11)
+                    .addGroup(panelModificarUsuarioLayout.createSequentialGroup()
+                        .addComponent(confirmarModificarUsuarioB)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cancelarModUsuario)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(panelModificarUsuarioLayout.createSequentialGroup()
                         .addGroup(panelModificarUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel13)
@@ -1527,29 +1577,28 @@ public class loginInterface extends javax.swing.JFrame {
                             .addComponent(jLabel17)
                             .addComponent(jLabel18)
                             .addComponent(jLabel78)
-                            .addComponent(jLabel12))
+                            .addComponent(jLabel12)
+                            .addComponent(jLabel77)
+                            .addComponent(jLabel11))
                         .addGap(32, 32, 32)
                         .addGroup(panelModificarUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(modificarNombreTF)
-                            .addComponent(emailUsuarioModificarTF)
-                            .addComponent(telefonoUsuarioModificarTF)
-                            .addComponent(modificarSedeUsuarioCB, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(modificarTipoUsuarioCB, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelModificarUsuarioLayout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(confirmarModificarUsuarioB))
                             .addGroup(panelModificarUsuarioLayout.createSequentialGroup()
-                                .addGroup(panelModificarUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelModificarUsuarioLayout.createSequentialGroup()
+                                .addGroup(panelModificarUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(modificarNombreTF, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addGroup(panelModificarUsuarioLayout.createSequentialGroup()
                                         .addComponent(modificarActivoRB)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addComponent(modificarInactivoRB)
                                         .addGap(54, 54, 54))
-                                    .addComponent(modificarCodigoUsuarioTF, javax.swing.GroupLayout.DEFAULT_SIZE, 184, Short.MAX_VALUE)
-                                    .addComponent(modificarConfirmarContraseñaTF)
-                                    .addComponent(modificarContraseñaTF))
-                                .addGap(0, 0, Short.MAX_VALUE)))))
-                .addGap(270, 270, 270))
+                                    .addComponent(modificarContraseñaTF, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 184, Short.MAX_VALUE)
+                                    .addComponent(modificarCodigoUsuarioTF, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(modificarConfirmarContraseñaTF, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(modificarTipoUsuarioCB, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(modificarSedeUsuarioCB, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(emailUsuarioModificarTF, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(telefonoUsuarioModificarTF, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(270, 270, 270))))
         );
         panelModificarUsuarioLayout.setVerticalGroup(
             panelModificarUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1592,8 +1641,10 @@ public class loginInterface extends javax.swing.JFrame {
                     .addComponent(jLabel78)
                     .addComponent(telefonoUsuarioModificarTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(confirmarModificarUsuarioB)
-                .addContainerGap(200, Short.MAX_VALUE))
+                .addGroup(panelModificarUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(confirmarModificarUsuarioB)
+                    .addComponent(cancelarModUsuario))
+                .addContainerGap(182, Short.MAX_VALUE))
         );
 
         panelCrearSede.setBackground(new java.awt.Color(255, 255, 255));
@@ -1612,7 +1663,8 @@ public class loginInterface extends javax.swing.JFrame {
             }
         });
 
-        confirmarCrearSede.setText("Aceptar");
+        confirmarCrearSede.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfazGrafica/Imagenes/aceptar.png"))); // NOI18N
+        confirmarCrearSede.setBorder(null);
         confirmarCrearSede.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 confirmarCrearSedeActionPerformed(evt);
@@ -1625,16 +1677,20 @@ public class loginInterface extends javax.swing.JFrame {
 
         jLabel71.setText("Email:");
 
+        cancelarCrearSede.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfazGrafica/Imagenes/cancelar.png"))); // NOI18N
+        cancelarCrearSede.setBorder(null);
+
         javax.swing.GroupLayout panelCrearSedeLayout = new javax.swing.GroupLayout(panelCrearSede);
         panelCrearSede.setLayout(panelCrearSedeLayout);
         panelCrearSedeLayout.setHorizontalGroup(
             panelCrearSedeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelCrearSedeLayout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addGroup(panelCrearSedeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(panelCrearSedeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(panelCrearSedeLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(confirmarCrearSede))
+                        .addComponent(confirmarCrearSede)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cancelarCrearSede))
                     .addGroup(panelCrearSedeLayout.createSequentialGroup()
                         .addGroup(panelCrearSedeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -1642,14 +1698,14 @@ public class loginInterface extends javax.swing.JFrame {
                             .addComponent(jLabel70)
                             .addComponent(jLabel71)
                             .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(panelCrearSedeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(emailSedeCrearTF, javax.swing.GroupLayout.DEFAULT_SIZE, 176, Short.MAX_VALUE)
                             .addComponent(direccionSedeCrearTF)
                             .addComponent(nombreSedeTF)
                             .addComponent(codigoSedeTF)
-                            .addComponent(telefonoSedeCrearTF, javax.swing.GroupLayout.Alignment.TRAILING))))
-                .addGap(274, 274, 274))
+                            .addComponent(telefonoSedeCrearTF, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 176, Short.MAX_VALUE))))
+                .addGap(274, 350, Short.MAX_VALUE))
         );
         panelCrearSedeLayout.setVerticalGroup(
             panelCrearSedeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1675,8 +1731,10 @@ public class loginInterface extends javax.swing.JFrame {
                     .addComponent(jLabel71)
                     .addComponent(emailSedeCrearTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(confirmarCrearSede)
-                .addContainerGap(355, Short.MAX_VALUE))
+                .addGroup(panelCrearSedeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(confirmarCrearSede)
+                    .addComponent(cancelarCrearSede))
+                .addContainerGap(345, Short.MAX_VALUE))
         );
 
         panelModificarSede.setBackground(new java.awt.Color(255, 255, 255));
@@ -1694,7 +1752,8 @@ public class loginInterface extends javax.swing.JFrame {
 
         jLabel10.setText("Nombre:");
 
-        confirmarModificarSede.setText("Aceptar");
+        confirmarModificarSede.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfazGrafica/Imagenes/aceptar.png"))); // NOI18N
+        confirmarModificarSede.setBorder(null);
         confirmarModificarSede.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 confirmarModificarSedeActionPerformed(evt);
@@ -1713,14 +1772,22 @@ public class loginInterface extends javax.swing.JFrame {
 
         jLabel74.setText("E-mail:");
 
+        cancelarModSede.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfazGrafica/Imagenes/cancelar.png"))); // NOI18N
+        cancelarModSede.setBorder(null);
+
         javax.swing.GroupLayout panelModificarSedeLayout = new javax.swing.GroupLayout(panelModificarSede);
         panelModificarSede.setLayout(panelModificarSedeLayout);
         panelModificarSedeLayout.setHorizontalGroup(
             panelModificarSedeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelModificarSedeLayout.createSequentialGroup()
-                .addGroup(panelModificarSedeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelModificarSedeLayout.createSequentialGroup()
-                        .addGap(20, 20, 20)
+            .addGroup(panelModificarSedeLayout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addGroup(panelModificarSedeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelModificarSedeLayout.createSequentialGroup()
+                        .addComponent(confirmarModificarSede)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cancelarModSede)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(panelModificarSedeLayout.createSequentialGroup()
                         .addGroup(panelModificarSedeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(panelModificarSedeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -1735,11 +1802,8 @@ public class loginInterface extends javax.swing.JFrame {
                                 .addComponent(nuevoNombreTF)
                                 .addComponent(modificarSedeSedesCB, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(direccionSedeModificarTF))
-                            .addComponent(emailSedeModificarTF, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)))
-                    .addGroup(panelModificarSedeLayout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(confirmarModificarSede)))
-                .addGap(268, 268, 268))
+                            .addComponent(emailSedeModificarTF, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE))
+                        .addGap(268, 268, 268))))
         );
         panelModificarSedeLayout.setVerticalGroup(
             panelModificarSedeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1765,8 +1829,10 @@ public class loginInterface extends javax.swing.JFrame {
                     .addComponent(emailSedeModificarTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel74))
                 .addGap(18, 18, 18)
-                .addComponent(confirmarModificarSede)
-                .addContainerGap(355, Short.MAX_VALUE))
+                .addGroup(panelModificarSedeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(confirmarModificarSede)
+                    .addComponent(cancelarModSede))
+                .addContainerGap(337, Short.MAX_VALUE))
         );
 
         panelAgregarVehiculos.setBackground(new java.awt.Color(255, 255, 255));
@@ -1791,7 +1857,8 @@ public class loginInterface extends javax.swing.JFrame {
 
         jLabel26.setText("Sede:");
 
-        confirmarAgregarVehiculoB.setText("Aceptar");
+        confirmarAgregarVehiculoB.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfazGrafica/Imagenes/aceptar.png"))); // NOI18N
+        confirmarAgregarVehiculoB.setBorder(null);
         confirmarAgregarVehiculoB.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 confirmarAgregarVehiculoBActionPerformed(evt);
@@ -1800,6 +1867,9 @@ public class loginInterface extends javax.swing.JFrame {
 
         jLabel51.setText("Valor del vehículo:");
 
+        cancelarAgregarVehiculo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfazGrafica/Imagenes/cancelar.png"))); // NOI18N
+        cancelarAgregarVehiculo.setBorder(null);
+
         javax.swing.GroupLayout panelAgregarVehiculosLayout = new javax.swing.GroupLayout(panelAgregarVehiculos);
         panelAgregarVehiculos.setLayout(panelAgregarVehiculosLayout);
         panelAgregarVehiculosLayout.setHorizontalGroup(
@@ -1807,38 +1877,39 @@ public class loginInterface extends javax.swing.JFrame {
             .addGroup(panelAgregarVehiculosLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(panelAgregarVehiculosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelAgregarVehiculosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(confirmarAgregarVehiculoB, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(panelAgregarVehiculosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(panelAgregarVehiculosLayout.createSequentialGroup()
-                                .addGroup(panelAgregarVehiculosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel20)
-                                    .addComponent(jLabel21)
-                                    .addComponent(jLabel22))
-                                .addGap(34, 34, 34)
-                                .addGroup(panelAgregarVehiculosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(crearModeloVehiculoTF, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 176, Short.MAX_VALUE)
-                                    .addComponent(crearMarcaVehiculoTF, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(crearColorVehiculoTF)))
-                            .addGroup(panelAgregarVehiculosLayout.createSequentialGroup()
-                                .addComponent(jLabel23)
-                                .addGap(79, 79, 79)
-                                .addComponent(crearVehiculoNuevoRB)
-                                .addGap(10, 10, 10)
-                                .addComponent(crearVehiculoUsadoRB))
-                            .addGroup(panelAgregarVehiculosLayout.createSequentialGroup()
-                                .addComponent(jLabel26)
-                                .addGap(88, 88, 88)
-                                .addComponent(crearSedeVehiculoCB, 0, 174, Short.MAX_VALUE))))
                     .addGroup(panelAgregarVehiculosLayout.createSequentialGroup()
                         .addGroup(panelAgregarVehiculosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel25)
                             .addComponent(jLabel51))
                         .addGap(18, 18, 18)
+                        .addGroup(panelAgregarVehiculosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(crearValorVehiculoTF, javax.swing.GroupLayout.DEFAULT_SIZE, 212, Short.MAX_VALUE)
+                            .addComponent(crearCantidadVehiculoTF)))
+                    .addGroup(panelAgregarVehiculosLayout.createSequentialGroup()
+                        .addComponent(jLabel23)
+                        .addGap(79, 79, 79)
+                        .addComponent(crearVehiculoNuevoRB)
+                        .addGap(10, 10, 10)
+                        .addComponent(crearVehiculoUsadoRB))
+                    .addGroup(panelAgregarVehiculosLayout.createSequentialGroup()
+                        .addComponent(jLabel26)
+                        .addGap(88, 88, 88)
+                        .addComponent(crearSedeVehiculoCB, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(panelAgregarVehiculosLayout.createSequentialGroup()
+                        .addComponent(confirmarAgregarVehiculoB)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cancelarAgregarVehiculo))
+                    .addGroup(panelAgregarVehiculosLayout.createSequentialGroup()
                         .addGroup(panelAgregarVehiculosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(crearValorVehiculoTF, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(crearCantidadVehiculoTF, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(317, Short.MAX_VALUE))
+                            .addComponent(jLabel20)
+                            .addComponent(jLabel21)
+                            .addComponent(jLabel22))
+                        .addGap(34, 34, 34)
+                        .addGroup(panelAgregarVehiculosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(crearModeloVehiculoTF, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(crearColorVehiculoTF)
+                            .addComponent(crearMarcaVehiculoTF, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(279, Short.MAX_VALUE))
         );
         panelAgregarVehiculosLayout.setVerticalGroup(
             panelAgregarVehiculosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1874,8 +1945,10 @@ public class loginInterface extends javax.swing.JFrame {
                     .addComponent(jLabel26)
                     .addComponent(crearSedeVehiculoCB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(confirmarAgregarVehiculoB)
-                .addContainerGap(276, Short.MAX_VALUE))
+                .addGroup(panelAgregarVehiculosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(confirmarAgregarVehiculoB)
+                    .addComponent(cancelarAgregarVehiculo))
+                .addContainerGap(258, Short.MAX_VALUE))
         );
 
         panelAgregarPartes.setBackground(new java.awt.Color(255, 255, 255));
@@ -1890,12 +1963,16 @@ public class loginInterface extends javax.swing.JFrame {
 
         jLabel39.setText("Sede:");
 
-        confirmarCrearParteB.setText("Aceptar");
+        confirmarCrearParteB.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfazGrafica/Imagenes/aceptar.png"))); // NOI18N
+        confirmarCrearParteB.setBorder(null);
         confirmarCrearParteB.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 confirmarCrearParteBActionPerformed(evt);
             }
         });
+
+        cancelarAgregarParte.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfazGrafica/Imagenes/cancelar.png"))); // NOI18N
+        cancelarAgregarParte.setBorder(null);
 
         javax.swing.GroupLayout panelAgregarPartesLayout = new javax.swing.GroupLayout(panelAgregarPartes);
         panelAgregarPartes.setLayout(panelAgregarPartesLayout);
@@ -1903,8 +1980,7 @@ public class loginInterface extends javax.swing.JFrame {
             panelAgregarPartesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelAgregarPartesLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(panelAgregarPartesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(confirmarCrearParteB)
+                .addGroup(panelAgregarPartesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelAgregarPartesLayout.createSequentialGroup()
                         .addGroup(panelAgregarPartesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel35)
@@ -1913,11 +1989,15 @@ public class loginInterface extends javax.swing.JFrame {
                             .addComponent(jLabel39, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(33, 33, 33)
                         .addGroup(panelAgregarPartesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(crearCantidadPartesTF, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(crearCantidadPartesTF, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 214, Short.MAX_VALUE)
                             .addComponent(crearNombreParteTF, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(crearValorParteTF, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(crearParteSedeCB, 0, 176, Short.MAX_VALUE))))
-                .addContainerGap(317, Short.MAX_VALUE))
+                            .addComponent(crearParteSedeCB, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(panelAgregarPartesLayout.createSequentialGroup()
+                        .addComponent(confirmarCrearParteB)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cancelarAgregarParte)))
+                .addContainerGap(279, Short.MAX_VALUE))
         );
         panelAgregarPartesLayout.setVerticalGroup(
             panelAgregarPartesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1939,8 +2019,10 @@ public class loginInterface extends javax.swing.JFrame {
                     .addComponent(jLabel39)
                     .addComponent(crearParteSedeCB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(confirmarCrearParteB)
-                .addContainerGap(393, Short.MAX_VALUE))
+                .addGroup(panelAgregarPartesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(confirmarCrearParteB)
+                    .addComponent(cancelarAgregarParte))
+                .addContainerGap(375, Short.MAX_VALUE))
         );
 
         panelModificarPartes.setBackground(new java.awt.Color(255, 255, 255));
@@ -1956,7 +2038,8 @@ public class loginInterface extends javax.swing.JFrame {
 
         jLabel44.setText("Parte:");
 
-        confirmarModificarParteB.setText("Aceptar");
+        confirmarModificarParteB.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfazGrafica/Imagenes/aceptar.png"))); // NOI18N
+        confirmarModificarParteB.setBorder(null);
         confirmarModificarParteB.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 confirmarModificarParteBActionPerformed(evt);
@@ -1982,6 +2065,9 @@ public class loginInterface extends javax.swing.JFrame {
 
         jLabel24.setText("ID parte:");
 
+        cancelarModParte.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfazGrafica/Imagenes/cancelar.png"))); // NOI18N
+        cancelarModParte.setBorder(null);
+
         javax.swing.GroupLayout panelModificarPartesLayout = new javax.swing.GroupLayout(panelModificarPartes);
         panelModificarPartes.setLayout(panelModificarPartesLayout);
         panelModificarPartesLayout.setHorizontalGroup(
@@ -1990,27 +2076,26 @@ public class loginInterface extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(panelModificarPartesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelModificarPartesLayout.createSequentialGroup()
-                        .addComponent(jLabel55)
-                        .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelModificarPartesLayout.createSequentialGroup()
-                        .addGroup(panelModificarPartesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(confirmarModificarParteB)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelModificarPartesLayout.createSequentialGroup()
-                                .addGroup(panelModificarPartesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel44)
-                                    .addComponent(jLabel40)
-                                    .addComponent(jLabel42)
-                                    .addComponent(jLabel43)
-                                    .addComponent(jLabel24))
-                                .addGap(33, 33, 33)
-                                .addGroup(panelModificarPartesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(modificarParteID, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(modificarParteSedeCB, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(modificarValorParteTF, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(modificarCantidadPartesTF, javax.swing.GroupLayout.DEFAULT_SIZE, 176, Short.MAX_VALUE)
-                                    .addComponent(modificarNombreParteTF)
-                                    .addComponent(parteModificarCB, 0, 176, Short.MAX_VALUE))))
-                        .addGap(317, 317, 317))))
+                        .addGroup(panelModificarPartesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel44)
+                            .addComponent(jLabel40)
+                            .addComponent(jLabel42)
+                            .addComponent(jLabel43)
+                            .addComponent(jLabel24))
+                        .addGap(33, 33, 33)
+                        .addGroup(panelModificarPartesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(parteModificarCB, javax.swing.GroupLayout.Alignment.LEADING, 0, 214, Short.MAX_VALUE)
+                            .addComponent(modificarNombreParteTF, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(modificarCantidadPartesTF, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(modificarValorParteTF, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(modificarParteID)
+                            .addComponent(modificarParteSedeCB, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(jLabel55)
+                    .addGroup(panelModificarPartesLayout.createSequentialGroup()
+                        .addComponent(confirmarModificarParteB)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cancelarModParte)))
+                .addContainerGap(279, Short.MAX_VALUE))
         );
         panelModificarPartesLayout.setVerticalGroup(
             panelModificarPartesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2041,8 +2126,10 @@ public class loginInterface extends javax.swing.JFrame {
                         .addComponent(modificarParteID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel24))
                 .addGap(18, 18, 18)
-                .addComponent(confirmarModificarParteB)
-                .addContainerGap(317, Short.MAX_VALUE))
+                .addGroup(panelModificarPartesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(confirmarModificarParteB)
+                    .addComponent(cancelarModParte))
+                .addContainerGap(299, Short.MAX_VALUE))
         );
 
         panelGenerarReportes.setBackground(new java.awt.Color(255, 255, 255));
@@ -2282,7 +2369,8 @@ public class loginInterface extends javax.swing.JFrame {
 
         jLabel34.setText("Color vehiculo:");
 
-        confirmarModificarVehiculoB.setText("Aceptar");
+        confirmarModificarVehiculoB.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfazGrafica/Imagenes/aceptar.png"))); // NOI18N
+        confirmarModificarVehiculoB.setBorder(null);
         confirmarModificarVehiculoB.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 confirmarModificarVehiculoBActionPerformed(evt);
@@ -2290,6 +2378,9 @@ public class loginInterface extends javax.swing.JFrame {
         });
 
         jLabel19.setText("Valor:");
+
+        cancelarModVehiculo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfazGrafica/Imagenes/cancelar.png"))); // NOI18N
+        cancelarModVehiculo.setBorder(null);
 
         javax.swing.GroupLayout panelModificarVehiculoLayout = new javax.swing.GroupLayout(panelModificarVehiculo);
         panelModificarVehiculo.setLayout(panelModificarVehiculoLayout);
@@ -2299,36 +2390,35 @@ public class loginInterface extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(panelModificarVehiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelModificarVehiculoLayout.createSequentialGroup()
-                        .addComponent(jLabel33)
-                        .addContainerGap(579, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelModificarVehiculoLayout.createSequentialGroup()
-                        .addGroup(panelModificarVehiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(panelModificarVehiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel30)
+                            .addComponent(jLabel32)
+                            .addComponent(jLabel34)
+                            .addComponent(jLabel27)
+                            .addComponent(jLabel28))
+                        .addGap(33, 33, 33)
+                        .addGroup(panelModificarVehiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(panelModificarVehiculoLayout.createSequentialGroup()
-                                .addGroup(panelModificarVehiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel30)
-                                    .addComponent(jLabel32)
-                                    .addComponent(jLabel34)
-                                    .addComponent(jLabel27)
-                                    .addComponent(jLabel28))
-                                .addGap(33, 33, 33)
-                                .addGroup(panelModificarVehiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(modificarCodigoVehiculoTF)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelModificarVehiculoLayout.createSequentialGroup()
-                                        .addComponent(modificarVehiculoNuevoRB)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(modificarVehiculoUsadoRB)
-                                        .addGap(0, 61, Short.MAX_VALUE))
-                                    .addComponent(modificarModeloVehiculoTF, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(modificarColorVehiculoTF, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(modificarMarcaVehiculoTF, javax.swing.GroupLayout.Alignment.LEADING)))
-                            .addGroup(panelModificarVehiculoLayout.createSequentialGroup()
-                                .addComponent(jLabel19)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(panelModificarVehiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(confirmarModificarVehiculoB, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(modificarSedeVehiculoCB, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(modificarValorVehiculoTF, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(319, 319, 319))))
+                                .addComponent(modificarVehiculoNuevoRB)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(modificarVehiculoUsadoRB))
+                            .addComponent(modificarMarcaVehiculoTF, javax.swing.GroupLayout.DEFAULT_SIZE, 215, Short.MAX_VALUE)
+                            .addComponent(modificarModeloVehiculoTF)
+                            .addComponent(modificarColorVehiculoTF, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(modificarCodigoVehiculoTF)))
+                    .addGroup(panelModificarVehiculoLayout.createSequentialGroup()
+                        .addComponent(confirmarModificarVehiculoB)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cancelarModVehiculo))
+                    .addGroup(panelModificarVehiculoLayout.createSequentialGroup()
+                        .addGroup(panelModificarVehiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel33)
+                            .addComponent(jLabel19))
+                        .addGap(85, 85, 85)
+                        .addGroup(panelModificarVehiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(modificarValorVehiculoTF)
+                            .addComponent(modificarSedeVehiculoCB, 0, 215, Short.MAX_VALUE))))
+                .addContainerGap(279, Short.MAX_VALUE))
         );
         panelModificarVehiculoLayout.setVerticalGroup(
             panelModificarVehiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2350,21 +2440,24 @@ public class loginInterface extends javax.swing.JFrame {
                     .addComponent(jLabel34)
                     .addComponent(modificarColorVehiculoTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(panelModificarVehiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel27)
-                    .addComponent(modificarVehiculoNuevoRB)
-                    .addComponent(modificarVehiculoUsadoRB))
-                .addGap(18, 18, 18)
-                .addGroup(panelModificarVehiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel33)
-                    .addComponent(modificarSedeVehiculoCB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(panelModificarVehiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel19)
-                    .addComponent(modificarValorVehiculoTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(23, 23, 23)
-                .addComponent(confirmarModificarVehiculoB)
-                .addContainerGap(278, Short.MAX_VALUE))
+                .addGroup(panelModificarVehiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(panelModificarVehiculoLayout.createSequentialGroup()
+                        .addGroup(panelModificarVehiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel27)
+                            .addComponent(modificarVehiculoNuevoRB)
+                            .addComponent(modificarVehiculoUsadoRB))
+                        .addGap(18, 18, 18)
+                        .addGroup(panelModificarVehiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel33)
+                            .addComponent(modificarSedeVehiculoCB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(panelModificarVehiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel19)
+                            .addComponent(modificarValorVehiculoTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(confirmarModificarVehiculoB))
+                    .addComponent(cancelarModVehiculo))
+                .addContainerGap(272, Short.MAX_VALUE))
         );
 
         panelCrearOrden.setBackground(new java.awt.Color(255, 255, 255));
@@ -2388,12 +2481,16 @@ public class loginInterface extends javax.swing.JFrame {
         resumenCrearOrdenTA.setRows(5);
         jScrollPane1.setViewportView(resumenCrearOrdenTA);
 
-        botonCrearOrden.setText("Aceptar");
+        botonCrearOrden.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfazGrafica/Imagenes/aceptar.png"))); // NOI18N
+        botonCrearOrden.setBorder(null);
         botonCrearOrden.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botonCrearOrdenActionPerformed(evt);
             }
         });
+
+        cancelarCrearOrden.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfazGrafica/Imagenes/cancelar.png"))); // NOI18N
+        cancelarCrearOrden.setBorder(null);
 
         javax.swing.GroupLayout panelCrearOrdenLayout = new javax.swing.GroupLayout(panelCrearOrden);
         panelCrearOrden.setLayout(panelCrearOrdenLayout);
@@ -2403,32 +2500,29 @@ public class loginInterface extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(panelCrearOrdenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelCrearOrdenLayout.createSequentialGroup()
+                        .addComponent(jLabel45)
+                        .addGap(18, 18, 18)
+                        .addComponent(codOrdenCrearOrdenTF, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(panelCrearOrdenLayout.createSequentialGroup()
                         .addGroup(panelCrearOrdenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(panelCrearOrdenLayout.createSequentialGroup()
-                                .addGroup(panelCrearOrdenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel48)
-                                    .addComponent(jLabel46)
-                                    .addComponent(jLabel47))
-                                .addGap(18, 18, 18)
-                                .addGroup(panelCrearOrdenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(codJefeTallerCrearOrdenTF, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 176, Short.MAX_VALUE)
-                                    .addComponent(codParteCrearOrdenTF, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(codVehiculoCrearOrdenTF)))
-                            .addGroup(panelCrearOrdenLayout.createSequentialGroup()
-                                .addComponent(jLabel45)
-                                .addGap(18, 18, 18)
-                                .addComponent(codOrdenCrearOrdenTF, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelCrearOrdenLayout.createSequentialGroup()
-                        .addGroup(panelCrearOrdenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(panelCrearOrdenLayout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(botonCrearOrden))
-                            .addGroup(panelCrearOrdenLayout.createSequentialGroup()
-                                .addComponent(jLabel49)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 66, Short.MAX_VALUE)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(201, 201, 201))))
+                            .addComponent(jLabel48)
+                            .addComponent(jLabel46)
+                            .addComponent(jLabel47))
+                        .addGap(18, 18, 18)
+                        .addGroup(panelCrearOrdenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(codJefeTallerCrearOrdenTF, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 176, Short.MAX_VALUE)
+                            .addComponent(codParteCrearOrdenTF, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(codVehiculoCrearOrdenTF)))
+                    .addGroup(panelCrearOrdenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(panelCrearOrdenLayout.createSequentialGroup()
+                            .addComponent(botonCrearOrden)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(cancelarCrearOrden))
+                        .addGroup(panelCrearOrdenLayout.createSequentialGroup()
+                            .addComponent(jLabel49)
+                            .addGap(66, 66, 66)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(201, Short.MAX_VALUE))
         );
         panelCrearOrdenLayout.setVerticalGroup(
             panelCrearOrdenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2453,9 +2547,11 @@ public class loginInterface extends javax.swing.JFrame {
                 .addGroup(panelCrearOrdenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel49)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(botonCrearOrden)
-                .addContainerGap(206, Short.MAX_VALUE))
+                .addGap(11, 11, 11)
+                .addGroup(panelCrearOrdenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(botonCrearOrden)
+                    .addComponent(cancelarCrearOrden))
+                .addContainerGap(195, Short.MAX_VALUE))
         );
 
         panelConsultarOrden.setBackground(new java.awt.Color(255, 255, 255));
@@ -2465,7 +2561,8 @@ public class loginInterface extends javax.swing.JFrame {
 
         jLabel50.setText("Código de la orden:");
 
-        aceptarConsultarOrden.setText("Aceptar");
+        aceptarConsultarOrden.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfazGrafica/Imagenes/aceptar.png"))); // NOI18N
+        aceptarConsultarOrden.setBorder(null);
         aceptarConsultarOrden.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 aceptarConsultarOrdenActionPerformed(evt);
@@ -2475,10 +2572,12 @@ public class loginInterface extends javax.swing.JFrame {
         jLabel57.setText("Vehículo:");
 
         nombreClienteConsultarOrden.setEditable(false);
+        nombreClienteConsultarOrden.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel65.setText("Parte:");
 
         idClienteConsultarOrden.setEditable(false);
+        idClienteConsultarOrden.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel66.setText("Descripción:");
 
@@ -2538,13 +2637,24 @@ public class loginInterface extends javax.swing.JFrame {
                 .addGroup(panelConsultarOrdenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel66)
                     .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(194, Short.MAX_VALUE))
+                .addContainerGap(176, Short.MAX_VALUE))
         );
 
         panelCrearCotizacion.setBackground(new java.awt.Color(255, 255, 255));
         panelCrearCotizacion.setMaximumSize(new java.awt.Dimension(617, 579));
         panelCrearCotizacion.setMinimumSize(new java.awt.Dimension(617, 579));
         panelCrearCotizacion.setPreferredSize(new java.awt.Dimension(617, 579));
+
+        cancelarCrearCot.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfazGrafica/Imagenes/cancelar.png"))); // NOI18N
+        cancelarCrearCot.setBorder(null);
+
+        crearCotizacion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfazGrafica/Imagenes/aceptar.png"))); // NOI18N
+        crearCotizacion.setBorder(null);
+        crearCotizacion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                crearCotizacionActionPerformed(evt);
+            }
+        });
 
         jLabel52.setText("Codigo del vendedor:");
 
@@ -2568,8 +2678,6 @@ public class loginInterface extends javax.swing.JFrame {
         jScrollPane2.setViewportView(tableCrearCot);
         tableCrearCot.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
 
-        jButton1.setText("Aceptar");
-
         javax.swing.GroupLayout panelCrearCotizacionLayout = new javax.swing.GroupLayout(panelCrearCotizacion);
         panelCrearCotizacion.setLayout(panelCrearCotizacionLayout);
         panelCrearCotizacionLayout.setHorizontalGroup(
@@ -2577,10 +2685,6 @@ public class loginInterface extends javax.swing.JFrame {
             .addGroup(panelCrearCotizacionLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(panelCrearCotizacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 597, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelCrearCotizacionLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton1))
                     .addGroup(panelCrearCotizacionLayout.createSequentialGroup()
                         .addGroup(panelCrearCotizacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(panelCrearCotizacionLayout.createSequentialGroup()
@@ -2599,7 +2703,13 @@ public class loginInterface extends javax.swing.JFrame {
                                 .addComponent(jLabel52)
                                 .addGap(28, 28, 28)
                                 .addComponent(codVendedorCrearCot, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(panelCrearCotizacionLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(crearCotizacion)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cancelarCrearCot))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 597, Short.MAX_VALUE))
                 .addContainerGap())
         );
         panelCrearCotizacionLayout.setVerticalGroup(
@@ -2622,10 +2732,12 @@ public class loginInterface extends javax.swing.JFrame {
                     .addComponent(jLabel54)
                     .addComponent(vehiculosDispCrearCot, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 364, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jButton1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 336, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(panelCrearCotizacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(crearCotizacion)
+                    .addComponent(cancelarCrearCot))
+                .addGap(0, 25, Short.MAX_VALUE))
         );
 
         panelConsultarCotizacion.setBackground(new java.awt.Color(255, 255, 255));
@@ -2635,32 +2747,90 @@ public class loginInterface extends javax.swing.JFrame {
 
         jLabel58.setText("Codigo de la cotización:");
 
-        aceptarConsultarCot.setText("Aceptar");
+        aceptarConsultarCot.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfazGrafica/Imagenes/aceptar.png"))); // NOI18N
+        aceptarConsultarCot.setBorder(null);
+
+        jLabel86.setText("Codigo del vendedor:");
+
+        codVendedorConsultarCot.setEditable(false);
+        codVendedorConsultarCot.setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabel87.setText("Codigo del comprador:");
+
+        codCompradorConsultarCot.setEditable(false);
+        codCompradorConsultarCot.setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabel88.setText("Vehiculo:");
+
+        codVehiculoConsultarCot.setEditable(false);
+        codVehiculoConsultarCot.setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabel89.setText("Valor total:");
+
+        valorTotalConsultarCot.setText("Precio");
 
         javax.swing.GroupLayout panelConsultarCotizacionLayout = new javax.swing.GroupLayout(panelConsultarCotizacion);
         panelConsultarCotizacion.setLayout(panelConsultarCotizacionLayout);
         panelConsultarCotizacionLayout.setHorizontalGroup(
             panelConsultarCotizacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelConsultarCotizacionLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(panelConsultarCotizacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(aceptarConsultarCot)
+                .addGroup(panelConsultarCotizacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(panelConsultarCotizacionLayout.createSequentialGroup()
-                        .addComponent(jLabel58)
-                        .addGap(18, 18, 18)
-                        .addComponent(codCotConsultarCot, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(300, Short.MAX_VALUE))
+                        .addContainerGap()
+                        .addComponent(jLabel89)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(valorTotalConsultarCot))
+                    .addGroup(panelConsultarCotizacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(panelConsultarCotizacionLayout.createSequentialGroup()
+                            .addContainerGap()
+                            .addComponent(jLabel58)
+                            .addGap(18, 18, 18)
+                            .addComponent(codCotConsultarCot))
+                        .addGroup(panelConsultarCotizacionLayout.createSequentialGroup()
+                            .addContainerGap()
+                            .addGroup(panelConsultarCotizacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelConsultarCotizacionLayout.createSequentialGroup()
+                                    .addComponent(jLabel88)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(codVehiculoConsultarCot, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(panelConsultarCotizacionLayout.createSequentialGroup()
+                                    .addComponent(jLabel87)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(codCompradorConsultarCot, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(panelConsultarCotizacionLayout.createSequentialGroup()
+                                    .addComponent(jLabel86)
+                                    .addGap(28, 28, 28)
+                                    .addComponent(codVendedorConsultarCot, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                .addGap(18, 18, 18)
+                .addComponent(aceptarConsultarCot)
+                .addContainerGap(88, Short.MAX_VALUE))
         );
         panelConsultarCotizacionLayout.setVerticalGroup(
             panelConsultarCotizacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelConsultarCotizacionLayout.createSequentialGroup()
                 .addContainerGap()
+                .addGroup(panelConsultarCotizacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelConsultarCotizacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel58)
+                        .addComponent(codCotConsultarCot, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(aceptarConsultarCot))
+                .addGap(13, 13, 13)
                 .addGroup(panelConsultarCotizacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel58)
-                    .addComponent(codCotConsultarCot, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel86)
+                    .addComponent(codVendedorConsultarCot, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(21, 21, 21)
+                .addGroup(panelConsultarCotizacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel87)
+                    .addComponent(codCompradorConsultarCot, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(aceptarConsultarCot)
-                .addContainerGap(507, Short.MAX_VALUE))
+                .addGroup(panelConsultarCotizacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel88)
+                    .addComponent(codVehiculoConsultarCot, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(panelConsultarCotizacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel89)
+                    .addComponent(valorTotalConsultarCot))
+                .addContainerGap(383, Short.MAX_VALUE))
         );
 
         panelVender.setBackground(new java.awt.Color(255, 255, 255));
@@ -2681,7 +2851,8 @@ public class loginInterface extends javax.swing.JFrame {
         codCotVender.setForeground(new java.awt.Color(102, 102, 102));
         codCotVender.setText("(Opcional)");
 
-        ventaCrearVentaButton.setText("Vender");
+        ventaCrearVentaButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfazGrafica/Imagenes/aceptar.png"))); // NOI18N
+        ventaCrearVentaButton.setBorder(null);
         ventaCrearVentaButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ventaCrearVentaButtonActionPerformed(evt);
@@ -2707,12 +2878,16 @@ public class loginInterface extends javax.swing.JFrame {
         jScrollPane3.setViewportView(tableCrearCot1);
         tableCrearCot1.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
 
-        venderBuscarCotButton.setText("Buscar");
+        venderBuscarCotButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfazGrafica/Imagenes/aceptar.png"))); // NOI18N
+        venderBuscarCotButton.setBorder(null);
         venderBuscarCotButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 venderBuscarCotButtonActionPerformed(evt);
             }
         });
+
+        cancelarVender.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfazGrafica/Imagenes/cancelar.png"))); // NOI18N
+        cancelarVender.setBorder(null);
 
         javax.swing.GroupLayout panelVenderLayout = new javax.swing.GroupLayout(panelVender);
         panelVender.setLayout(panelVenderLayout);
@@ -2743,11 +2918,13 @@ public class loginInterface extends javax.swing.JFrame {
                                     .addComponent(codCotVender, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 176, Short.MAX_VALUE)
                                     .addComponent(codVehiculoVender))))
                         .addGap(18, 18, 18)
-                        .addComponent(venderBuscarCotButton, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(venderBuscarCotButton)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelVenderLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(ventaCrearVentaButton, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(ventaCrearVentaButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(cancelarVender)
                 .addContainerGap())
         );
         panelVenderLayout.setVerticalGroup(
@@ -2779,10 +2956,12 @@ public class loginInterface extends javax.swing.JFrame {
                     .addComponent(jLabel64)
                     .addComponent(vehiculosDispVender, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(ventaCrearVentaButton)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(panelVenderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(ventaCrearVentaButton)
+                    .addComponent(cancelarVender))
+                .addContainerGap(26, Short.MAX_VALUE))
         );
 
         panelConsultas.setBackground(new java.awt.Color(255, 255, 255));
@@ -2820,7 +2999,8 @@ public class loginInterface extends javax.swing.JFrame {
             .addGap(0, 365, Short.MAX_VALUE)
         );
 
-        exportarButton.setText("Exportar");
+        exportarButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfazGrafica/Imagenes/exportar.png"))); // NOI18N
+        exportarButton.setBorder(null);
 
         javax.swing.GroupLayout panelReporteFinalLayout = new javax.swing.GroupLayout(panelReporteFinal);
         panelReporteFinal.setLayout(panelReporteFinalLayout);
@@ -2831,7 +3011,7 @@ public class loginInterface extends javax.swing.JFrame {
                 .addGroup(panelReporteFinalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(panelReporte, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelReporteFinalLayout.createSequentialGroup()
-                        .addGap(0, 522, Short.MAX_VALUE)
+                        .addGap(0, 436, Short.MAX_VALUE)
                         .addComponent(exportarButton)))
                 .addContainerGap())
         );
@@ -2842,7 +3022,7 @@ public class loginInterface extends javax.swing.JFrame {
                 .addComponent(panelReporte, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(exportarButton)
-                .addContainerGap(162, Short.MAX_VALUE))
+                .addContainerGap(144, Short.MAX_VALUE))
         );
 
         panelVacio.setBackground(new java.awt.Color(255, 255, 255));
@@ -3838,6 +4018,10 @@ public class loginInterface extends javax.swing.JFrame {
         Ordenes orden = new Ordenes();
         
     }//GEN-LAST:event_aceptarConsultarOrdenActionPerformed
+
+    private void crearCotizacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crearCotizacionActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_crearCotizacionActionPerformed
     
     
     
@@ -3887,7 +4071,18 @@ public class loginInterface extends javax.swing.JFrame {
     private javax.swing.JButton aportePorSedeReportesBoton;
     private javax.swing.JButton botonCancelarCrear;
     private javax.swing.JButton botonCrearOrden;
+    private javax.swing.JButton cancelarAgregarParte;
+    private javax.swing.JButton cancelarAgregarVehiculo;
+    private javax.swing.JButton cancelarCrearCot;
+    private javax.swing.JButton cancelarCrearOrden;
+    private javax.swing.JButton cancelarCrearSede;
+    private javax.swing.JButton cancelarModParte;
+    private javax.swing.JButton cancelarModSede;
+    private javax.swing.JButton cancelarModUsuario;
+    private javax.swing.JButton cancelarModVehiculo;
+    private javax.swing.JButton cancelarVender;
     private javax.swing.JTextField cedulaIngresarCliente;
+    private javax.swing.JTextField codCompradorConsultarCot;
     private javax.swing.JTextField codCompradorCrearCot;
     private javax.swing.JTextField codCompradorVender;
     private javax.swing.JTextField codCotConsultarCot;
@@ -3896,9 +4091,11 @@ public class loginInterface extends javax.swing.JFrame {
     private javax.swing.JTextField codOrdenConsultarOrdenTF;
     private javax.swing.JTextField codOrdenCrearOrdenTF;
     private javax.swing.JTextField codParteCrearOrdenTF;
+    private javax.swing.JTextField codVehiculoConsultarCot;
     private javax.swing.JTextField codVehiculoCrearCot;
     private javax.swing.JTextField codVehiculoCrearOrdenTF;
     private javax.swing.JTextField codVehiculoVender;
+    private javax.swing.JTextField codVendedorConsultarCot;
     private javax.swing.JTextField codVendedorCrearCot;
     private javax.swing.JTextField codVendedorVender;
     private javax.swing.JTextField codVentaVender;
@@ -3920,6 +4117,7 @@ public class loginInterface extends javax.swing.JFrame {
     private javax.swing.JTextField crearCantidadPartesTF;
     private javax.swing.JTextField crearCantidadVehiculoTF;
     private javax.swing.JTextField crearColorVehiculoTF;
+    private javax.swing.JButton crearCotizacion;
     private javax.swing.JButton crearCotizacionButton;
     private javax.swing.JTextField crearMarcaVehiculoTF;
     private javax.swing.JTextField crearModeloVehiculoTF;
@@ -3955,7 +4153,6 @@ public class loginInterface extends javax.swing.JFrame {
     private javax.swing.JButton ingresarUsuarioBoton;
     private javax.swing.JFrame ingresarUsuarioFrame;
     private javax.swing.JPanel inventarioReportesPanel;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButtonLogin;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -4041,6 +4238,10 @@ public class loginInterface extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel83;
     private javax.swing.JLabel jLabel84;
     private javax.swing.JLabel jLabel85;
+    private javax.swing.JLabel jLabel86;
+    private javax.swing.JLabel jLabel87;
+    private javax.swing.JLabel jLabel88;
+    private javax.swing.JLabel jLabel89;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JLabel jLabelPassword;
     private javax.swing.JLabel jLabelUsuario;
@@ -4151,6 +4352,7 @@ public class loginInterface extends javax.swing.JFrame {
     private javax.swing.JTextField tfLogin;
     private javax.swing.JComboBox<String> tipoUsuarioCB;
     private javax.swing.JRadioButton todoOpcionesReportes;
+    private javax.swing.JLabel valorTotalConsultarCot;
     private javax.swing.JButton vehiculosAgregadosReporteBoton;
     private javax.swing.JComboBox vehiculosDispCrearCot;
     private javax.swing.JComboBox vehiculosDispVender;
