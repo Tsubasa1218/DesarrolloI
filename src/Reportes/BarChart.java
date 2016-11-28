@@ -5,12 +5,14 @@
  */
 package Reportes;
 
+import java.awt.Color;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartFrame;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.chart.renderer.category.BarRenderer;
 import org.jfree.data.category.DefaultCategoryDataset;
 
 /**
@@ -23,7 +25,7 @@ public class BarChart {
     static int alto;
     
     public BarChart(){
-        ancho = 597;
+        ancho = 780;
         alto = 365;
     }
     
@@ -36,6 +38,13 @@ public class BarChart {
         chartFrame.setSize(300, 300);
         chartFrame.setVisible(true);
         */
+        
+        CategoryPlot categoryP = JFchart.getCategoryPlot();
+        BarRenderer renderer = (BarRenderer) categoryP.getRenderer();
+        
+        Color color = new Color(67,165,208);
+        renderer.setSeriesPaint(0, color);
+        
         ChartPanel panel = new ChartPanel(JFchart, true, true, true, false, false);
         
         panel.setSize(ancho, alto);
@@ -46,6 +55,12 @@ public class BarChart {
     public ChartPanel reporteAportesVentas(DefaultCategoryDataset data){
         JFreeChart chart = ChartFactory.createBarChart("Reporte de aporte por sede", "Sedes", "Aporte", data, PlotOrientation.VERTICAL, true, true, true);
         
+        CategoryPlot categoryP = chart.getCategoryPlot();
+        BarRenderer renderer = (BarRenderer) categoryP.getRenderer();
+        
+        Color color = new Color(67,165,208);
+        renderer.setSeriesPaint(0, color);
+        
         ChartPanel panel = new ChartPanel(chart, true, true, true, false, false);
         panel.setSize(ancho, alto);
         
@@ -54,6 +69,12 @@ public class BarChart {
     
     public ChartPanel reporteCantidadVehiculosPorSede(DefaultCategoryDataset data){
         JFreeChart chart = ChartFactory.createBarChart("Reporte de cantidad de vehiculos por sede", "Sedes", "Cantidad", data, PlotOrientation.VERTICAL, true, true, true);
+        
+        CategoryPlot categoryP = chart.getCategoryPlot();
+        BarRenderer renderer = (BarRenderer) categoryP.getRenderer();
+        
+        Color color = new Color(67,165,208);
+        renderer.setSeriesPaint(0, color);
         
         ChartPanel panel = new ChartPanel(chart, true, true, true, false, false);
         panel.setSize(ancho, alto);
@@ -64,6 +85,12 @@ public class BarChart {
     public ChartPanel reporteCantidadCotizacionesSede(DefaultCategoryDataset data){
         JFreeChart chart = ChartFactory.createBarChart("Reporte de cantidad de cotizaciones por empleado", "Empleado", "Cantidad", data, PlotOrientation.VERTICAL, true, true, true);
         
+        CategoryPlot categoryP = chart.getCategoryPlot();
+        BarRenderer renderer = (BarRenderer) categoryP.getRenderer();
+        
+        Color color = new Color(67,165,208);
+        renderer.setSeriesPaint(0, color);
+        
         ChartPanel panel = new ChartPanel(chart, true, true, true, false, false);
         panel.setSize(ancho, alto);
         
@@ -72,6 +99,27 @@ public class BarChart {
     
     public ChartPanel reporteCantidadCotizacionesEmpresa(DefaultCategoryDataset data){
         JFreeChart chart = ChartFactory.createBarChart("Reporte de cantidad de cotizaciones por sede", "Sede", "Cantidad", data, PlotOrientation.VERTICAL, true, true, true);
+        
+        CategoryPlot categoryP = chart.getCategoryPlot();
+        BarRenderer renderer = (BarRenderer) categoryP.getRenderer();
+        
+        Color color = new Color(67,165,208);
+        renderer.setSeriesPaint(0, color);
+        
+        ChartPanel panel = new ChartPanel(chart, true, true, true, false, false);
+        panel.setSize(ancho, alto);
+        
+        return panel;
+    }
+    
+    public ChartPanel reporteVehiculosAgregados(DefaultCategoryDataset data){
+        JFreeChart chart = ChartFactory.createBarChart("Reporte de cantidad de vehiculos añadidos por sede", "Sedes", "Cantidad", data, PlotOrientation.VERTICAL, true, true, true);
+        
+        CategoryPlot categoryP = chart.getCategoryPlot();
+        BarRenderer renderer = (BarRenderer) categoryP.getRenderer();
+        
+        Color color = new Color(67,165,208);
+        renderer.setSeriesPaint(0, color);
         
         ChartPanel panel = new ChartPanel(chart, true, true, true, false, false);
         panel.setSize(ancho, alto);

@@ -27,17 +27,17 @@ public class Vehiculo {
         return codigo;
     }
     
-    public int modificarVehiculo(String id_vehiculo, String marca_vehiculo, String modelo_vehiculo, String color_vehiculo, String nuevo_vehiculo, String valor_vehiculo,  String id_sede){
+    public int modificarVehiculo(String id_vehiculo, String marca_vehiculo, String modelo_vehiculo, String color_vehiculo, String nuevo_vehiculo, float valor_vehiculo,  String id_sede){
             String consultaSQL = "UPDATE vehiculos SET "
                     + "marca_vehiculo = '" + marca_vehiculo + "', "
                     + "modelo_vehiculo = '" + modelo_vehiculo + "', "
                     + "color_vehiculo = '" + color_vehiculo + "', "
                     + "nuevo_vehiculo = '" + nuevo_vehiculo + "', "
                     //+ "cantidad_disponible_vehiculo = '" + cantidad_disponible_vehiculo + "', "                 
-                    + "valor_vehiculo = '" + valor_vehiculo + "', "
+                    + "valor_vehiculo = " + valor_vehiculo + ", "
                     //+ "fecha_adicion_vehiculo = '" + fecha_adicion_vehiculo + "', "
-                    + "id_sede = '" + id_sede + "' "
-                    + " WHERE id_vehiculo = '" + id_vehiculo + "';";
+                    + "id_sede = " + id_sede + " "
+                    + " WHERE id_vehiculo = " + id_vehiculo + ";";
         int codigo = operacionesBD.updates(consultaSQL);
         return codigo;
     }

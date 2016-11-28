@@ -8,8 +8,6 @@ package Usuarios;
 import dataBaseOperations.OperacionesBD;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -37,7 +35,7 @@ public class Usuario {
             
             consultaSQL = "UPDATE usuarios SET activo_usuario = TRUE WHERE id_usuario = '" + id_usuario + "';";
             
-            operacionesBD.consultas(consultaSQL);
+            operacionesBD.updates(consultaSQL);
             
 
         } catch (SQLException ex) {
@@ -70,6 +68,13 @@ public class Usuario {
         if(codigo != 0){
             JOptionPane.showMessageDialog(null, "Usuario modificado con exito!", "Exito!", JOptionPane.INFORMATION_MESSAGE);
         }  
+    }
+    
+    public ResultSet datosUsuario(String id_usuario){
+        String consultaSQL = "SELECT nombre_usuario, tipo_usuario, nombre_sede FROM usuarios NATURAL JOIN sedes WHERE id_usuario = '" + id_usuario + "';";
+        ResultSet resultado = new OperacionesBD().consultas(consultaSQL);
+        
+        return resultado;
     }
     
 }

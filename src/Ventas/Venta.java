@@ -50,4 +50,10 @@ public class Venta {
             
         }     
     }
+    
+    public ResultSet buscarCotizacion(String codigoCotizacion){
+        OperacionesBD vehiculo = new OperacionesBD();
+        ResultSet consulta = vehiculo.consultas("SELECT * FROM cotizaciones_realizadas WHERE id_cotizaciones = '" + codigoCotizacion + "';");
+        return consulta;
+    }
 }

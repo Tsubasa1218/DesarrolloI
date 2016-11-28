@@ -29,13 +29,13 @@ public class Partes {
         }       
     }
     
-    public void modificarParte(String id_parte, String nombre_parte, String cantidad_parte, String valor_parte, String id_sede){
+    public void modificarParte(String id_parte, String nombre_parte, int cantidad_parte, float valor_parte, String id_sede){
             String consultaSQL = "UPDATE partes SET "
                     + "nombre_parte = '" + nombre_parte + "', "
-                    + "cantidad_parte = '" + cantidad_parte + "', "
-                    + "valor_parte = '" + valor_parte + "', "
-                    + "id_sede = '" + id_sede + "' "
-                    + " WHERE id_parte = '" + id_parte + "';";
+                    + "cantidad_parte = " + cantidad_parte + ", "
+                    + "valor_parte = " + valor_parte + ", "
+                    + "id_sede = " + id_sede + " "
+                    + " WHERE id_parte = " + id_parte + ";";
             //System.out.println(consultaSQL);
         int codigo = operacionesBD.updates(consultaSQL);
         if(codigo != 0){

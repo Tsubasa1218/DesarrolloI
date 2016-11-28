@@ -10,8 +10,6 @@ import java.sql.SQLException;
 import java.util.Date;
 import interfazGrafica.Operaciones;
 import java.text.SimpleDateFormat;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import org.jfree.chart.ChartPanel;
 import org.jfree.data.category.DefaultCategoryDataset;
 
@@ -137,6 +135,16 @@ public class Reporte {
         DefaultCategoryDataset data = new DefaultCategoryDataset();
         for (int i = 0; i < nombreSedes.length; i++) {
             data.setValue((double)valorVentas[i], "Aporte por sede", nombreSedes[i]);
+        }
+        
+        consultaSQL = "SELECT nombre_sede FROM sedes EXCEPT SELECT nombre_sede FROM ventas_vehiculos NATURAL JOIN vehiculos NATURAL JOIN sedes GROUP BY nombre_sede;";
+        tabla = new OperacionesBD().consultas(consultaSQL);
+        try {
+            while(tabla.next()){
+                data.setValue(0.0, "Aporte por sede" , tabla.getString(1));
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
         }
         
         ChartPanel panel = new BarChart().reporteAportesVentas(data);
@@ -362,6 +370,77 @@ public class Reporte {
         }
         
         ChartPanel panel = new BarChart().reporteCantidadCotizacionesEmpresa(data);
+        
+        return panel;
+    }
+    
+    public ChartPanel generarReporteVehiculosAgregadosSemanal(Date fechaInicial){
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+        Operaciones oper = new Operaciones();        
+        Date fechaFinal = oper.aumentarFecha(fechaInicial);
+        
+        String fechaI = sdf.format(fechaInicial);
+        String fechaF = sdf.format(fechaFinal);
+        
+        String consultaSQL = "SELECT sedes.nombre_sede, COUNT(sedes.nombre_sede) FROM vehiculos NATURAL JOIN sedes WHERE fecha_adicion_vehiculo BETWEEN '" + fechaI + "' AND '"
+                                + fechaF + "' GROUP BY sedes.nombre_sede;";
+        
+        ResultSet tabla = new OperacionesBD().consultas(consultaSQL);
+        
+        DefaultCategoryDataset data = new DefaultCategoryDataset();
+        
+        try {
+            while(tabla.next()){
+                data.setValue(tabla.getInt(2), "Cantidad de vehiculo añadidos/sede", tabla.getString(1));
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        
+        consultaSQL = "SELECT nombre_sede FROM sedes EXCEPT SELECT sedes.nombre_sede FROM vehiculos NATURAL JOIN sedes WHERE fecha_adicion_vehiculo BETWEEN '" + fechaI + "' AND '"
+                                + fechaF + "' GROUP BY sedes.nombre_sede;";
+        
+        tabla = new OperacionesBD().consultas(consultaSQL);
+        try {
+            while(tabla.next()){
+                data.setValue(0.0, "Cantidad de vehiculo añadidos/sede", tabla.getString(1));
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        
+        ChartPanel panel = new BarChart().reporteVehiculosAgregados(data);
+        
+        return panel;
+    }
+    
+    public ChartPanel generarReporteVehiculosAgregados(){
+        String consultaSQL = "SELECT sedes.nombre_sede, COUNT(sedes.nombre_sede) FROM vehiculos NATURAL JOIN sedes GROUP BY sedes.nombre_sede;";
+        
+        ResultSet tabla = new OperacionesBD().consultas(consultaSQL);
+        
+        DefaultCategoryDataset data = new DefaultCategoryDataset();
+        
+        try {
+            while(tabla.next()){
+                data.setValue(tabla.getInt(2), "Cantidad de vehiculo añadidos/sede", tabla.getString(1));
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        
+        consultaSQL = "SELECT nombre_sede FROM sedes EXCEPT SELECT sedes.nombre_sede FROM vehiculos NATURAL JOIN sedes GROUP BY sedes.nombre_sede;";
+        
+        tabla = new OperacionesBD().consultas(consultaSQL);
+        try {
+            while(tabla.next()){
+                data.setValue(0.0, "Cantidad de vehiculo añadidos/sede", tabla.getString(1));
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        
+        ChartPanel panel = new BarChart().reporteVehiculosAgregados(data);
         
         return panel;
     }
