@@ -70,18 +70,15 @@ CREATE TABLE cotizaciones_realizadas(
 	CONSTRAINT pk_cotizaciones_realizadas PRIMARY KEY(id_cotizaciones),
 	CONSTRAINT unique_cotizaciones UNIQUE(fecha_cotizacion, id_usuario, id_vehiculo, id_comprador));
 
-CREATE TABLE ordenes(
-	id_orden SERIAL PRIMARY KEY,
-	resumen_orden VARCHAR(250) NOT NULL
-	);
-
 CREATE TABLE ordenes_emitidas(
 	id_usuario CHAR(10)  REFERENCES usuarios(id_usuario),
-	id_orden SERIAL  REFERENCES ordenes(id_orden),
+	id_orden SERIAL,
 	id_vehiculo SERIAL REFERENCES vehiculos(id_vehiculo),
 	id_parte SERIAL REFERENCES partes(id_parte),
 	fecha_emision DATE NOT NULL,
-	CONSTRAINT pk_ordenes_emitidas PRIMARY KEY (id_usuario, id_orden, id_vehiculo, id_parte, fecha_emision)
+	resumen_orden VARCHAR(250) NOT NULL,
+	cantidad INTEGER NOT NULL,
+	CONSTRAINT pk_ordenes_emitidas PRIMARY KEY (id_orden)
 	);
 
 CREATE TABLE ventas_vehiculos(
