@@ -52,8 +52,28 @@ public class Venta {
     }
     
     public ResultSet buscarCotizacion(String codigoCotizacion){
-        OperacionesBD vehiculo = new OperacionesBD();
-        ResultSet consulta = vehiculo.consultas("SELECT * FROM cotizaciones_realizadas WHERE id_cotizaciones = '" + codigoCotizacion + "';");
+        ResultSet consulta = operacionesBD.consultas("SELECT * FROM cotizaciones_realizadas WHERE id_cotizaciones = '" + codigoCotizacion + "';");
         return consulta;
+    }
+    
+    public String buscarUltimoCodigo(){
+        String consultaSQL = "SELECT last_value FROM ventas_vehiculos_id_venta_seq;";
+        int last_value = 0;
+        ResultSet tabla = operacionesBD.consultas(consultaSQL);
+        
+        try{
+            while(tabla.next()){
+                last_value = tabla.getInt(1);
+                
+            }
+        }catch(SQLException ex){
+            ex.printStackTrace();
+        }
+        if(last_value == 1){
+            return "" + last_value;
+        }else{
+            return "" + ++last_value;
+        }
+        
     }
 }

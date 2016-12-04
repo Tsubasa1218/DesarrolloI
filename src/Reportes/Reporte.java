@@ -9,9 +9,16 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Date;
 import interfazGrafica.Operaciones;
+import java.awt.Dimension;
 import java.text.SimpleDateFormat;
+import java.util.HashMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JFrame;
 import org.jfree.chart.ChartPanel;
 import org.jfree.data.category.DefaultCategoryDataset;
+import net.sf.jasperreports.view.*;
+import net.sf.jasperreports.engine.*;
 
 
 /**
@@ -132,6 +139,8 @@ public class Reporte {
             ex.printStackTrace();
         }
         
+        
+        
         DefaultCategoryDataset data = new DefaultCategoryDataset();
         for (int i = 0; i < nombreSedes.length; i++) {
             data.setValue((double)valorVentas[i], "Aporte por sede", nombreSedes[i]);
@@ -148,6 +157,8 @@ public class Reporte {
         }
         
         ChartPanel panel = new BarChart().reporteAportesVentas(data);
+        
+        
         return panel;
     }
     
@@ -374,6 +385,13 @@ public class Reporte {
         return panel;
     }
     
+     /*
+    Nombre: generarReporteVehiculosAgregadosSemanal
+    @param: Date
+    Objetivo: Obtener la cantidad de vehiculos que se han agregado al inventario en una semana
+    Autor: Juan David Suaza Cruz 1427841
+    */
+    
     public ChartPanel generarReporteVehiculosAgregadosSemanal(Date fechaInicial){
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
         Operaciones oper = new Operaciones();        
@@ -414,6 +432,13 @@ public class Reporte {
         return panel;
     }
     
+    /*
+    Nombre: generarReporteVehiculosAgregados
+    @param: ninguno
+    Objetivo: Obtener la cantidad de vehiculos que se han agregado al inventario
+    Autor: Juan David Suaza Cruz 1427841
+    */
+    
     public ChartPanel generarReporteVehiculosAgregados(){
         String consultaSQL = "SELECT sedes.nombre_sede, COUNT(sedes.nombre_sede) FROM vehiculos NATURAL JOIN sedes GROUP BY sedes.nombre_sede;";
         
@@ -444,4 +469,324 @@ public class Reporte {
         
         return panel;
     }
+    
+    /*
+    Nombre: generarReporteOrdenesSemanalEmpresa
+    @param: Date
+    Objetivo: Obtener la cantidad de ordenes de trabajo que se han hehco en una semana en la empresa
+    Autor: Juan David Suaza Cruz 1427841
+    */
+
+    public ChartPanel generarReporteOrdenesSemanalEmpresa(Date fechaInicial){
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+        Operaciones oper = new Operaciones();        
+        Date fechaFinal = oper.aumentarFecha(fechaInicial);
+        
+        String fechaI = sdf.format(fechaInicial);
+        String fechaF = sdf.format(fechaFinal);
+        
+        String consultaSQL = "SELECT sedes.nombre_sede, COUNT(sedes.nombre_sede) FROM ordenes_emitidas NATURAL JOIN usuarios NATURAL JOIN sedes WHERE fecha_emision BETWEEN '" 
+                + fechaI + "' AND '" + fechaF + "' GROUP BY sedes.nombre_sede;";
+        
+        ResultSet tabla = new OperacionesBD().consultas(consultaSQL);
+        DefaultCategoryDataset data = new DefaultCategoryDataset();
+        try{
+            while(tabla.next()){
+                data.setValue(tabla.getInt(2), "Ordenes generadas/sede", tabla.getString(1));
+            }
+        }catch(SQLException ex){
+            ex.printStackTrace();
+        }
+        
+        consultaSQL = "SELECT nombre_sede FROM sedes EXCEPT SELECT sedes.nombre_sede FROM ordenes_emitidas NATURAL JOIN usuarios NATURAL JOIN sedes "
+                + "WHERE fecha_emision BETWEEN '" + fechaI + "' AND '" + fechaF + "';";
+        
+        tabla = new OperacionesBD().consultas(consultaSQL);
+        try{
+            while(tabla.next()){
+                data.setValue(0.0, "Ordenes generadas/sede", tabla.getString(1));
+            }
+        }catch(SQLException ex){
+            ex.printStackTrace();
+        }
+        
+        ChartPanel panel = new BarChart().reporteOrdenesEmpresa(data);
+        
+        return panel;
+    }
+    
+    /*
+    Nombre: generarReporteOrdenesEmpresa
+    @param: Nninguno
+    Objetivo: Obtener la cantidad de ordenes de trabajo que se han hecho en la empresa
+    Autor: Juan David Suaza Cruz 1427841
+    */
+    
+    public ChartPanel generarReporteOrdenesEmpresa(){
+        
+        String consultaSQL = "SELECT sedes.nombre_sede, COUNT(sedes.nombre_sede) FROM ordenes_emitidas NATURAL JOIN usuarios NATURAL JOIN sedes GROUP BY sedes.nombre_sede;";
+        
+        ResultSet tabla = new OperacionesBD().consultas(consultaSQL);
+        DefaultCategoryDataset data = new DefaultCategoryDataset();
+        try{
+            while(tabla.next()){
+                data.setValue(tabla.getInt(2), "Ordenes generadas/sede", tabla.getString(1));
+            }
+        }catch(SQLException ex){
+            ex.printStackTrace();
+        }
+        
+        consultaSQL = "SELECT nombre_sede FROM sedes EXCEPT SELECT sedes.nombre_sede FROM ordenes_emitidas NATURAL JOIN usuarios NATURAL JOIN sedes;";
+        
+        tabla = new OperacionesBD().consultas(consultaSQL);
+        try{
+            while(tabla.next()){
+                data.setValue(0.0, "Ordenes generadas/sede", tabla.getString(1));
+            }
+        }catch(SQLException ex){
+            ex.printStackTrace();
+        }
+        
+        ChartPanel panel = new BarChart().reporteOrdenesEmpresa(data);
+        
+        return panel;
+    }
+    
+    /*
+    Nombre: generarReporteOrdenesSemanalSede
+    @param: Nninguno
+    Objetivo: Obtener la cantidad de ordenes de trabajo que se han hehco en una semana en una sede
+    Autor: Juan David Suaza Cruz 1427841
+    */
+    public ChartPanel generarReporteOrdenesSemanalSede(Date fechaInicial, String id_sede){
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+        Operaciones oper = new Operaciones();        
+        Date fechaFinal = oper.aumentarFecha(fechaInicial);
+        
+        String fechaI = sdf.format(fechaInicial);
+        String fechaF = sdf.format(fechaFinal);
+        
+        String consultaSQL = "SELECT usuarios.nombre_usuario, COUNT(usuarios.nombre_usuario) FROM ordenes_emitidas NATURAL JOIN usuarios WHERE fecha_emision BETWEEN '" 
+                + fechaI + "' AND '" + fechaF + "' AND usuarios.id_sede = " + id_sede + " GROUP BY usuarios.nombre_usuario;";
+        
+        ResultSet tabla = new OperacionesBD().consultas(consultaSQL);
+        DefaultCategoryDataset data = new DefaultCategoryDataset();
+        try{
+            while(tabla.next()){
+                data.setValue(tabla.getInt(2), "Ordenes generadas/vendedor", tabla.getString(1));
+            }
+        }catch(SQLException ex){
+            ex.printStackTrace();
+        }
+        
+        consultaSQL = "SELECT nombre_usuario FROM usuarios WHERE id_sede = " + id_sede + " EXCEPT SELECT usuarios.nombre_usuario FROM ordenes_emitidas NATURAL JOIN usuarios "
+                + "WHERE fecha_emision BETWEEN '" + fechaI + "' AND '" + fechaF + "' AND usuarios.id_sede = " + id_sede + " GROUP BY usuarios.nombre_usuario;";
+        
+        tabla = new OperacionesBD().consultas(consultaSQL);
+        try{
+            while(tabla.next()){
+                data.setValue(0.0, "Ordenes generadas/sede", tabla.getString(1));
+            }
+        }catch(SQLException ex){
+            ex.printStackTrace();
+        }
+        
+        ChartPanel panel = new BarChart().reporteOrdenesEmpresa(data);
+        
+        return panel;
+    }
+    
+    /*
+    Nombre: generarReporteOrdenesSede
+    @param: String
+    Objetivo: Obtener la cantidad de ordenes de trabajo que se han hecho en una sede de la empresa
+    Autor: Juan David Suaza Cruz 1427841
+    */
+    
+    public ChartPanel generarReporteOrdenesSede(String id_sede){
+        
+        String consultaSQL = "SELECT usuarios.nombre_usuario, COUNT(usuarios.nombre_usuario) FROM ordenes_emitidas NATURAL JOIN usuarios WHERE usuarios.id_sede = "
+                + id_sede +" GROUP BY usuarios.nombre_usuario;";
+        
+        ResultSet tabla = new OperacionesBD().consultas(consultaSQL);
+        DefaultCategoryDataset data = new DefaultCategoryDataset();
+        try{
+            while(tabla.next()){
+                data.setValue(tabla.getInt(2), "Ordenes generadas/jefe", tabla.getString(1));
+            }
+        }catch(SQLException ex){
+            ex.printStackTrace();
+        }
+        
+        consultaSQL = "SELECT usuarios.nombre_usuario FROM usuarios WHERE id_sede = " + id_sede + " EXCEPT SELECT usuarios.nombre_usuario FROM ordenes_emitidas NATURAL JOIN usuarios WHERE usuarios.id_sede = "
+                + id_sede + ";";
+        
+        tabla = new OperacionesBD().consultas(consultaSQL);
+        try{
+            while(tabla.next()){
+                data.setValue(0.0, "Ordenes generadas/jefe", tabla.getString(1));
+            }
+        }catch(SQLException ex){
+            ex.printStackTrace();
+        }
+        
+        ChartPanel panel = new BarChart().reporteOrdenesSede(data);
+        
+        return panel;
+    }
+    
+    /*
+    Nombre: generarReporteVentasEmpresa
+    @param: String
+    Objetivo: Obtener la cantidad de ordenes de trabajo que se han hecho en una sede de la empresa
+    Autor: Juan David Suaza Cruz 1427841
+    */
+    public ChartPanel generarReporteVentasEmpresa(){
+        String consultaSQL = "SELECT sedes.nombre_sede, COUNT(sedes.nombre_sede) FROM ventas_vehiculos NATURAL JOIN usuarios NATURAL JOIN sedes GROUP BY sedes.nombre_sede;";
+        ResultSet tabla = new OperacionesBD().consultas(consultaSQL);
+        
+        DefaultCategoryDataset data = new DefaultCategoryDataset();
+        try{
+            while(tabla.next()){
+                data.setValue(tabla.getInt(2), "Ventas/sede", tabla.getString(1));
+            }
+        }catch(SQLException ex){
+            ex.printStackTrace();
+        }
+        
+        consultaSQL = "SELECT nombre_sede FROM sedes EXCEPT SELECT sedes.nombre_sede FROM ventas_vehiculos NATURAL JOIN usuarios NATURAL JOIN sedes;";
+        tabla = new OperacionesBD().consultas(consultaSQL);
+        try{
+            while(tabla.next()){
+                data.setValue(0.0, "Ventas/sede", tabla.getString(1));
+            }
+        }catch(SQLException ex){
+            ex.printStackTrace();
+        }
+        
+        ChartPanel panel = new BarChart().reporteVentasEmpresa(data);
+        return panel;
+    }
+    
+    /*
+    Nombre: generarReporteVentasSemanalEmpresa
+    @param: String
+    Objetivo: Obtener la cantidad de ordenes de trabajo que se han hecho en una sede de la empresa
+    Autor: Juan David Suaza Cruz 1427841
+    */
+    public ChartPanel generarReporteVentasSemanalEmpresa(Date fechaInicial){
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+        Operaciones oper = new Operaciones();        
+        Date fechaFinal = oper.aumentarFecha(fechaInicial);
+        
+        String fechaI = sdf.format(fechaInicial);
+        String fechaF = sdf.format(fechaFinal);
+        
+        String consultaSQL = "SELECT sedes.nombre_sede, COUNT(sedes.nombre_sede) FROM ventas_vehiculos NATURAL JOIN usuarios NATURAL JOIN sedes " +
+                "WHERE fecha_venta BETWEEN '"+ fechaI + "' AND '" + fechaF + "' GROUP BY sedes.nombre_sede;";
+        ResultSet tabla = new OperacionesBD().consultas(consultaSQL);
+        
+        DefaultCategoryDataset data = new DefaultCategoryDataset();
+        try{
+            while(tabla.next()){
+                data.setValue(tabla.getInt(2), "Ventas/sede", tabla.getString(1));
+            }
+        }catch(SQLException ex){
+            ex.printStackTrace();
+        }
+        
+        consultaSQL = "SELECT nombre_sede FROM sedes EXCEPT SELECT sedes.nombre_sede FROM ventas_vehiculos NATURAL JOIN usuarios NATURAL JOIN sedes " +
+                "WHERE fecha_venta BETWEEN '"+ fechaI + "' AND '" + fechaF + "';";
+        tabla = new OperacionesBD().consultas(consultaSQL);
+        try{
+            while(tabla.next()){
+                data.setValue(0.0, "Ventas/sede", tabla.getString(1));
+            }
+        }catch(SQLException ex){
+            ex.printStackTrace();
+        }
+        
+        ChartPanel panel = new BarChart().reporteVentasEmpresa(data);
+        return panel;
+    }
+    
+    /*
+    Nombre: generarReporteVentasEmpresa
+    @param: String
+    Objetivo: Obtener la cantidad de ordenes de trabajo que se han hecho en una sede de la empresa
+    Autor: Juan David Suaza Cruz 1427841
+    */
+    public ChartPanel generarReporteVentasSede(String id_sede){
+        String consultaSQL = "SELECT usuarios.nombre_usuario, COUNT(usuarios.nombre_usuario) FROM ventas_vehiculos NATURAL JOIN usuarios WHERE usuarios.id_sede = "
+                + id_sede + " GROUP BY usuarios.nombre_usuario;";
+        ResultSet tabla = new OperacionesBD().consultas(consultaSQL);
+        
+        DefaultCategoryDataset data = new DefaultCategoryDataset();
+        try{
+            while(tabla.next()){
+                data.setValue(tabla.getInt(2), "Ventas/usuario", tabla.getString(1));
+            }
+        }catch(SQLException ex){
+            ex.printStackTrace();
+        }
+        
+        consultaSQL = "SELECT usuarios.nombre_usuario FROM usuarios WHERE id_sede = " + id_sede +" EXCEPT SELECT usuarios.nombre_usuario FROM ventas_vehiculos NATURAL JOIN usuarios WHERE"
+                + " id_sede = " + id_sede + ";";
+        tabla = new OperacionesBD().consultas(consultaSQL);
+        try{
+            while(tabla.next()){
+                data.setValue(0.0, "Ventas/usuario", tabla.getString(1));
+            }
+        }catch(SQLException ex){
+            ex.printStackTrace();
+        }
+        
+        ChartPanel panel = new BarChart().reporteVentasSede(data);
+        return panel;
+    }
+    
+    /*
+    Nombre: generarReporteVentasSemanalEmpresa
+    @param: String
+    Objetivo: Obtener la cantidad de ordenes de trabajo que se han hecho en una sede de la empresa
+    Autor: Juan David Suaza Cruz 1427841
+    */
+    public ChartPanel generarReporteVentasSemanalSede(Date fechaInicial, String id_sede){
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+        Operaciones oper = new Operaciones();        
+        Date fechaFinal = oper.aumentarFecha(fechaInicial);
+        
+        String fechaI = sdf.format(fechaInicial);
+        String fechaF = sdf.format(fechaFinal);
+        
+        String consultaSQL = "SELECT usuarios.nombre_usuario, COUNT(usuarios.nombre_usuario) FROM ventas_vehiculos NATURAL JOIN usuarios " +
+                "WHERE usuarios.id_sede = " + id_sede + " AND fecha_venta BETWEEN '" + fechaI + "' AND '" + fechaF + "' GROUP BY usuarios.nombre_usuario;";
+        System.out.println(consultaSQL);
+        ResultSet tabla = new OperacionesBD().consultas(consultaSQL);
+        
+        DefaultCategoryDataset data = new DefaultCategoryDataset();
+        try{
+            while(tabla.next()){
+                data.setValue(tabla.getInt(2), "Ventas/usuario", tabla.getString(1));
+            }
+        }catch(SQLException ex){
+            ex.printStackTrace();
+        }
+        
+        consultaSQL = "SELECT usuarios.nombre_usuario FROM usuarios WHERE id_sede = " + id_sede + " EXCEPT SELECT usuarios.nombre_usuario FROM ventas_vehiculos NATURAL JOIN usuarios " +
+                "WHERE fecha_venta BETWEEN '"+ fechaI + "' AND '" + fechaF + "' AND usuarios.id_sede = " + id_sede + ";";
+        tabla = new OperacionesBD().consultas(consultaSQL);
+        try{
+            while(tabla.next()){
+                data.setValue(0.0, "Ventas/usuario", tabla.getString(1));
+            }
+        }catch(SQLException ex){
+            ex.printStackTrace();
+        }
+        
+        ChartPanel panel = new BarChart().reporteVentasSede(data);
+        return panel;
+    }
 }
+
+

@@ -6,6 +6,8 @@
 package inventario;
 
 import dataBaseOperations.OperacionesBD;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
 /**
@@ -40,6 +42,22 @@ public class Vehiculo {
                     + " WHERE id_vehiculo = " + id_vehiculo + ";";
         int codigo = operacionesBD.updates(consultaSQL);
         return codigo;
+    }
+    
+    public double valorVehiculoIVA(String id_vehiculo){
+        String consultaSQL = "SELECT valor_vehiculo FROM vehiculos WHERE id_vehiculo = " + id_vehiculo + ";";
+        ResultSet valor = operacionesBD.consultas(consultaSQL);
+        double valorVehiculo = 0.0;
+        try{
+            while(valor.next()){
+                valorVehiculo = valor.getDouble(1);
+                valorVehiculo = valorVehiculo + valorVehiculo*0.16;
+            }
+        }catch(SQLException ex){
+            ex.printStackTrace();
+        }
+        
+        return valorVehiculo;
     }
     
 }

@@ -14,9 +14,12 @@ import inventario.Vehiculo;
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import Sedes.Sede;
+import Usuarios.Comprador;
 import Ventas.Venta;
 import inventario.Partes;
 import java.awt.Color;
+import static java.awt.image.ImageObserver.HEIGHT;
+import static java.awt.image.ImageObserver.WIDTH;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Calendar;
@@ -35,7 +38,7 @@ import org.jfree.chart.ChartPanel;
  */
 public class loginInterface extends javax.swing.JFrame {
     BorderLayout border;
-    CardLayout cl, clVendedor, clJefe;
+    CardLayout cl, clVendedor, clJefe, clInventario;
     
     ButtonGroup modUsuario;
     ButtonGroup agregarVehiculos;
@@ -51,13 +54,14 @@ public class loginInterface extends javax.swing.JFrame {
     final int VENTAS_SEDE = 5;
     final int VENTAS_EMPRESA = 6;
     final int VEHICULOS_AGREGADOS = 7;
+    String id_usuario_global;
     /**
      * Creates new form loginInterface
      */
 
     public loginInterface() {
         initComponents();
-  
+        id_usuario_global = "";
         tipoReporte = -1;
         //Inicializacion de paneles como no visibles
         panelContenedor.setVisible(true);
@@ -98,7 +102,7 @@ public class loginInterface extends javax.swing.JFrame {
         panelContenedorVendedor.add(panelCrearCotizacion, "Crear cotizacion");
         panelContenedorVendedor.add(panelConsultarCotizacion, "Consultar cotizacion");
         panelContenedorVendedor.add(panelVender, "Vender");
-        
+
         clVendedor = (CardLayout)(panelContenedorVendedor.getLayout());
         
         //Adicion de paneles al card layout del jefe de taller
@@ -108,6 +112,15 @@ public class loginInterface extends javax.swing.JFrame {
         panelContenedorJefe.add(panelConsultarOrden, "Consultar orden");
         
         clJefe = (CardLayout)panelContenedorJefe.getLayout();
+        
+        //Adicion de paneles al cardlayout del panel de inventario
+        panel.setLayout(new CardLayout());
+        panel.add(panelGestion, "Gestion");
+        panel.add(manejoVehiculos, "Vehiculos");
+        panel.add(manejoPartes, "Partes");
+
+        //System.out.println(""+panelContenedorInventario.getLayout());
+        clInventario = (CardLayout)panel.getLayout();
         
         
          //Creacion de ButtonGroups
@@ -131,9 +144,7 @@ public class loginInterface extends javax.swing.JFrame {
         
         espacioReporte.add(sedesOpcionesReportes);
         espacioReporte.add(empresaOpcionesReportes);
-            
-        
-        
+       
     }
 
     /**
@@ -151,18 +162,13 @@ public class loginInterface extends javax.swing.JFrame {
         crearUsuarioButton = new javax.swing.JButton();
         modificarUsuarioButton = new javax.swing.JButton();
         consultarUsuarios = new javax.swing.JButton();
-        manejoVehiculosJPanel = new javax.swing.JPanel();
-        agregarVehiculosButton = new javax.swing.JButton();
-        modificarVehiculos = new javax.swing.JButton();
         manejoSedesJPanel = new javax.swing.JPanel();
         crearSedeButton = new javax.swing.JButton();
         modificarSedeButton = new javax.swing.JButton();
         consultarSedes = new javax.swing.JButton();
         manejoReportesJPanel = new javax.swing.JPanel();
         generarReporteButton = new javax.swing.JButton();
-        manejoPartes = new javax.swing.JPanel();
-        agregarPartes = new javax.swing.JButton();
-        modificarPartes = new javax.swing.JButton();
+        panel = new javax.swing.JPanel();
         panelBanner = new javax.swing.JPanel();
         nombreUserLabel = new javax.swing.JLabel();
         sedeCargoLabel = new javax.swing.JLabel();
@@ -337,12 +343,12 @@ public class loginInterface extends javax.swing.JFrame {
         jLabel24 = new javax.swing.JLabel();
         cancelarModParte = new javax.swing.JButton();
         panelGenerarReportes = new javax.swing.JPanel();
-        jPanel1 = new javax.swing.JPanel();
+        reporteUsuariosPanel = new javax.swing.JPanel();
         reportePersonal = new javax.swing.JButton();
         inventarioReportesPanel = new javax.swing.JPanel();
         vehiculosPorSedeBoton = new javax.swing.JButton();
         vehiculosAgregadosReporteBoton = new javax.swing.JButton();
-        jPanel3 = new javax.swing.JPanel();
+        reporteVentasPanel = new javax.swing.JPanel();
         ventasReporteBoton = new javax.swing.JButton();
         aportePorSedeReportesBoton = new javax.swing.JButton();
         cotizacionesReportePanel = new javax.swing.JPanel();
@@ -381,17 +387,20 @@ public class loginInterface extends javax.swing.JFrame {
         resumenCrearOrdenTA = new javax.swing.JTextArea();
         botonCrearOrden = new javax.swing.JButton();
         cancelarCrearOrden = new javax.swing.JButton();
+        jLabel90 = new javax.swing.JLabel();
+        spinnerCantidad = new javax.swing.JSpinner();
         panelConsultarOrden = new javax.swing.JPanel();
         jLabel50 = new javax.swing.JLabel();
         codOrdenConsultarOrdenTF = new javax.swing.JTextField();
         aceptarConsultarOrden = new javax.swing.JButton();
         jLabel57 = new javax.swing.JLabel();
-        nombreClienteConsultarOrden = new javax.swing.JTextField();
+        vehiculoConsultarOrden = new javax.swing.JTextField();
         jLabel65 = new javax.swing.JLabel();
-        idClienteConsultarOrden = new javax.swing.JTextField();
+        parteConsultarOrden = new javax.swing.JTextField();
         jLabel66 = new javax.swing.JLabel();
         jScrollPane4 = new javax.swing.JScrollPane();
         descripcionConsultarOrden = new javax.swing.JTextArea();
+        labelCantidadConsultarOrden = new javax.swing.JLabel();
         panelCrearCotizacion = new javax.swing.JPanel();
         cancelarCrearCot = new javax.swing.JButton();
         crearCotizacion = new javax.swing.JButton();
@@ -442,6 +451,15 @@ public class loginInterface extends javax.swing.JFrame {
         panelVacio = new javax.swing.JPanel();
         panelVacio1 = new javax.swing.JPanel();
         panelVacio2 = new javax.swing.JPanel();
+        manejoVehiculos = new javax.swing.JPanel();
+        agregarVehiculosButton = new javax.swing.JButton();
+        modificarVehiculos = new javax.swing.JButton();
+        manejoPartes = new javax.swing.JPanel();
+        agregarPartes = new javax.swing.JButton();
+        modificarPartes = new javax.swing.JButton();
+        panelGestion = new javax.swing.JPanel();
+        gestionVehiculos = new javax.swing.JButton();
+        gestionPartes = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel15 = new javax.swing.JLabel();
         jPanelCampos = new javax.swing.JPanel();
@@ -451,12 +469,17 @@ public class loginInterface extends javax.swing.JFrame {
         tfLogin = new javax.swing.JTextField();
         jPasswordField = new javax.swing.JPasswordField();
 
-        gerenteJFrame.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        gerenteJFrame.setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         gerenteJFrame.setTitle("ABC Corp. - Gerente");
         gerenteJFrame.setBackground(new java.awt.Color(255, 255, 255));
         gerenteJFrame.setLocation(new java.awt.Point(300, 100));
-        gerenteJFrame.setMinimumSize(new java.awt.Dimension(1015, 967));
+        gerenteJFrame.setMinimumSize(new java.awt.Dimension(1015, 756));
         gerenteJFrame.setResizable(false);
+        gerenteJFrame.addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                gerenteJFrameWindowClosing(evt);
+            }
+        });
 
         gerenteJPanel.setBackground(new java.awt.Color(255, 255, 255));
         gerenteJPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
@@ -516,66 +539,16 @@ public class loginInterface extends javax.swing.JFrame {
                     .addComponent(consultarUsuarios, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addComponent(modificarUsuarioButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(crearUsuarioButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(21, Short.MAX_VALUE))
         );
         manejoUsuariosJPanelLayout.setVerticalGroup(
             manejoUsuariosJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(manejoUsuariosJPanelLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(crearUsuarioButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(modificarUsuarioButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(consultarUsuarios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(16, 16, 16))
-        );
-
-        manejoVehiculosJPanel.setBackground(new java.awt.Color(255, 255, 255));
-        manejoVehiculosJPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Vehículos"));
-        manejoVehiculosJPanel.setToolTipText("Manejo de vehiculos");
-
-        agregarVehiculosButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfazGrafica/Imagenes/agregar.png"))); // NOI18N
-        agregarVehiculosButton.setBorder(null);
-        agregarVehiculosButton.setMargin(new java.awt.Insets(0, 0, 0, 0));
-        agregarVehiculosButton.setMaximumSize(new java.awt.Dimension(160, 40));
-        agregarVehiculosButton.setMinimumSize(new java.awt.Dimension(160, 40));
-        agregarVehiculosButton.setPreferredSize(new java.awt.Dimension(160, 40));
-        agregarVehiculosButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                agregarVehiculosButtonActionPerformed(evt);
-            }
-        });
-
-        modificarVehiculos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfazGrafica/Imagenes/modificar.png"))); // NOI18N
-        modificarVehiculos.setBorder(null);
-        modificarVehiculos.setMargin(new java.awt.Insets(0, 0, 0, 0));
-        modificarVehiculos.setMaximumSize(new java.awt.Dimension(160, 40));
-        modificarVehiculos.setMinimumSize(new java.awt.Dimension(160, 40));
-        modificarVehiculos.setPreferredSize(new java.awt.Dimension(160, 40));
-        modificarVehiculos.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                modificarVehiculosActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout manejoVehiculosJPanelLayout = new javax.swing.GroupLayout(manejoVehiculosJPanel);
-        manejoVehiculosJPanel.setLayout(manejoVehiculosJPanelLayout);
-        manejoVehiculosJPanelLayout.setHorizontalGroup(
-            manejoVehiculosJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(manejoVehiculosJPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(manejoVehiculosJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(agregarVehiculosButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(modificarVehiculos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        manejoVehiculosJPanelLayout.setVerticalGroup(
-            manejoVehiculosJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(manejoVehiculosJPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(agregarVehiculosButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(modificarVehiculos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -623,16 +596,15 @@ public class loginInterface extends javax.swing.JFrame {
             manejoSedesJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(manejoSedesJPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(manejoSedesJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(crearSedeButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(modificarSedeButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(consultarSedes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                .addGroup(manejoSedesJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(consultarSedes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(modificarSedeButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(crearSedeButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         manejoSedesJPanelLayout.setVerticalGroup(
             manejoSedesJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(manejoSedesJPanelLayout.createSequentialGroup()
-                .addGap(18, 18, 18)
                 .addComponent(crearSedeButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(modificarSedeButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -673,67 +645,34 @@ public class loginInterface extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        manejoPartes.setBackground(new java.awt.Color(255, 255, 255));
-        manejoPartes.setBorder(javax.swing.BorderFactory.createTitledBorder("Partes"));
+        panel.setBackground(new java.awt.Color(255, 255, 255));
+        panel.setBorder(javax.swing.BorderFactory.createTitledBorder("Inventario"));
 
-        agregarPartes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfazGrafica/Imagenes/agregar.png"))); // NOI18N
-        agregarPartes.setBorder(null);
-        agregarPartes.setMargin(new java.awt.Insets(0, 0, 0, 0));
-        agregarPartes.setMaximumSize(new java.awt.Dimension(160, 40));
-        agregarPartes.setMinimumSize(new java.awt.Dimension(160, 40));
-        agregarPartes.setPreferredSize(new java.awt.Dimension(160, 40));
-        agregarPartes.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                agregarPartesActionPerformed(evt);
-            }
-        });
-
-        modificarPartes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfazGrafica/Imagenes/modificar.png"))); // NOI18N
-        modificarPartes.setBorder(null);
-        modificarPartes.setMargin(new java.awt.Insets(0, 0, 0, 0));
-        modificarPartes.setMaximumSize(new java.awt.Dimension(160, 40));
-        modificarPartes.setMinimumSize(new java.awt.Dimension(160, 40));
-        modificarPartes.setPreferredSize(new java.awt.Dimension(160, 40));
-        modificarPartes.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                modificarPartesActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout manejoPartesLayout = new javax.swing.GroupLayout(manejoPartes);
-        manejoPartes.setLayout(manejoPartesLayout);
-        manejoPartesLayout.setHorizontalGroup(
-            manejoPartesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(manejoPartesLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(manejoPartesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(agregarPartes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(modificarPartes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        javax.swing.GroupLayout panelLayout = new javax.swing.GroupLayout(panel);
+        panel.setLayout(panelLayout);
+        panelLayout.setHorizontalGroup(
+            panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
-        manejoPartesLayout.setVerticalGroup(
-            manejoPartesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(manejoPartesLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(agregarPartes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(modificarPartes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        panelLayout.setVerticalGroup(
+            panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 132, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout gerenteJPanelLayout = new javax.swing.GroupLayout(gerenteJPanel);
         gerenteJPanel.setLayout(gerenteJPanelLayout);
         gerenteJPanelLayout.setHorizontalGroup(
             gerenteJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, gerenteJPanelLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(gerenteJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+            .addGroup(gerenteJPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(gerenteJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, gerenteJPanelLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(manejoUsuariosJPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(manejoReportesJPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(manejoSedesJPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(manejoUsuariosJPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(manejoVehiculosJPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(manejoPartes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(manejoReportesJPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(789, 789, 789))
+                    .addComponent(panel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         gerenteJPanelLayout.setVerticalGroup(
             gerenteJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -742,13 +681,11 @@ public class loginInterface extends javax.swing.JFrame {
                 .addComponent(manejoUsuariosJPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(manejoSedesJPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(manejoVehiculosJPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(manejoPartes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(manejoReportesJPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(53, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         panelBanner.setBackground(new java.awt.Color(67, 165, 208));
@@ -770,6 +707,11 @@ public class loginInterface extends javax.swing.JFrame {
         salirLabel.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         salirLabel.setForeground(new java.awt.Color(255, 255, 255));
         salirLabel.setText("Salir");
+        salirLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                salirLabelMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout panelBannerLayout = new javax.swing.GroupLayout(panelBanner);
         panelBanner.setLayout(panelBannerLayout);
@@ -778,7 +720,7 @@ public class loginInterface extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelBannerLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(logoLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 431, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 439, Short.MAX_VALUE)
                 .addGroup(panelBannerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(salirLabel, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(nombreUserLabel, javax.swing.GroupLayout.Alignment.TRAILING)
@@ -808,13 +750,12 @@ public class loginInterface extends javax.swing.JFrame {
         panelContenedor.setMaximumSize(new java.awt.Dimension(780, 813));
         panelContenedor.setMinimumSize(new java.awt.Dimension(780, 813));
         panelContenedor.setName(""); // NOI18N
-        panelContenedor.setPreferredSize(new java.awt.Dimension(780, 813));
 
         javax.swing.GroupLayout panelContenedorLayout = new javax.swing.GroupLayout(panelContenedor);
         panelContenedor.setLayout(panelContenedorLayout);
         panelContenedorLayout.setHorizontalGroup(
             panelContenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 780, Short.MAX_VALUE)
         );
         panelContenedorLayout.setVerticalGroup(
             panelContenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -827,9 +768,9 @@ public class loginInterface extends javax.swing.JFrame {
             gerenteJFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(panelBanner, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(gerenteJFrameLayout.createSequentialGroup()
-                .addComponent(gerenteJPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(gerenteJPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(panelContenedor, javax.swing.GroupLayout.DEFAULT_SIZE, 782, Short.MAX_VALUE)
+                .addComponent(panelContenedor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
         gerenteJFrameLayout.setVerticalGroup(
@@ -837,17 +778,22 @@ public class loginInterface extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, gerenteJFrameLayout.createSequentialGroup()
                 .addComponent(panelBanner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(gerenteJFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(panelContenedor, javax.swing.GroupLayout.PREFERRED_SIZE, 807, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(gerenteJPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(gerenteJFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(gerenteJPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(panelContenedor, javax.swing.GroupLayout.PREFERRED_SIZE, 623, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jefeJFrame.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        jefeJFrame.setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         jefeJFrame.setTitle("ABC Corp. - Jefe de Taller");
         jefeJFrame.setBackground(new java.awt.Color(255, 255, 255));
         jefeJFrame.setLocation(new java.awt.Point(300, 100));
         jefeJFrame.setMinimumSize(new java.awt.Dimension(830, 715));
+        jefeJFrame.addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                jefeJFrameWindowClosing(evt);
+            }
+        });
 
         panelContenedorJefe.setBackground(new java.awt.Color(255, 255, 255));
         panelContenedorJefe.setMaximumSize(new java.awt.Dimension(617, 579));
@@ -884,6 +830,11 @@ public class loginInterface extends javax.swing.JFrame {
         salirLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         salirLabel1.setForeground(new java.awt.Color(255, 255, 255));
         salirLabel1.setText("Salir");
+        salirLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                salirLabel1MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout panelBanner3Layout = new javax.swing.GroupLayout(panelBanner3);
         panelBanner3.setLayout(panelBanner3Layout);
@@ -988,13 +939,16 @@ public class loginInterface extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        vendedorJFrame.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        vendedorJFrame.setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         vendedorJFrame.setTitle("ABC Corp. - Vendedor");
         vendedorJFrame.setBackground(new java.awt.Color(255, 255, 255));
         vendedorJFrame.setLocation(new java.awt.Point(300, 100));
-        vendedorJFrame.setMaximumSize(new java.awt.Dimension(900, 832));
         vendedorJFrame.setMinimumSize(new java.awt.Dimension(900, 832));
-        vendedorJFrame.setPreferredSize(new java.awt.Dimension(900, 832));
+        vendedorJFrame.addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                vendedorJFrameWindowClosing(evt);
+            }
+        });
 
         vendedorJPanel.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -1118,11 +1072,11 @@ public class loginInterface extends javax.swing.JFrame {
 
         nombreUserLabel4.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         nombreUserLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        nombreUserLabel4.setText("Juan David Suaza Cruz");
+        nombreUserLabel4.setText("Nombre del empleado");
 
         sedeCargoLabel4.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         sedeCargoLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        sedeCargoLabel4.setText("Gerente - Londres");
+        sedeCargoLabel4.setText("Cargo - Sede");
 
         logoLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfazGrafica/Imagenes/logo.png"))); // NOI18N
 
@@ -1131,6 +1085,11 @@ public class loginInterface extends javax.swing.JFrame {
         salirLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         salirLabel2.setForeground(new java.awt.Color(255, 255, 255));
         salirLabel2.setText("Salir");
+        salirLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                salirLabel2MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout panelBanner4Layout = new javax.swing.GroupLayout(panelBanner4);
         panelBanner4.setLayout(panelBanner4Layout);
@@ -1139,7 +1098,7 @@ public class loginInterface extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelBanner4Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(logoLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 530, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 538, Short.MAX_VALUE)
                 .addGroup(panelBanner4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(sedeCargoLabel4, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(nombreUserLabel4, javax.swing.GroupLayout.Alignment.TRAILING)
@@ -1190,6 +1149,7 @@ public class loginInterface extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        frameOpcionesReporte.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         frameOpcionesReporte.setTitle("ABC Corp. - Reportes");
         frameOpcionesReporte.setLocation(new java.awt.Point(500, 300));
         frameOpcionesReporte.setMinimumSize(new java.awt.Dimension(300, 300));
@@ -1331,6 +1291,11 @@ public class loginInterface extends javax.swing.JFrame {
 
         ingresarUsuarioBoton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfazGrafica/Imagenes/aceptar.png"))); // NOI18N
         ingresarUsuarioBoton.setBorder(null);
+        ingresarUsuarioBoton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ingresarUsuarioBotonActionPerformed(evt);
+            }
+        });
 
         jLabel67.setText("Cédula:");
 
@@ -1434,6 +1399,11 @@ public class loginInterface extends javax.swing.JFrame {
         botonCancelarCrear.setMaximumSize(new java.awt.Dimension(160, 40));
         botonCancelarCrear.setMinimumSize(new java.awt.Dimension(160, 40));
         botonCancelarCrear.setPreferredSize(new java.awt.Dimension(160, 40));
+        botonCancelarCrear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonCancelarCrearActionPerformed(evt);
+            }
+        });
 
         jLabel1.setText("Tipo de usuario:");
 
@@ -1601,6 +1571,11 @@ public class loginInterface extends javax.swing.JFrame {
 
         cancelarModUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfazGrafica/Imagenes/cancelar.png"))); // NOI18N
         cancelarModUsuario.setBorder(null);
+        cancelarModUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelarModUsuarioActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout panelModificarUsuarioLayout = new javax.swing.GroupLayout(panelModificarUsuario);
         panelModificarUsuario.setLayout(panelModificarUsuarioLayout);
@@ -1724,6 +1699,11 @@ public class loginInterface extends javax.swing.JFrame {
 
         cancelarCrearSede.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfazGrafica/Imagenes/cancelar.png"))); // NOI18N
         cancelarCrearSede.setBorder(null);
+        cancelarCrearSede.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelarCrearSedeActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout panelCrearSedeLayout = new javax.swing.GroupLayout(panelCrearSede);
         panelCrearSede.setLayout(panelCrearSedeLayout);
@@ -1819,6 +1799,11 @@ public class loginInterface extends javax.swing.JFrame {
 
         cancelarModSede.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfazGrafica/Imagenes/cancelar.png"))); // NOI18N
         cancelarModSede.setBorder(null);
+        cancelarModSede.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelarModSedeActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout panelModificarSedeLayout = new javax.swing.GroupLayout(panelModificarSede);
         panelModificarSede.setLayout(panelModificarSedeLayout);
@@ -1914,6 +1899,11 @@ public class loginInterface extends javax.swing.JFrame {
 
         cancelarAgregarVehiculo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfazGrafica/Imagenes/cancelar.png"))); // NOI18N
         cancelarAgregarVehiculo.setBorder(null);
+        cancelarAgregarVehiculo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelarAgregarVehiculoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout panelAgregarVehiculosLayout = new javax.swing.GroupLayout(panelAgregarVehiculos);
         panelAgregarVehiculos.setLayout(panelAgregarVehiculosLayout);
@@ -2018,6 +2008,11 @@ public class loginInterface extends javax.swing.JFrame {
 
         cancelarAgregarParte.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfazGrafica/Imagenes/cancelar.png"))); // NOI18N
         cancelarAgregarParte.setBorder(null);
+        cancelarAgregarParte.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelarAgregarParteActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout panelAgregarPartesLayout = new javax.swing.GroupLayout(panelAgregarPartes);
         panelAgregarPartes.setLayout(panelAgregarPartesLayout);
@@ -2112,6 +2107,11 @@ public class loginInterface extends javax.swing.JFrame {
 
         cancelarModParte.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfazGrafica/Imagenes/cancelar.png"))); // NOI18N
         cancelarModParte.setBorder(null);
+        cancelarModParte.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelarModParteActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout panelModificarPartesLayout = new javax.swing.GroupLayout(panelModificarPartes);
         panelModificarPartes.setLayout(panelModificarPartesLayout);
@@ -2182,8 +2182,8 @@ public class loginInterface extends javax.swing.JFrame {
         panelGenerarReportes.setMinimumSize(new java.awt.Dimension(617, 579));
         panelGenerarReportes.setPreferredSize(new java.awt.Dimension(617, 579));
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Usuarios"));
+        reporteUsuariosPanel.setBackground(new java.awt.Color(255, 255, 255));
+        reporteUsuariosPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Usuarios"));
 
         reportePersonal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfazGrafica/Imagenes/reportePersonal.png"))); // NOI18N
         reportePersonal.setBorder(null);
@@ -2196,18 +2196,18 @@ public class loginInterface extends javax.swing.JFrame {
             }
         });
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        javax.swing.GroupLayout reporteUsuariosPanelLayout = new javax.swing.GroupLayout(reporteUsuariosPanel);
+        reporteUsuariosPanel.setLayout(reporteUsuariosPanelLayout);
+        reporteUsuariosPanelLayout.setHorizontalGroup(
+            reporteUsuariosPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(reporteUsuariosPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(reportePersonal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        reporteUsuariosPanelLayout.setVerticalGroup(
+            reporteUsuariosPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(reporteUsuariosPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(reportePersonal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -2258,14 +2258,19 @@ public class loginInterface extends javax.swing.JFrame {
                 .addComponent(vehiculosAgregadosReporteBoton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Ventas"));
+        reporteVentasPanel.setBackground(new java.awt.Color(255, 255, 255));
+        reporteVentasPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Ventas"));
 
         ventasReporteBoton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfazGrafica/Imagenes/reporteVentas.png"))); // NOI18N
         ventasReporteBoton.setBorder(null);
         ventasReporteBoton.setMaximumSize(new java.awt.Dimension(220, 40));
         ventasReporteBoton.setMinimumSize(new java.awt.Dimension(220, 40));
         ventasReporteBoton.setPreferredSize(new java.awt.Dimension(220, 40));
+        ventasReporteBoton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ventasReporteBotonActionPerformed(evt);
+            }
+        });
 
         aportePorSedeReportesBoton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfazGrafica/Imagenes/reporteAporteSedes.png"))); // NOI18N
         aportePorSedeReportesBoton.setBorder(null);
@@ -2278,20 +2283,20 @@ public class loginInterface extends javax.swing.JFrame {
             }
         });
 
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
+        javax.swing.GroupLayout reporteVentasPanelLayout = new javax.swing.GroupLayout(reporteVentasPanel);
+        reporteVentasPanel.setLayout(reporteVentasPanelLayout);
+        reporteVentasPanelLayout.setHorizontalGroup(
+            reporteVentasPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(reporteVentasPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(reporteVentasPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(ventasReporteBoton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(aportePorSedeReportesBoton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
+        reporteVentasPanelLayout.setVerticalGroup(
+            reporteVentasPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(reporteVentasPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(ventasReporteBoton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -2366,9 +2371,9 @@ public class loginInterface extends javax.swing.JFrame {
             .addGroup(panelGenerarReportesLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(panelGenerarReportesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(reporteUsuariosPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(inventarioReportesPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(reporteVentasPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(cotizacionesReportePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(ordenesReportePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(355, Short.MAX_VALUE))
@@ -2377,7 +2382,7 @@ public class loginInterface extends javax.swing.JFrame {
             panelGenerarReportesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelGenerarReportesLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(reporteUsuariosPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(inventarioReportesPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -2385,7 +2390,7 @@ public class loginInterface extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(ordenesReportePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(reporteVentasPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(6, Short.MAX_VALUE))
         );
 
@@ -2426,6 +2431,11 @@ public class loginInterface extends javax.swing.JFrame {
 
         cancelarModVehiculo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfazGrafica/Imagenes/cancelar.png"))); // NOI18N
         cancelarModVehiculo.setBorder(null);
+        cancelarModVehiculo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelarModVehiculoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout panelModificarVehiculoLayout = new javax.swing.GroupLayout(panelModificarVehiculo);
         panelModificarVehiculo.setLayout(panelModificarVehiculoLayout);
@@ -2536,6 +2546,13 @@ public class loginInterface extends javax.swing.JFrame {
 
         cancelarCrearOrden.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfazGrafica/Imagenes/cancelar.png"))); // NOI18N
         cancelarCrearOrden.setBorder(null);
+        cancelarCrearOrden.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelarCrearOrdenActionPerformed(evt);
+            }
+        });
+
+        jLabel90.setText("Cantidad");
 
         javax.swing.GroupLayout panelCrearOrdenLayout = new javax.swing.GroupLayout(panelCrearOrden);
         panelCrearOrden.setLayout(panelCrearOrdenLayout);
@@ -2545,10 +2562,6 @@ public class loginInterface extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(panelCrearOrdenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelCrearOrdenLayout.createSequentialGroup()
-                        .addComponent(jLabel45)
-                        .addGap(18, 18, 18)
-                        .addComponent(codOrdenCrearOrdenTF, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(panelCrearOrdenLayout.createSequentialGroup()
                         .addGroup(panelCrearOrdenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel48)
                             .addComponent(jLabel46)
@@ -2557,16 +2570,24 @@ public class loginInterface extends javax.swing.JFrame {
                         .addGroup(panelCrearOrdenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(codJefeTallerCrearOrdenTF, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 176, Short.MAX_VALUE)
                             .addComponent(codParteCrearOrdenTF, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(codVehiculoCrearOrdenTF)))
-                    .addGroup(panelCrearOrdenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(codVehiculoCrearOrdenTF))
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel90))
+                    .addGroup(panelCrearOrdenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(panelCrearOrdenLayout.createSequentialGroup()
-                            .addComponent(botonCrearOrden)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(cancelarCrearOrden))
-                        .addGroup(panelCrearOrdenLayout.createSequentialGroup()
-                            .addComponent(jLabel49)
-                            .addGap(66, 66, 66)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(jLabel45)
+                            .addGap(18, 18, 18)
+                            .addComponent(codOrdenCrearOrdenTF, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(panelCrearOrdenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(panelCrearOrdenLayout.createSequentialGroup()
+                                .addComponent(botonCrearOrden)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(cancelarCrearOrden))
+                            .addGroup(panelCrearOrdenLayout.createSequentialGroup()
+                                .addComponent(jLabel49)
+                                .addGap(66, 66, 66)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(spinnerCantidad, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(201, Short.MAX_VALUE))
         );
         panelCrearOrdenLayout.setVerticalGroup(
@@ -2583,7 +2604,9 @@ public class loginInterface extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(panelCrearOrdenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel46)
-                    .addComponent(codParteCrearOrdenTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(codParteCrearOrdenTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel90)
+                    .addComponent(spinnerCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(panelCrearOrdenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel47)
@@ -2616,13 +2639,13 @@ public class loginInterface extends javax.swing.JFrame {
 
         jLabel57.setText("Vehículo:");
 
-        nombreClienteConsultarOrden.setEditable(false);
-        nombreClienteConsultarOrden.setBackground(new java.awt.Color(255, 255, 255));
+        vehiculoConsultarOrden.setEditable(false);
+        vehiculoConsultarOrden.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel65.setText("Parte:");
 
-        idClienteConsultarOrden.setEditable(false);
-        idClienteConsultarOrden.setBackground(new java.awt.Color(255, 255, 255));
+        parteConsultarOrden.setEditable(false);
+        parteConsultarOrden.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel66.setText("Descripción:");
 
@@ -2630,6 +2653,8 @@ public class loginInterface extends javax.swing.JFrame {
         descripcionConsultarOrden.setColumns(20);
         descripcionConsultarOrden.setRows(5);
         jScrollPane4.setViewportView(descripcionConsultarOrden);
+
+        labelCantidadConsultarOrden.setText("Cantidad: ");
 
         javax.swing.GroupLayout panelConsultarOrdenLayout = new javax.swing.GroupLayout(panelConsultarOrden);
         panelConsultarOrden.setLayout(panelConsultarOrdenLayout);
@@ -2644,23 +2669,22 @@ public class loginInterface extends javax.swing.JFrame {
                             .addComponent(jLabel57))
                         .addGap(18, 18, 18)
                         .addGroup(panelConsultarOrdenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(nombreClienteConsultarOrden, javax.swing.GroupLayout.DEFAULT_SIZE, 199, Short.MAX_VALUE)
+                            .addComponent(vehiculoConsultarOrden, javax.swing.GroupLayout.DEFAULT_SIZE, 197, Short.MAX_VALUE)
                             .addComponent(codOrdenConsultarOrdenTF))
-                        .addGap(18, 18, 18)
-                        .addComponent(aceptarConsultarOrden)
-                        .addGap(207, 207, 207))
+                        .addGap(20, 20, 20)
+                        .addComponent(aceptarConsultarOrden))
                     .addGroup(panelConsultarOrdenLayout.createSequentialGroup()
                         .addGroup(panelConsultarOrdenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel65)
                             .addComponent(jLabel66))
                         .addGap(54, 54, 54)
                         .addGroup(panelConsultarOrdenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 402, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(panelConsultarOrdenLayout.createSequentialGroup()
-                                .addComponent(idClienteConsultarOrden)
-                                .addGap(296, 296, 296))
-                            .addGroup(panelConsultarOrdenLayout.createSequentialGroup()
-                                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 402, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap(93, Short.MAX_VALUE))))))
+                                .addComponent(parteConsultarOrden, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(labelCantidadConsultarOrden)))))
+                .addContainerGap(93, Short.MAX_VALUE))
         );
         panelConsultarOrdenLayout.setVerticalGroup(
             panelConsultarOrdenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2673,11 +2697,12 @@ public class loginInterface extends javax.swing.JFrame {
                 .addGap(16, 16, 16)
                 .addGroup(panelConsultarOrdenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel57)
-                    .addComponent(nombreClienteConsultarOrden, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(vehiculoConsultarOrden, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(panelConsultarOrdenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel65)
-                    .addComponent(idClienteConsultarOrden, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(parteConsultarOrden, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(labelCantidadConsultarOrden))
                 .addGap(18, 18, 18)
                 .addGroup(panelConsultarOrdenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel66)
@@ -2819,33 +2844,28 @@ public class loginInterface extends javax.swing.JFrame {
         panelConsultarCotizacionLayout.setHorizontalGroup(
             panelConsultarCotizacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelConsultarCotizacionLayout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(panelConsultarCotizacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(panelConsultarCotizacionLayout.createSequentialGroup()
-                        .addContainerGap()
                         .addComponent(jLabel89)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(valorTotalConsultarCot))
-                    .addGroup(panelConsultarCotizacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(panelConsultarCotizacionLayout.createSequentialGroup()
-                            .addContainerGap()
-                            .addComponent(jLabel58)
-                            .addGap(18, 18, 18)
-                            .addComponent(codCotConsultarCot))
-                        .addGroup(panelConsultarCotizacionLayout.createSequentialGroup()
-                            .addContainerGap()
-                            .addGroup(panelConsultarCotizacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelConsultarCotizacionLayout.createSequentialGroup()
-                                    .addComponent(jLabel88)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(codVehiculoConsultarCot, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(panelConsultarCotizacionLayout.createSequentialGroup()
-                                    .addComponent(jLabel87)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(codCompradorConsultarCot, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(panelConsultarCotizacionLayout.createSequentialGroup()
-                                    .addComponent(jLabel86)
-                                    .addGap(28, 28, 28)
-                                    .addComponent(codVendedorConsultarCot, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                    .addGroup(panelConsultarCotizacionLayout.createSequentialGroup()
+                        .addComponent(jLabel58)
+                        .addGap(18, 18, 18)
+                        .addComponent(codCotConsultarCot))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelConsultarCotizacionLayout.createSequentialGroup()
+                        .addComponent(jLabel88)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(codVehiculoConsultarCot, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(panelConsultarCotizacionLayout.createSequentialGroup()
+                        .addComponent(jLabel87)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(codCompradorConsultarCot, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(panelConsultarCotizacionLayout.createSequentialGroup()
+                        .addComponent(jLabel86)
+                        .addGap(28, 28, 28)
+                        .addComponent(codVendedorConsultarCot, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addComponent(aceptarConsultarCot)
                 .addContainerGap(88, Short.MAX_VALUE))
@@ -2895,6 +2915,11 @@ public class loginInterface extends javax.swing.JFrame {
 
         codCotVender.setForeground(new java.awt.Color(102, 102, 102));
         codCotVender.setText("(Opcional)");
+        codCotVender.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                codCotVenderActionPerformed(evt);
+            }
+        });
 
         ventaCrearVentaButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfazGrafica/Imagenes/aceptar.png"))); // NOI18N
         ventaCrearVentaButton.setBorder(null);
@@ -2933,6 +2958,11 @@ public class loginInterface extends javax.swing.JFrame {
 
         cancelarVender.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfazGrafica/Imagenes/cancelar.png"))); // NOI18N
         cancelarVender.setBorder(null);
+        cancelarVender.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelarVenderActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout panelVenderLayout = new javax.swing.GroupLayout(panelVender);
         panelVender.setLayout(panelVenderLayout);
@@ -3116,6 +3146,140 @@ public class loginInterface extends javax.swing.JFrame {
             .addGap(0, 813, Short.MAX_VALUE)
         );
 
+        manejoVehiculos.setBackground(new java.awt.Color(255, 255, 255));
+        manejoVehiculos.setToolTipText("Manejo de vehiculos");
+
+        agregarVehiculosButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfazGrafica/Imagenes/agregar.png"))); // NOI18N
+        agregarVehiculosButton.setBorder(null);
+        agregarVehiculosButton.setMargin(new java.awt.Insets(0, 0, 0, 0));
+        agregarVehiculosButton.setMaximumSize(new java.awt.Dimension(160, 40));
+        agregarVehiculosButton.setMinimumSize(new java.awt.Dimension(160, 40));
+        agregarVehiculosButton.setPreferredSize(new java.awt.Dimension(160, 40));
+        agregarVehiculosButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                agregarVehiculosButtonActionPerformed(evt);
+            }
+        });
+
+        modificarVehiculos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfazGrafica/Imagenes/modificar.png"))); // NOI18N
+        modificarVehiculos.setBorder(null);
+        modificarVehiculos.setMargin(new java.awt.Insets(0, 0, 0, 0));
+        modificarVehiculos.setMaximumSize(new java.awt.Dimension(160, 40));
+        modificarVehiculos.setMinimumSize(new java.awt.Dimension(160, 40));
+        modificarVehiculos.setPreferredSize(new java.awt.Dimension(160, 40));
+        modificarVehiculos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                modificarVehiculosActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout manejoVehiculosLayout = new javax.swing.GroupLayout(manejoVehiculos);
+        manejoVehiculos.setLayout(manejoVehiculosLayout);
+        manejoVehiculosLayout.setHorizontalGroup(
+            manejoVehiculosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(manejoVehiculosLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(manejoVehiculosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(agregarVehiculosButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(modificarVehiculos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        manejoVehiculosLayout.setVerticalGroup(
+            manejoVehiculosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(manejoVehiculosLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(agregarVehiculosButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(modificarVehiculos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        manejoPartes.setBackground(new java.awt.Color(255, 255, 255));
+
+        agregarPartes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfazGrafica/Imagenes/agregar.png"))); // NOI18N
+        agregarPartes.setBorder(null);
+        agregarPartes.setMargin(new java.awt.Insets(0, 0, 0, 0));
+        agregarPartes.setMaximumSize(new java.awt.Dimension(160, 40));
+        agregarPartes.setMinimumSize(new java.awt.Dimension(160, 40));
+        agregarPartes.setPreferredSize(new java.awt.Dimension(160, 40));
+        agregarPartes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                agregarPartesActionPerformed(evt);
+            }
+        });
+
+        modificarPartes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfazGrafica/Imagenes/modificar.png"))); // NOI18N
+        modificarPartes.setBorder(null);
+        modificarPartes.setMargin(new java.awt.Insets(0, 0, 0, 0));
+        modificarPartes.setMaximumSize(new java.awt.Dimension(160, 40));
+        modificarPartes.setMinimumSize(new java.awt.Dimension(160, 40));
+        modificarPartes.setPreferredSize(new java.awt.Dimension(160, 40));
+        modificarPartes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                modificarPartesActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout manejoPartesLayout = new javax.swing.GroupLayout(manejoPartes);
+        manejoPartes.setLayout(manejoPartesLayout);
+        manejoPartesLayout.setHorizontalGroup(
+            manejoPartesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(manejoPartesLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(manejoPartesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(agregarPartes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(modificarPartes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        manejoPartesLayout.setVerticalGroup(
+            manejoPartesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(manejoPartesLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(agregarPartes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(modificarPartes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        panelGestion.setBackground(new java.awt.Color(255, 255, 255));
+
+        gestionVehiculos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfazGrafica/Imagenes/vehiculos.png"))); // NOI18N
+        gestionVehiculos.setBorder(null);
+        gestionVehiculos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                gestionVehiculosActionPerformed(evt);
+            }
+        });
+
+        gestionPartes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfazGrafica/Imagenes/partes.png"))); // NOI18N
+        gestionPartes.setBorder(null);
+        gestionPartes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                gestionPartesActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout panelGestionLayout = new javax.swing.GroupLayout(panelGestion);
+        panelGestion.setLayout(panelGestionLayout);
+        panelGestionLayout.setHorizontalGroup(
+            panelGestionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelGestionLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(panelGestionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(gestionVehiculos)
+                    .addComponent(gestionPartes))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        panelGestionLayout.setVerticalGroup(
+            panelGestionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelGestionLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(gestionVehiculos)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(gestionPartes)
+                .addContainerGap(15, Short.MAX_VALUE))
+        );
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("ABC Corp. - Log in");
         setBackground(new java.awt.Color(255, 255, 255));
@@ -3227,6 +3391,7 @@ public class loginInterface extends javax.swing.JFrame {
         String tipo = user.validarUsuario(id_usuario, password);
         
         if (tipo.equalsIgnoreCase("Gerente")) {
+            id_usuario_global = id_usuario;
             gerenteJFrame.setEnabled(true);
             gerenteJFrame.setVisible(true);
             gerenteJFrame.pack();
@@ -3241,6 +3406,7 @@ public class loginInterface extends javax.swing.JFrame {
                 ex.printStackTrace();
             }
         } else if (tipo.equalsIgnoreCase("Jefe")) {
+            id_usuario_global = id_usuario;
             jefeJFrame.setEnabled(true);
             jefeJFrame.setVisible(true);
             this.setVisible(false);
@@ -3256,6 +3422,7 @@ public class loginInterface extends javax.swing.JFrame {
             }
 
         } else if (tipo.equalsIgnoreCase("Vendedor")) {
+            id_usuario_global = id_usuario;
             vendedorJFrame.setEnabled(true);
             vendedorJFrame.setVisible(true);
             this.setVisible(false);
@@ -3269,11 +3436,12 @@ public class loginInterface extends javax.swing.JFrame {
                 ex.printStackTrace();
             }
         }
-      
-        vendedorJFrame.setVisible(true);
+        tfLogin.setText("");
+        jPasswordField.setText("");
+/*        vendedorJFrame.setVisible(true);
         jefeJFrame.setVisible(true);
         gerenteJFrame.setVisible(true);
-        this.setVisible(false);
+        this.setVisible(false);*/
        
     }//GEN-LAST:event_jButtonLoginActionPerformed
 
@@ -3313,6 +3481,8 @@ public class loginInterface extends javax.swing.JFrame {
         
         user.crearUsuario(id_usuario, password_usuario, nombre_usuario, tipo_usuario, email_usuario, telefono_usuario, fecha_ingreso_usuario, id_sede);
         
+        limpiarCrearUsuario();
+        
         
     }//GEN-LAST:event_confirmarCrearUsuarioBActionPerformed
 
@@ -3339,12 +3509,14 @@ public class loginInterface extends javax.swing.JFrame {
     private void crearCotizacionButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crearCotizacionButtonActionPerformed
         // TODO add your handling code here:
         panelContenedorVendedor.setVisible(true);
+        
         clVendedor.show(panelContenedorVendedor, "Crear cotizacion");
     }//GEN-LAST:event_crearCotizacionButtonActionPerformed
 
     private void venderButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_venderButtonActionPerformed
         // TODO add your handling code here:
         OperacionesBD marcas = new OperacionesBD();
+        codVentaVender.setText(new Venta().buscarUltimoCodigo());
         ResultSet listaMarcas = marcas.consultas("SELECT V.marca_vehiculo FROM vehiculos V GROUP BY V.marca_vehiculo;");
         new Operaciones().agregarItemCombo(listaMarcas, vehiculosDispVender);
         panelContenedorVendedor.setVisible(true);
@@ -3374,7 +3546,7 @@ public class loginInterface extends javax.swing.JFrame {
                 modificarNombreTF.setText(consulta.getString("nombre_usuario"));
                 emailUsuarioModificarTF.setText(consulta.getString("email_usuario"));
                 telefonoUsuarioModificarTF.setText(consulta.getString("telefono_usuario"));
-                consulta.close();
+                //consulta.close();
             }
         } catch (SQLException ex) {
             Logger.getLogger(loginInterface.class.getName()).log(Level.SEVERE, null, ex);
@@ -3427,7 +3599,7 @@ public class loginInterface extends javax.swing.JFrame {
                     modificarVehiculoUsadoRB.setSelected(true);
                 }
                 modificarValorVehiculoTF.setText(consulta.getString(7));
-                consulta.close();
+                //consulta.close();
             }
         
         
@@ -3489,7 +3661,10 @@ public class loginInterface extends javax.swing.JFrame {
             }
         }catch(NumberFormatException ex){
             JOptionPane.showMessageDialog(null, "La cantidad y el valor deben ser numeros", "Error", JOptionPane.ERROR_MESSAGE);
-        }            
+        }   
+        
+        limpiarCrearVehiculos();
+        
     }//GEN-LAST:event_confirmarAgregarVehiculoBActionPerformed
 
     private void confirmarCrearSedeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmarCrearSedeActionPerformed
@@ -3502,8 +3677,8 @@ public class loginInterface extends javax.swing.JFrame {
         
         Operaciones oper = new Operaciones();
         String id = oper.obtenerUltimoCodigoSede();
-        codigoSedeTF.setText(id);
         
+        limpiarCrearSede();       
     }//GEN-LAST:event_confirmarCrearSedeActionPerformed
 
     private void telefonoSedeModificarTFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_telefonoSedeModificarTFActionPerformed
@@ -3564,32 +3739,38 @@ public class loginInterface extends javax.swing.JFrame {
 
         String id_usuario = modificarCodigoUsuarioTF.getText().trim();
         char[] password = modificarContraseñaTF.getPassword();
-        char[] password_2 =  modificarContraseñaTF.getPassword();
+        char[] password_2 = modificarConfirmarContraseñaTF.getPassword();
         String nombre_usuario = modificarNombreTF.getText().trim();
-        String tipo_usuario = (String)modificarTipoUsuarioCB.getSelectedItem();
-        String sede = (String)modificarSedeUsuarioCB.getSelectedItem();
+        String tipo_usuario = (String) modificarTipoUsuarioCB.getSelectedItem();
+        String sede = (String) modificarSedeUsuarioCB.getSelectedItem();
         String email_usuario = emailUsuarioModificarTF.getText().trim();
         String telefono_usuario = telefonoUsuarioModificarTF.getText().trim();
-        
+
         String password_usuario = "";
         String password_usuario2 = "";
-        
-        for(int i = 0; i<password.length; i++){
-            password_usuario += password[i];
-            password_usuario2 += password_2[i];
+        try {
+            for (int i = 0; i < password.length; i++) {
+                password_usuario += password[i];
+                password_usuario2 += password_2[i];
+                String estado = "false";
+                if (modificarActivoRB.isSelected()) {
+                    estado = "true";
+                }
+                if (!password_usuario.equals(password_usuario2)) {
+                    JOptionPane.showMessageDialog(null, "Contraseñas no coinciden\nEscribelas nuevamente");
+                } else {
+                    Operaciones operaciones = new Operaciones();
+                    String id_sede = operaciones.codigoSedeDeNombre(sede);
+                    Usuario usuario = new Usuario();
+                    usuario.modificarUsuario(id_usuario, password_usuario, nombre_usuario, email_usuario, telefono_usuario, tipo_usuario, id_sede, estado);
+                }
+            }
+        } catch (ArrayIndexOutOfBoundsException ex) {
+            JOptionPane.showMessageDialog(null, "Por favor, completa los campos de contraseña", "Error", JOptionPane.ERROR_MESSAGE);
         }
-        String estado = "false";
-        if(modificarActivoRB.isSelected()){
-            estado = "true";
-        }
-        if(!password_usuario.equals(password_usuario2)){
-            JOptionPane.showMessageDialog(null, "Contraseñas no coinciden");
-        }else{
-            Operaciones operaciones = new Operaciones();
-            String id_sede = operaciones.codigoSedeDeNombre(sede);
-            Usuario usuario = new Usuario();
-            usuario.modificarUsuario(id_usuario, password_usuario, nombre_usuario, email_usuario, telefono_usuario, tipo_usuario, id_sede, estado);
-        } 
+
+        limpiarModificarUsuario();
+       
         
     }//GEN-LAST:event_confirmarModificarUsuarioBActionPerformed
 
@@ -3610,13 +3791,15 @@ public class loginInterface extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "La cantidad y el valor deben ser números", "Error", JOptionPane.ERROR_MESSAGE);
         }
         
-        
+        limpiarModificarPartes();
     }//GEN-LAST:event_confirmarModificarParteBActionPerformed
 
     private void consultarOrdenButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consultarOrdenButtonActionPerformed
         // TODO add your handling code here:
         panelContenedorJefe.setVisible(true);
         clJefe.show(panelContenedorJefe, "Consultar orden");
+        
+        
     }//GEN-LAST:event_consultarOrdenButtonActionPerformed
 
     private void consultarCotizacionButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consultarCotizacionButtonActionPerformed
@@ -3667,15 +3850,6 @@ public class loginInterface extends javax.swing.JFrame {
         
     }//GEN-LAST:event_consultarSedesActionPerformed
 
-    private void reportePersonalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reportePersonalActionPerformed
-        // TODO add your handling code here:
-        panelReporte.removeAll();
-        ChartPanel panel = new Reporte().generarReportePersonal();
-        cl.show(panelContenedor, "Reporte");
-        panelReporte.add(panel);
-        panelReporte.updateUI();
-    }//GEN-LAST:event_reportePersonalActionPerformed
-
     private void CrearUsuarioSedesCBItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_CrearUsuarioSedesCBItemStateChanged
         // TODO add your handling code here:
         tipoUsuarioCB.removeAllItems();
@@ -3701,6 +3875,8 @@ public class loginInterface extends javax.swing.JFrame {
         
         Sede sede = new Sede();
         sede.modificarSede(id, nombre, direccion, telefono, email);
+        
+        limpiarModificarSede();
         
     }//GEN-LAST:event_confirmarModificarSedeActionPerformed
 
@@ -3735,6 +3911,8 @@ public class loginInterface extends javax.swing.JFrame {
         if(codigo != 0){
             JOptionPane.showMessageDialog(null, "Vehículo modificado con exito!", "Exito!", JOptionPane.INFORMATION_MESSAGE);
         }
+        limpiarModificarVehiculos();
+              
     }//GEN-LAST:event_confirmarModificarVehiculoBActionPerformed
 
     private void modificarSedeSedesCBItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_modificarSedeSedesCBItemStateChanged
@@ -3791,6 +3969,8 @@ public class loginInterface extends javax.swing.JFrame {
         String valor_parte = crearValorParteTF.getText();
         String id_sede_parte = operaciones.codigoSedeDeNombre((String)crearParteSedeCB.getSelectedItem());
         parte.agregarPartes(nombre_parte, cantidad_parte, valor_parte, id_sede_parte);
+        limpiarCrearPartes();
+        
     }//GEN-LAST:event_confirmarCrearParteBActionPerformed
 
     private void aportePorSedeReportesBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aportePorSedeReportesBotonActionPerformed
@@ -3888,6 +4068,90 @@ public class loginInterface extends javax.swing.JFrame {
             }else{
                 JOptionPane.showMessageDialog(null, "Debes llenar todos los campos", "Error", JOptionPane.ERROR_MESSAGE);
             }           
+        }else if(tipoReporte == ORDENES_EMPRESA){
+            panelReporte.removeAll();
+            if(semanalOpcionesReportes.isSelected() && sedesOpcionesReportes.isSelected()){
+                int dia = Integer.parseInt(diaOpcionesReportes.getText());
+                int mes = Integer.parseInt(mesOpcionesReportes.getText());
+                int year = Integer.parseInt(yearOpcionesReportes.getText());
+                Calendar c  = Calendar.getInstance();
+                c.set(year, --mes, dia);
+            
+                java.util.Date fechaInicial = c.getTime();
+            
+                String id_sede = new Operaciones().codigoSedeDeNombre((String)sedesOpcionesReporte.getSelectedItem());
+                ChartPanel panel = new Reporte().generarReporteOrdenesSemanalSede(fechaInicial, id_sede);
+                cl.show(panelContenedor, "Reporte");
+                panelReporte.add(panel);
+                panelReporte.updateUI();
+            }else if(sedesOpcionesReportes.isSelected() && todoOpcionesReportes.isSelected()){
+                String id_sede = new Operaciones().codigoSedeDeNombre((String)sedesOpcionesReporte.getSelectedItem());
+                ChartPanel panel = new Reporte().generarReporteOrdenesSede(id_sede);
+                cl.show(panelContenedor, "Reporte");
+                panelReporte.add(panel);
+                panelReporte.updateUI();
+            }else if(empresaOpcionesReportes.isSelected() && semanalOpcionesReportes.isSelected()){
+                int dia = Integer.parseInt(diaOpcionesReportes.getText());
+                int mes = Integer.parseInt(mesOpcionesReportes.getText());
+                int year = Integer.parseInt(yearOpcionesReportes.getText());
+                Calendar c  = Calendar.getInstance();
+                c.set(year, --mes, dia);            
+                java.util.Date fechaInicial = c.getTime();
+            
+                ChartPanel panel = new Reporte().generarReporteOrdenesSemanalEmpresa(fechaInicial);
+                cl.show(panelContenedor, "Reporte");
+                panelReporte.add(panel);
+                panelReporte.updateUI();
+            }else if(empresaOpcionesReportes.isSelected() && todoOpcionesReportes.isSelected()){
+                ChartPanel panel = new Reporte().generarReporteOrdenesEmpresa();
+                cl.show(panelContenedor, "Reporte");
+                panelReporte.add(panel);
+                panelReporte.updateUI();
+            }else{
+                JOptionPane.showMessageDialog(null, "Debes llenar todos los campos", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        }else if(tipoReporte == VENTAS_EMPRESA){
+            panelReporte.removeAll();
+            if(semanalOpcionesReportes.isSelected() && sedesOpcionesReportes.isSelected()){
+                int dia = Integer.parseInt(diaOpcionesReportes.getText());
+                int mes = Integer.parseInt(mesOpcionesReportes.getText());
+                int year = Integer.parseInt(yearOpcionesReportes.getText());
+                Calendar c  = Calendar.getInstance();
+                c.set(year, --mes, dia);
+            
+                java.util.Date fechaInicial = c.getTime();
+            
+                String id_sede = new Operaciones().codigoSedeDeNombre((String)sedesOpcionesReporte.getSelectedItem());
+                ChartPanel panel = new Reporte().generarReporteVentasSemanalSede(fechaInicial, id_sede);
+                cl.show(panelContenedor, "Reporte");
+                panelReporte.add(panel);
+                panelReporte.updateUI();
+            }else if(sedesOpcionesReportes.isSelected() && todoOpcionesReportes.isSelected()){
+                String id_sede = new Operaciones().codigoSedeDeNombre((String)sedesOpcionesReporte.getSelectedItem());
+                ChartPanel panel = new Reporte().generarReporteVentasSede(id_sede);
+                cl.show(panelContenedor, "Reporte");
+                panelReporte.add(panel);
+                panelReporte.updateUI();
+            }else if(empresaOpcionesReportes.isSelected() && semanalOpcionesReportes.isSelected()){
+                int dia = Integer.parseInt(diaOpcionesReportes.getText());
+                int mes = Integer.parseInt(mesOpcionesReportes.getText());
+                int year = Integer.parseInt(yearOpcionesReportes.getText());
+                Calendar c  = Calendar.getInstance();
+                c.set(year, --mes, dia);            
+                java.util.Date fechaInicial = c.getTime();
+            
+                ChartPanel panel = new Reporte().generarReporteVentasSemanalEmpresa(fechaInicial);
+                cl.show(panelContenedor, "Reporte");
+                panelReporte.add(panel);
+                panelReporte.updateUI();
+            }else if(empresaOpcionesReportes.isSelected() && todoOpcionesReportes.isSelected()){
+                ChartPanel panel = new Reporte().generarReporteVentasEmpresa();
+                cl.show(panelContenedor, "Reporte");
+                panelReporte.add(panel);
+                panelReporte.updateUI();
+            }else{
+                JOptionPane.showMessageDialog(null, "Debes llenar todos los campos", "Error", JOptionPane.ERROR_MESSAGE);
+            }
         }
         
         frameOpcionesReporte.setVisible(false);
@@ -3908,16 +4172,7 @@ public class loginInterface extends javax.swing.JFrame {
     private void ordenesReporteBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ordenesReporteBotonActionPerformed
         // TODO add your handling code here:
         frameOpcionesReporte.setVisible(true);
-        if(sedesOpcionesReportes.isSelected()){
-            sedesOpcionesReportes.doClick();
-        }
-        if(semanalOpcionesReportes.isSelected()){
-            semanalOpcionesReportes.doClick();
-        }
-        
-        if(todoOpcionesReportes.isSelected()){
-            todoOpcionesReportes.doClick();
-        }
+        tipoReporte = ORDENES_EMPRESA;
     }//GEN-LAST:event_ordenesReporteBotonActionPerformed
 
     private void vehiculosAgregadosReporteBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_vehiculosAgregadosReporteBotonActionPerformed
@@ -3983,13 +4238,36 @@ public class loginInterface extends javax.swing.JFrame {
     private void ventaCrearVentaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ventaCrearVentaButtonActionPerformed
         // TODO add your handling code here:
         Venta venta = new Venta();
+        Comprador comprador = new Comprador();
+        
         Operaciones operacion = new Operaciones();
         String id_usuario = (String)codVendedorVender.getText();
         String id_vehiculo = (String)codVehiculoVender.getText();
         String id_comprador = (String)codCompradorVender.getText();
         String fecha_venta = operacion.obtenerFecha();
-
-        venta.crearVenta(id_usuario, id_vehiculo, id_comprador, fecha_venta);
+        Object[] options = {"Pagar","Cancelar"};
+        int n = JOptionPane.showOptionDialog(null, "Está a punto de confirmar la venta por un valor de: " + new Vehiculo().valorVehiculoIVA(id_vehiculo) 
+                + "\n¿Desea confirmar el pago?", "Confirmar pago", WIDTH, HEIGHT, null, options, options[1]);
+        boolean bool;
+        bool = (id_usuario.isEmpty() || id_vehiculo.isEmpty() || id_comprador.isEmpty());
+        if(!bool){
+            if(n == 0 ){
+            cedulaIngresarCliente.setText(id_comprador);
+                if(!comprador.existeComprador(id_comprador)){
+                    ingresarUsuarioFrame.setVisible(true);
+                    JOptionPane.showMessageDialog(null, "El comprador no se encuentra registrado\nPor favor ingrese los datos.");
+                }else{
+                    venta.crearVenta(id_usuario, id_vehiculo, id_comprador, fecha_venta);
+                }
+            }else{
+                JOptionPane.showMessageDialog(null, "Error en el pago");
+            }
+        }else{
+            JOptionPane.showMessageDialog(null, "No deje espacios vacios");
+        }
+        
+        limpiarCrearVenta();
+        codVentaVender.setText(venta.buscarUltimoCodigo());
     }//GEN-LAST:event_ventaCrearVentaButtonActionPerformed
 
     private void vehiculosDispVenderItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_vehiculosDispVenderItemStateChanged
@@ -4041,10 +4319,11 @@ public class loginInterface extends javax.swing.JFrame {
         String codigoParte = codParteCrearOrdenTF.getText();
         String codigoJefe = codJefeTallerCrearOrdenTF.getText();
         String resumen = resumenCrearOrdenTA.getText();
+        int cantidad = (int)spinnerCantidad.getValue();
         
         if (!(codigoJefe.equals("") && codigoParte.equals("") && codigoVehiculo.equals("") && resumen.equals(""))) {
             Ordenes objeto = new Ordenes();
-            if (objeto.generarOrden(codigoVehiculo, codigoParte, codigoJefe, resumen)) {
+            if (objeto.generarOrden(codigoVehiculo, codigoParte, codigoJefe, resumen, cantidad)) {
                 codVehiculoCrearOrdenTF.setText("");
                 codParteCrearOrdenTF.setText("");
                 codJefeTallerCrearOrdenTF.setText("");
@@ -4055,20 +4334,293 @@ public class loginInterface extends javax.swing.JFrame {
             } else {
                 JOptionPane.showMessageDialog(gerenteJPanel, "La orden no fue generada");
             }
-        }      
+        }    
+        
+        limpiarCrearOrden();
     }//GEN-LAST:event_botonCrearOrdenActionPerformed
 
     private void aceptarConsultarOrdenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aceptarConsultarOrdenActionPerformed
         // TODO add your handling code here:
         Ordenes orden = new Ordenes();
+        String codString = codOrdenConsultarOrdenTF.getText();
+        ResultSet tabla = orden.consultarOrden(codString);
+        try {
+            while(tabla.next()){
+                vehiculoConsultarOrden.setText(tabla.getString(1));
+                parteConsultarOrden.setText(tabla.getString(2));
+                descripcionConsultarOrden.setText(tabla.getString(3));
+                labelCantidadConsultarOrden.setText("Cantidad: "+tabla.getInt(4));
+            }           
+        } catch (SQLException ex) {
+            ex.printStackTrace();        
+        }
+        
         
     }//GEN-LAST:event_aceptarConsultarOrdenActionPerformed
 
     private void crearCotizacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crearCotizacionActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_crearCotizacionActionPerformed
+
+    private void ventasReporteBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ventasReporteBotonActionPerformed
+        // TODO add your handling code here:
+        frameOpcionesReporte.setVisible(true);
+        tipoReporte = VENTAS_EMPRESA;
+    }//GEN-LAST:event_ventasReporteBotonActionPerformed
+
+    private void salirLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_salirLabelMouseClicked
+        // TODO add your handling code here:
+        int salir = JOptionPane.showConfirmDialog(null, "Esta a punto de salir del sistema.\n¿Desea continuar?");
+        if(salir == JOptionPane.YES_OPTION){
+            Usuario user = new Usuario();
+            user.desconectarUsuario(id_usuario_global);
+            gerenteJFrame.setVisible(false);
+            this.setVisible(true);
+        }
+    }//GEN-LAST:event_salirLabelMouseClicked
+
+    private void gerenteJFrameWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_gerenteJFrameWindowClosing
+        // TODO add your handling code here:
+        int salir = JOptionPane.showConfirmDialog(null, "Esta a punto de salir del sistema.\n¿Desea continuar?");
+        if(salir == JOptionPane.YES_OPTION){
+            Usuario user = new Usuario();
+            user.desconectarUsuario(id_usuario_global);
+            gerenteJFrame.setVisible(false);
+            this.setVisible(true);
+        }
+        
+    }//GEN-LAST:event_gerenteJFrameWindowClosing
+
+    private void jefeJFrameWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_jefeJFrameWindowClosing
+        // TODO add your handling code here:
+        int salir = JOptionPane.showConfirmDialog(null, "Esta a punto de salir del sistema.\n¿Desea continuar?");
+        if(salir == JOptionPane.YES_OPTION){
+            Usuario user = new Usuario();
+            user.desconectarUsuario(id_usuario_global);
+            jefeJFrame.setVisible(false);
+            this.setVisible(true);
+        }
+    }//GEN-LAST:event_jefeJFrameWindowClosing
+
+    private void vendedorJFrameWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_vendedorJFrameWindowClosing
+        // TODO add your handling code here:
+        int salir = JOptionPane.showConfirmDialog(null, "Esta a punto de salir del sistema.\n¿Desea continuar?");
+        if(salir == JOptionPane.YES_OPTION){
+            Usuario user = new Usuario();
+            user.desconectarUsuario(id_usuario_global);
+            vendedorJFrame.setVisible(false);
+            this.setVisible(true);
+        }
+    }//GEN-LAST:event_vendedorJFrameWindowClosing
+
+    private void salirLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_salirLabel1MouseClicked
+        // TODO add your handling code here:
+        int salir = JOptionPane.showConfirmDialog(null, "Esta a punto de salir del sistema.\n¿Desea continuar?");
+        if(salir == JOptionPane.YES_OPTION){
+            Usuario user = new Usuario();
+            user.desconectarUsuario(id_usuario_global);
+            jefeJFrame.setVisible(false);
+            this.setVisible(true);
+        }
+    }//GEN-LAST:event_salirLabel1MouseClicked
+
+    private void salirLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_salirLabel2MouseClicked
+        // TODO add your handling code here:
+        int salir = JOptionPane.showConfirmDialog(null, "Esta a punto de salir del sistema.\n¿Desea continuar?");
+        if(salir == JOptionPane.YES_OPTION){
+            Usuario user = new Usuario();
+            user.desconectarUsuario(id_usuario_global);
+            vendedorJFrame.setVisible(false);
+            this.setVisible(true);
+        }
+    }//GEN-LAST:event_salirLabel2MouseClicked
+
+    private void reportePersonalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reportePersonalActionPerformed
+        // TODO add your handling code here:
+        panelReporte.removeAll();
+        ChartPanel panel = new Reporte().generarReportePersonal();
+        cl.show(panelContenedor, "Reporte");
+        panelReporte.add(panel);
+        panelReporte.updateUI();
+    }//GEN-LAST:event_reportePersonalActionPerformed
+
+    private void gestionVehiculosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gestionVehiculosActionPerformed
+        // TODO add your handling code here:
+        clInventario.show(panel, "Vehiculos");
+    }//GEN-LAST:event_gestionVehiculosActionPerformed
+
+    private void gestionPartesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gestionPartesActionPerformed
+        // TODO add your handling code here:
+        clInventario.show(panel, "Partes");
+    }//GEN-LAST:event_gestionPartesActionPerformed
+
+    private void ingresarUsuarioBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ingresarUsuarioBotonActionPerformed
+        // TODO add your handling code here:
+        Comprador comprador = new Comprador();
+
+        String id_comprador = cedulaIngresarCliente.getText();
+        String nombre_comprador = nombreIngresarCliente.getText();
+        String direccion_comprador = direccionIngresarCliente.getText();
+        String email_comprador = emailIngresarCliente.getText();
+        String telefono_comprador = telefonoIngresarCliente.getText();
+
+        cedulaIngresarCliente.setText("");
+        comprador.crearComprador(id_comprador, nombre_comprador, direccion_comprador, telefono_comprador, email_comprador);
+        frameOpcionesReporte.setVisible(false);
+        cedulaIngresarCliente.setText("");
+        nombreIngresarCliente.setText("");
+        direccionIngresarCliente.setText("");
+        emailIngresarCliente.setText("");
+        telefonoIngresarCliente.setText("");
+    }//GEN-LAST:event_ingresarUsuarioBotonActionPerformed
+
+    private void codCotVenderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_codCotVenderActionPerformed
+        // TODO add your handling code here:
+        codCotVender.setText("");
+    }//GEN-LAST:event_codCotVenderActionPerformed
+
+    private void cancelarVenderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarVenderActionPerformed
+        // TODO add your handling code here:
+        limpiarCrearVenta();
+        clVendedor.show(panelContenedorVendedor, "Inicio");
+    }//GEN-LAST:event_cancelarVenderActionPerformed
+
+    private void cancelarCrearSedeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarCrearSedeActionPerformed
+        // TODO add your handling code here:
+        limpiarCrearSede();
+        cl.show(panelContenedor, "Inicio");
+    }//GEN-LAST:event_cancelarCrearSedeActionPerformed
+
+    private void cancelarModSedeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarModSedeActionPerformed
+        // TODO add your handling code here:
+        limpiarModificarSede();
+        cl.show(panelContenedor, "Inicio");
+    }//GEN-LAST:event_cancelarModSedeActionPerformed
+
+    private void botonCancelarCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCancelarCrearActionPerformed
+        // TODO add your handling code here:
+        limpiarCrearUsuario();
+        cl.show(panelContenedor, "Inicio");
+    }//GEN-LAST:event_botonCancelarCrearActionPerformed
+
+    private void cancelarModUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarModUsuarioActionPerformed
+        // TODO add your handling code here:
+        limpiarModificarUsuario();
+        cl.show(panelContenedor, "Inicio");
+    }//GEN-LAST:event_cancelarModUsuarioActionPerformed
+
+    private void cancelarAgregarVehiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarAgregarVehiculoActionPerformed
+        // TODO add your handling code here:
+        limpiarCrearVehiculos();
+        cl.show(panelContenedor, "Inicio");
+    }//GEN-LAST:event_cancelarAgregarVehiculoActionPerformed
+
+    private void cancelarModVehiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarModVehiculoActionPerformed
+        // TODO add your handling code here:
+        limpiarModificarVehiculos();
+        cl.show(panelContenedor, "Inicio");
+    }//GEN-LAST:event_cancelarModVehiculoActionPerformed
+
+    private void cancelarAgregarParteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarAgregarParteActionPerformed
+        // TODO add your handling code here:
+        limpiarCrearPartes();
+        cl.show(panelContenedor, "Inicio");
+    }//GEN-LAST:event_cancelarAgregarParteActionPerformed
+
+    private void cancelarModParteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarModParteActionPerformed
+        // TODO add your handling code here:
+        limpiarModificarPartes();
+        cl.show(panelContenedor, "Inicio");
+    }//GEN-LAST:event_cancelarModParteActionPerformed
+
+    private void cancelarCrearOrdenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarCrearOrdenActionPerformed
+        // TODO add your handling code here:
+        limpiarCrearOrden();
+        clJefe.show(panelContenedorJefe, "Inicio");
+    }//GEN-LAST:event_cancelarCrearOrdenActionPerformed
     
+    private void limpiarCrearSede(){
+        String id = new Operaciones().obtenerUltimoCodigoSede();
+        codigoSedeTF.setText(id);
+        nombreSedeTF.setText("");
+        direccionSedeCrearTF.setText("");
+        telefonoSedeCrearTF.setText("");
+        emailSedeCrearTF.setText("");
+    }
     
+    private void limpiarModificarSede(){
+        nuevoNombreTF.setText("");
+        direccionSedeModificarTF.setText("");
+        telefonoSedeModificarTF.setText("");
+        emailSedeModificarTF.setText("");
+    }
+    
+    private void limpiarCrearUsuario(){
+        nombresCrear.setText("");
+        apellidosCrear.setText("");
+        passwordCrear.setText("");
+        emailUsuarioCrearTF.setText("");
+        id_usuarioCrear.setText("");
+        telefonoUsuarioCrearTF.setText("");
+    }
+    
+    private void limpiarModificarUsuario(){
+        modificarCodigoUsuarioTF.setText("");
+        modificarContraseñaTF.setText("");
+        modificarNombreTF.setText("");
+        modificarConfirmarContraseñaTF.setText("");
+        emailUsuarioModificarTF.setText("");
+        telefonoUsuarioModificarTF.setText("");
+    }
+    
+    private void limpiarCrearVehiculos(){
+        crearMarcaVehiculoTF.setText("");
+        crearModeloVehiculoTF.setText("");
+        crearColorVehiculoTF .setText("");
+        crearCantidadVehiculoTF.setText("");
+        crearValorVehiculoTF.setText(""); 
+    }
+    
+    private void limpiarModificarVehiculos(){
+        modificarCodigoVehiculoTF.setText("");
+        modificarMarcaVehiculoTF.setText("");
+        modificarModeloVehiculoTF.setText("");
+        modificarColorVehiculoTF.setText("");
+        modificarValorVehiculoTF.setText("");  
+    }
+    
+    private void limpiarCrearPartes(){
+        crearNombreParteTF.setText("");
+        crearCantidadPartesTF.setText("");
+        crearValorParteTF.setText("");
+    }
+    
+    private void limpiarModificarPartes(){
+        modificarParteID.setText("");
+        modificarNombreParteTF.setText("");
+        modificarCantidadPartesTF.setText("");
+        modificarValorParteTF.setText("");
+    }
+    
+    private void limpiarCrearOrden(){
+        codVehiculoCrearOrdenTF.setText("");
+        codParteCrearOrdenTF.setText("");
+        codJefeTallerCrearOrdenTF.setText("");
+        resumenCrearOrdenTA.setText("");
+        spinnerCantidad.setValue(0);
+    }
+    
+    private void limpiarCrearCotizacion(){
+        
+    }
+    
+    private void limpiarCrearVenta(){
+        codVendedorVender.setText("");
+        codVehiculoVender.setText("");
+        codCompradorVender.setText("");
+        codCotVender.setText("(Opcional)");
+        
+    }
     
     /**
      * @param args the command line arguments
@@ -4194,7 +4746,8 @@ public class loginInterface extends javax.swing.JFrame {
     private javax.swing.JButton generarReporteOpcionesButon;
     private javax.swing.JFrame gerenteJFrame;
     private javax.swing.JPanel gerenteJPanel;
-    private javax.swing.JTextField idClienteConsultarOrden;
+    private javax.swing.JButton gestionPartes;
+    private javax.swing.JButton gestionVehiculos;
     private javax.swing.JTextField id_usuarioCrear;
     private javax.swing.JButton ingresarUsuarioBoton;
     private javax.swing.JFrame ingresarUsuarioFrame;
@@ -4289,11 +4842,10 @@ public class loginInterface extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel88;
     private javax.swing.JLabel jLabel89;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JLabel jLabel90;
     private javax.swing.JLabel jLabelPassword;
     private javax.swing.JLabel jLabelUsuario;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanelCampos;
     private javax.swing.JPasswordField jPasswordField;
@@ -4302,6 +4854,7 @@ public class loginInterface extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JFrame jefeJFrame;
+    private javax.swing.JLabel labelCantidadConsultarOrden;
     private javax.swing.JLabel logoLabel;
     private javax.swing.JLabel logoLabel3;
     private javax.swing.JLabel logoLabel4;
@@ -4312,7 +4865,7 @@ public class loginInterface extends javax.swing.JFrame {
     private javax.swing.JPanel manejoReportesJPanel;
     private javax.swing.JPanel manejoSedesJPanel;
     private javax.swing.JPanel manejoUsuariosJPanel;
-    private javax.swing.JPanel manejoVehiculosJPanel;
+    private javax.swing.JPanel manejoVehiculos;
     private javax.swing.JTextField mesOpcionesReportes;
     private javax.swing.JRadioButton modificarActivoRB;
     private javax.swing.JTextField modificarCantidadPartesTF;
@@ -4340,7 +4893,6 @@ public class loginInterface extends javax.swing.JFrame {
     private javax.swing.JRadioButton modificarVehiculoNuevoRB;
     private javax.swing.JRadioButton modificarVehiculoUsadoRB;
     private javax.swing.JButton modificarVehiculos;
-    private javax.swing.JTextField nombreClienteConsultarOrden;
     private javax.swing.JTextField nombreIngresarCliente;
     private javax.swing.JTextField nombreSedeTF;
     private javax.swing.JLabel nombreUserLabel;
@@ -4350,6 +4902,7 @@ public class loginInterface extends javax.swing.JFrame {
     private javax.swing.JTextField nuevoNombreTF;
     private javax.swing.JButton ordenesReporteBoton;
     private javax.swing.JPanel ordenesReportePanel;
+    private javax.swing.JPanel panel;
     private javax.swing.JPanel panelAgregarPartes;
     private javax.swing.JPanel panelAgregarVehiculos;
     private javax.swing.JPanel panelBanner;
@@ -4367,6 +4920,7 @@ public class loginInterface extends javax.swing.JFrame {
     private javax.swing.JPanel panelCrearSede;
     private javax.swing.JPanel panelCrearUsuario;
     private javax.swing.JPanel panelGenerarReportes;
+    private javax.swing.JPanel panelGestion;
     private javax.swing.JPanel panelModificarPartes;
     private javax.swing.JPanel panelModificarSede;
     private javax.swing.JPanel panelModificarUsuario;
@@ -4377,9 +4931,12 @@ public class loginInterface extends javax.swing.JFrame {
     private javax.swing.JPanel panelVacio1;
     private javax.swing.JPanel panelVacio2;
     private javax.swing.JPanel panelVender;
+    private javax.swing.JTextField parteConsultarOrden;
     private javax.swing.JComboBox<String> parteModificarCB;
     private javax.swing.JTextField passwordCrear;
     private javax.swing.JButton reportePersonal;
+    private javax.swing.JPanel reporteUsuariosPanel;
+    private javax.swing.JPanel reporteVentasPanel;
     private javax.swing.JTextArea resumenCrearOrdenTA;
     private javax.swing.JLabel salirLabel;
     private javax.swing.JLabel salirLabel1;
@@ -4390,6 +4947,7 @@ public class loginInterface extends javax.swing.JFrame {
     private javax.swing.JComboBox sedesOpcionesReporte;
     private javax.swing.JRadioButton sedesOpcionesReportes;
     private javax.swing.JRadioButton semanalOpcionesReportes;
+    private javax.swing.JSpinner spinnerCantidad;
     private javax.swing.JTable tableCrearCot;
     private javax.swing.JTable tableCrearCot1;
     private javax.swing.JTextField telefonoIngresarCliente;
@@ -4401,6 +4959,7 @@ public class loginInterface extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> tipoUsuarioCB;
     private javax.swing.JRadioButton todoOpcionesReportes;
     private javax.swing.JLabel valorTotalConsultarCot;
+    private javax.swing.JTextField vehiculoConsultarOrden;
     private javax.swing.JButton vehiculosAgregadosReporteBoton;
     private javax.swing.JComboBox vehiculosDispCrearCot;
     private javax.swing.JComboBox vehiculosDispVender;

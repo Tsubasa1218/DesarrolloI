@@ -22,21 +22,24 @@ public class Usuario {
         operacionesBD = new OperacionesBD();
     }
     
-    public String validarUsuario(String id_usuario, String password){
+    public String validarUsuario(String id_usuario, String password) {
         String tipo_usuario = "";
-        try { 
-            String consultaSQL = "SELECT tipo_usuario FROM usuarios WHERE id_usuario = '" + id_usuario +
-                    "' AND password_usuario = '" + password + "';";
-            
+        try {
+            String consultaSQL = "SELECT tipo_usuario, activo_usuario FROM usuarios WHERE id_usuario = '" + id_usuario
+                    + "' AND password_usuario = '" + password + "';";
+
             ResultSet resultado = operacionesBD.consultas(consultaSQL);
-            while(resultado.next()){
-                tipo_usuario = resultado.getString(1);
+            while (resultado.next()) {
+                if (resultado.getBoolean("activo_usuario") == false) {
+                    tipo_usuario = resultado.getString(1);
+                    consultaSQL = "UPDATE usuarios SET activo_usuario = TRUE WHERE id_usuario = '" + id_usuario + "';";
+
+                    operacionesBD.updates(consultaSQL);
+                }else{
+                    JOptionPane.showMessageDialog(null, "Usuario ya conectado!", "Error", JOptionPane.ERROR_MESSAGE);
+                    return tipo_usuario;
+                }
             }
-            
-            consultaSQL = "UPDATE usuarios SET activo_usuario = TRUE WHERE id_usuario = '" + id_usuario + "';";
-            
-            operacionesBD.updates(consultaSQL);
-            
 
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al validar el usuario \nRevisa la los datos ingresados", "Error!", JOptionPane.ERROR_MESSAGE);
@@ -77,4 +80,8 @@ public class Usuario {
         return resultado;
     }
     
+    public void desconectarUsuario(String id_usuario){
+        String consultaSQL = "UPDATE usuarios SET activo_usuario = FALSE WHERE id_usuario = '" + id_usuario + "';";
+        operacionesBD.updates(consultaSQL);
+    }
 }
