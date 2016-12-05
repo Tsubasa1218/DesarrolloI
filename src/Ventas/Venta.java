@@ -5,10 +5,28 @@
  */
 package Ventas;
 
+import dataBaseOperations.Fachada;
 import dataBaseOperations.OperacionesBD;
+import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import net.sf.jasperreports.engine.JREmptyDataSource;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+import net.sf.jasperreports.view.JasperViewer;
 
 /**
  *
@@ -76,4 +94,32 @@ public class Venta {
         }
         
     }
+    
+    
+    public void generarFactura(int id_venta, double valor_Total){
+        
+        try {
+            JasperReport jasperReport=JasperCompileManager.compileReport("C:\\Users\\Juan Suaza\\Documents\\GitHub\\DesarrolloI-master\\src\\Ventas\\facturaVenta.jrxml");
+            HashMap map = new HashMap();
+            Connection conn = new Fachada().conectarBD();
+            System.out.println(""+id_venta);
+            int id = id_venta;
+            double valor = valor_Total;
+            map.put("numero_factura", id);
+            map.put("valor_total", valor);
+            
+            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, map, conn);
+            //JasperViewer.viewReport(jasperPrint); 
+            String filename=null;
+            filename="C:\\Users\\Juan Suaza\\Documents\\GitHub\\DesarrolloI-master\\Facturas\\facturaVenta"+id_venta+".pdf";
+
+        //Report saved in specified path
+            JasperExportManager.exportReportToPdfFile(jasperPrint,filename);
+        } catch (JRException ex) {
+            ex.printStackTrace();
+        }
+        
+    }
+    
+    
 }

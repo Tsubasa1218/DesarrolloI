@@ -9,12 +9,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Date;
 import interfazGrafica.Operaciones;
-import java.awt.Dimension;
+import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
-import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JFrame;
 import org.jfree.chart.ChartPanel;
 import org.jfree.data.category.DefaultCategoryDataset;
 import net.sf.jasperreports.view.*;
@@ -27,8 +25,20 @@ import net.sf.jasperreports.engine.*;
  */
 public class Reporte {
     
+    final int PERSONAL = 1;
+    final int APORTE_SEDE = 2;
+    final int CANTIDAD_VEHICULOS = 3;
+    final int COTIZACIONES_SEDE = 4;
+    final int COTIZACIONES_EMPRESA = 5;
+    final int VEHICULOS_AGREGADOS = 6;
+    final int ORDENES_EMPRESA = 7;
+    final int ORDENES_SEDE = 8;
+    final int VENTAS_EMPRESA = 9;
+    final int VENTAS_SEDE = 10;
+    int reporte;
+    
     public Reporte(){
-        
+        reporte=0;
     }
     
     /*
@@ -47,7 +57,9 @@ public class Reporte {
         
         //Obtencion de la consulta
         ResultSet tabla = new OperacionesBD().consultas(consultaSQL);
-        
+        reporte = PERSONAL;
+        generarReporte(tabla);
+        tabla = new OperacionesBD().consultas(consultaSQL);
         //Cuenta cuantas filas hay en la consulta
         try {
             while(tabla.next()){
@@ -116,6 +128,9 @@ public class Reporte {
         int filas = 0;
         
         ResultSet tabla = new OperacionesBD().consultas(consultaSQL);
+        reporte = APORTE_SEDE;
+        generarReporte(tabla);
+        tabla = new OperacionesBD().consultas(consultaSQL);
         try {
             while(tabla.next()){
                 filas++;
@@ -176,6 +191,9 @@ public class Reporte {
         int filas = 0;
         
         ResultSet tabla = new OperacionesBD().consultas(consultaSQL);
+        reporte = CANTIDAD_VEHICULOS;
+        generarReporte(tabla);
+        tabla = new OperacionesBD().consultas(consultaSQL);
         try {
             while(tabla.next()){
                 filas++;
@@ -240,6 +258,9 @@ public class Reporte {
                 "AND fecha_cotizacion BETWEEN '" + fechaI +"' AND '" + fechaF + "' GROUP BY usuarios.nombre_usuario;";
         
         ResultSet tabla = new OperacionesBD().consultas(consultaSQL);
+        reporte = COTIZACIONES_SEDE;
+        generarReporte(tabla);
+        tabla = new OperacionesBD().consultas(consultaSQL);
         DefaultCategoryDataset data = new DefaultCategoryDataset();
         
         try {
@@ -272,6 +293,9 @@ public class Reporte {
                  " GROUP BY usuarios.nombre_usuario;";
         
         ResultSet tabla = new OperacionesBD().consultas(consultaSQL);
+        reporte = COTIZACIONES_SEDE;
+        generarReporte(tabla);
+        tabla = new OperacionesBD().consultas(consultaSQL);
         DefaultCategoryDataset data = new DefaultCategoryDataset();
         
         try {
@@ -321,6 +345,9 @@ public class Reporte {
                 + fechaI + "' AND '" + fechaF + "' GROUP BY sedes.nombre_sede;";
         //System.out.println(consultaSQL);
         ResultSet tabla = new OperacionesBD().consultas(consultaSQL);
+        reporte = COTIZACIONES_EMPRESA;
+        generarReporte(tabla);
+        tabla = new OperacionesBD().consultas(consultaSQL);
         DefaultCategoryDataset data = new DefaultCategoryDataset();
         
         try {
@@ -359,6 +386,9 @@ public class Reporte {
         String consultaSQL = "SELECT sedes.nombre_sede,COUNT(sedes.nombre_sede) FROM cotizaciones_realizadas NATURAL JOIN usuarios NATURAL JOIN sedes GROUP BY sedes.nombre_sede;";
         
         ResultSet tabla = new OperacionesBD().consultas(consultaSQL);
+        reporte = COTIZACIONES_EMPRESA;
+        generarReporte(tabla);
+        tabla = new OperacionesBD().consultas(consultaSQL);
         DefaultCategoryDataset data = new DefaultCategoryDataset();
         
         try {
@@ -404,6 +434,9 @@ public class Reporte {
                                 + fechaF + "' GROUP BY sedes.nombre_sede;";
         
         ResultSet tabla = new OperacionesBD().consultas(consultaSQL);
+        reporte = VEHICULOS_AGREGADOS;
+        generarReporte(tabla);
+        tabla = new OperacionesBD().consultas(consultaSQL);
         
         DefaultCategoryDataset data = new DefaultCategoryDataset();
         
@@ -443,7 +476,9 @@ public class Reporte {
         String consultaSQL = "SELECT sedes.nombre_sede, COUNT(sedes.nombre_sede) FROM vehiculos NATURAL JOIN sedes GROUP BY sedes.nombre_sede;";
         
         ResultSet tabla = new OperacionesBD().consultas(consultaSQL);
-        
+        reporte = VEHICULOS_AGREGADOS;
+        generarReporte(tabla);
+        tabla = new OperacionesBD().consultas(consultaSQL);
         DefaultCategoryDataset data = new DefaultCategoryDataset();
         
         try {
@@ -489,6 +524,9 @@ public class Reporte {
                 + fechaI + "' AND '" + fechaF + "' GROUP BY sedes.nombre_sede;";
         
         ResultSet tabla = new OperacionesBD().consultas(consultaSQL);
+        reporte = ORDENES_EMPRESA;
+        generarReporte(tabla);
+        tabla = new OperacionesBD().consultas(consultaSQL);
         DefaultCategoryDataset data = new DefaultCategoryDataset();
         try{
             while(tabla.next()){
@@ -527,6 +565,9 @@ public class Reporte {
         String consultaSQL = "SELECT sedes.nombre_sede, COUNT(sedes.nombre_sede) FROM ordenes_emitidas NATURAL JOIN usuarios NATURAL JOIN sedes GROUP BY sedes.nombre_sede;";
         
         ResultSet tabla = new OperacionesBD().consultas(consultaSQL);
+        reporte = ORDENES_EMPRESA;
+        generarReporte(tabla);
+        tabla = new OperacionesBD().consultas(consultaSQL);
         DefaultCategoryDataset data = new DefaultCategoryDataset();
         try{
             while(tabla.next()){
@@ -570,6 +611,9 @@ public class Reporte {
                 + fechaI + "' AND '" + fechaF + "' AND usuarios.id_sede = " + id_sede + " GROUP BY usuarios.nombre_usuario;";
         
         ResultSet tabla = new OperacionesBD().consultas(consultaSQL);
+        reporte = ORDENES_SEDE;
+        generarReporte(tabla);
+        tabla = new OperacionesBD().consultas(consultaSQL);
         DefaultCategoryDataset data = new DefaultCategoryDataset();
         try{
             while(tabla.next()){
@@ -609,6 +653,9 @@ public class Reporte {
                 + id_sede +" GROUP BY usuarios.nombre_usuario;";
         
         ResultSet tabla = new OperacionesBD().consultas(consultaSQL);
+        reporte = ORDENES_SEDE;
+        generarReporte(tabla);
+        tabla = new OperacionesBD().consultas(consultaSQL);        
         DefaultCategoryDataset data = new DefaultCategoryDataset();
         try{
             while(tabla.next()){
@@ -644,7 +691,9 @@ public class Reporte {
     public ChartPanel generarReporteVentasEmpresa(){
         String consultaSQL = "SELECT sedes.nombre_sede, COUNT(sedes.nombre_sede) FROM ventas_vehiculos NATURAL JOIN usuarios NATURAL JOIN sedes GROUP BY sedes.nombre_sede;";
         ResultSet tabla = new OperacionesBD().consultas(consultaSQL);
-        
+        reporte =VENTAS_EMPRESA;
+        generarReporte(tabla);
+        tabla = new OperacionesBD().consultas(consultaSQL);
         DefaultCategoryDataset data = new DefaultCategoryDataset();
         try{
             while(tabla.next()){
@@ -685,7 +734,9 @@ public class Reporte {
         String consultaSQL = "SELECT sedes.nombre_sede, COUNT(sedes.nombre_sede) FROM ventas_vehiculos NATURAL JOIN usuarios NATURAL JOIN sedes " +
                 "WHERE fecha_venta BETWEEN '"+ fechaI + "' AND '" + fechaF + "' GROUP BY sedes.nombre_sede;";
         ResultSet tabla = new OperacionesBD().consultas(consultaSQL);
-        
+        reporte = VENTAS_EMPRESA;
+        generarReporte(tabla);
+        tabla = new OperacionesBD().consultas(consultaSQL);
         DefaultCategoryDataset data = new DefaultCategoryDataset();
         try{
             while(tabla.next()){
@@ -720,7 +771,9 @@ public class Reporte {
         String consultaSQL = "SELECT usuarios.nombre_usuario, COUNT(usuarios.nombre_usuario) FROM ventas_vehiculos NATURAL JOIN usuarios WHERE usuarios.id_sede = "
                 + id_sede + " GROUP BY usuarios.nombre_usuario;";
         ResultSet tabla = new OperacionesBD().consultas(consultaSQL);
-        
+        reporte = VENTAS_SEDE;
+        generarReporte(tabla);
+        tabla = new OperacionesBD().consultas(consultaSQL);
         DefaultCategoryDataset data = new DefaultCategoryDataset();
         try{
             while(tabla.next()){
@@ -761,9 +814,11 @@ public class Reporte {
         
         String consultaSQL = "SELECT usuarios.nombre_usuario, COUNT(usuarios.nombre_usuario) FROM ventas_vehiculos NATURAL JOIN usuarios " +
                 "WHERE usuarios.id_sede = " + id_sede + " AND fecha_venta BETWEEN '" + fechaI + "' AND '" + fechaF + "' GROUP BY usuarios.nombre_usuario;";
-        System.out.println(consultaSQL);
+        //System.out.println(consultaSQL);
         ResultSet tabla = new OperacionesBD().consultas(consultaSQL);
-        
+        reporte = VENTAS_SEDE;
+        generarReporte(tabla);
+        tabla = new OperacionesBD().consultas(consultaSQL);
         DefaultCategoryDataset data = new DefaultCategoryDataset();
         try{
             while(tabla.next()){
@@ -787,6 +842,169 @@ public class Reporte {
         ChartPanel panel = new BarChart().reporteVentasSede(data);
         return panel;
     }
+    
+    
+    public void generarReporte(ResultSet datos){   
+        
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss");
+        Timestamp timeS = new Timestamp(System.currentTimeMillis());
+        String currentTime = sdf.format(timeS);
+        
+        if(reporte == PERSONAL){
+            try {
+            JasperReport jasperReport=JasperCompileManager.compileReport("C:\\Users\\Juan Suaza\\Documents\\GitHub\\DesarrolloI-master\\src\\Reportes\\reporteCantidadEmpleados.jrxml");
+            JRResultSetDataSource jasperReports = new JRResultSetDataSource(datos);
+            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, null, jasperReports);
+            //JasperViewer.viewReport(jasperPrint);
+            
+            String filename=null;
+            filename="reportePersonal"+currentTime+".pdf";
+            
+            //Report saved in specified path
+            JasperExportManager.exportReportToPdfFile(jasperPrint,filename);
+        } catch (JRException ex) {
+            ex.printStackTrace();
+        }
+    
+        }else if(reporte == APORTE_SEDE){
+            try {
+            JasperReport jasperReport=JasperCompileManager.compileReport("C:\\Users\\Juan Suaza\\Documents\\GitHub\\DesarrolloI-master\\src\\Reportes\\reporteAporte.jrxml");
+            JRResultSetDataSource jasperReports = new JRResultSetDataSource(datos);
+            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport,null, jasperReports);
+            //JasperViewer.viewReport(jasperPrint);
+            
+            String filename=null;
+            filename="reporteAporteSede"+currentTime+".pdf";
+            
+            //Report saved in specified path
+            JasperExportManager.exportReportToPdfFile(jasperPrint,filename);
+        } catch (JRException ex) {
+            ex.printStackTrace();
+        }
+        }else if(reporte == CANTIDAD_VEHICULOS){
+            try {
+            JasperReport jasperReport=JasperCompileManager.compileReport("C:\\Users\\Juan Suaza\\Documents\\GitHub\\DesarrolloI-master\\src\\Reportes\\reporteCantidadVehiculos.jrxml");
+            JRResultSetDataSource jasperReports = new JRResultSetDataSource(datos);
+            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport,null, jasperReports);
+            //JasperViewer.viewReport(jasperPrint);
+            
+            String filename=null;
+            filename="reporteCantidadVehiculos"+currentTime+".pdf";
+            
+            //Report saved in specified path
+            JasperExportManager.exportReportToPdfFile(jasperPrint,filename);
+        } catch (JRException ex) {
+            ex.printStackTrace();
+        }
+        }else if(reporte == COTIZACIONES_SEDE){
+            try {
+            JasperReport jasperReport=JasperCompileManager.compileReport("C:\\Users\\Juan Suaza\\Documents\\GitHub\\DesarrolloI-master\\src\\Reportes\\reporteCotizacionesSede.jrxml");
+            JRResultSetDataSource jasperReports = new JRResultSetDataSource(datos);
+            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport,null, jasperReports);
+            //JasperViewer.viewReport(jasperPrint);
+            
+            String filename=null;
+            filename="reporteCotizacionesSede"+currentTime+".pdf";
+            
+            //Report saved in specified path
+            JasperExportManager.exportReportToPdfFile(jasperPrint,filename);
+        } catch (JRException ex) {
+            ex.printStackTrace();
+        }
+        }else if(reporte == COTIZACIONES_EMPRESA){
+            try {
+            JasperReport jasperReport=JasperCompileManager.compileReport("C:\\Users\\Juan Suaza\\Documents\\GitHub\\DesarrolloI-master\\src\\Reportes\\reporteCotizacionesEmpresa.jrxml");
+            JRResultSetDataSource jasperReports = new JRResultSetDataSource(datos);
+            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport,null, jasperReports);
+            //JasperViewer.viewReport(jasperPrint);
+            
+            String filename=null;
+            filename="reporteCotizacionesEmpresa"+currentTime+".pdf";
+            
+            //Report saved in specified path
+            JasperExportManager.exportReportToPdfFile(jasperPrint,filename);
+        } catch (JRException ex) {
+            ex.printStackTrace();
+        }
+        }else if(reporte == VEHICULOS_AGREGADOS){
+            try {
+            JasperReport jasperReport=JasperCompileManager.compileReport("C:\\Users\\Juan Suaza\\Documents\\GitHub\\DesarrolloI-master\\src\\Reportes\\reporteVehiculosAgregados.jrxml");
+            JRResultSetDataSource jasperReports = new JRResultSetDataSource(datos);
+            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport,null, jasperReports);
+            //JasperViewer.viewReport(jasperPrint);
+            
+            String filename=null;
+            filename="reporteVehiculosAgregados"+currentTime+".pdf";
+            
+            //Report saved in specified path
+            JasperExportManager.exportReportToPdfFile(jasperPrint,filename);
+        } catch (JRException ex) {
+            ex.printStackTrace();
+        }
+        }else if(reporte == ORDENES_EMPRESA){
+            try {
+            JasperReport jasperReport=JasperCompileManager.compileReport("C:\\Users\\Juan Suaza\\Documents\\GitHub\\DesarrolloI-master\\src\\Reportes\\reporteOrdenesEmpresa.jrxml");
+            JRResultSetDataSource jasperReports = new JRResultSetDataSource(datos);
+            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport,null, jasperReports);
+            //JasperViewer.viewReport(jasperPrint);
+            
+            String filename=null;
+            filename="reporteOrdenesEmpresa"+currentTime+".pdf";
+            
+            //Report saved in specified path
+            JasperExportManager.exportReportToPdfFile(jasperPrint,filename);
+        } catch (JRException ex) {
+            ex.printStackTrace();
+        }
+        }else if(reporte == ORDENES_SEDE){
+            try {
+            JasperReport jasperReport=JasperCompileManager.compileReport("C:\\Users\\Juan Suaza\\Documents\\GitHub\\DesarrolloI-master\\src\\Reportes\\reporteOrdenesSede.jrxml");
+            JRResultSetDataSource jasperReports = new JRResultSetDataSource(datos);
+            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport,null, jasperReports);
+            //JasperViewer.viewReport(jasperPrint);
+            
+            String filename=null;
+            filename="reporteOrdenesSede"+currentTime+".pdf";
+            
+            //Report saved in specified path
+            JasperExportManager.exportReportToPdfFile(jasperPrint,filename);
+        } catch (JRException ex) {
+            ex.printStackTrace();
+        }
+        }else if(reporte == VENTAS_EMPRESA){
+            try {
+            JasperReport jasperReport=JasperCompileManager.compileReport("C:\\Users\\Juan Suaza\\Documents\\GitHub\\DesarrolloI-master\\src\\Reportes\\reporteVentasEmpresa.jrxml");
+            JRResultSetDataSource jasperReports = new JRResultSetDataSource(datos);
+            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport,null, jasperReports);
+            //JasperViewer.viewReport(jasperPrint);
+            
+            String filename=null;
+            filename="reporteVentasEmpresa"+currentTime+".pdf";
+            
+            //Report saved in specified path
+            JasperExportManager.exportReportToPdfFile(jasperPrint,filename);
+        } catch (JRException ex) {
+            ex.printStackTrace();
+        }
+        }else if(reporte == VENTAS_SEDE){
+            try {
+            JasperReport jasperReport=JasperCompileManager.compileReport("C:\\Users\\Juan Suaza\\Documents\\GitHub\\DesarrolloI-master\\src\\Reportes\\reporteVentasSede.jrxml");
+            JRResultSetDataSource jasperReports = new JRResultSetDataSource(datos);
+            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport,null, jasperReports);
+            //JasperViewer.viewReport(jasperPrint);
+            
+            String filename=null;
+            filename="reporteVentasSede"+currentTime+".pdf";
+            
+            //Report saved in specified path
+            JasperExportManager.exportReportToPdfFile(jasperPrint,filename);
+        } catch (JRException ex) {
+            ex.printStackTrace();
+        }
+        }
+    }
+       
+    
 }
 
 

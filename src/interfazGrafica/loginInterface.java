@@ -54,6 +54,8 @@ public class loginInterface extends javax.swing.JFrame {
     final int VENTAS_SEDE = 5;
     final int VENTAS_EMPRESA = 6;
     final int VEHICULOS_AGREGADOS = 7;
+    final int PERSONAL = 8;
+    final int CANTIDAD_VEHICULOS = 9;
     String id_usuario_global;
     /**
      * Creates new form loginInterface
@@ -1153,6 +1155,11 @@ public class loginInterface extends javax.swing.JFrame {
         frameOpcionesReporte.setTitle("ABC Corp. - Reportes");
         frameOpcionesReporte.setLocation(new java.awt.Point(500, 300));
         frameOpcionesReporte.setMinimumSize(new java.awt.Dimension(300, 300));
+        frameOpcionesReporte.addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                frameOpcionesReporteWindowClosing(evt);
+            }
+        });
 
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -3076,6 +3083,11 @@ public class loginInterface extends javax.swing.JFrame {
 
         exportarButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfazGrafica/Imagenes/exportar.png"))); // NOI18N
         exportarButton.setBorder(null);
+        exportarButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                exportarButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout panelReporteFinalLayout = new javax.swing.GroupLayout(panelReporteFinal);
         panelReporteFinal.setLayout(panelReporteFinalLayout);
@@ -3389,7 +3401,7 @@ public class loginInterface extends javax.swing.JFrame {
         Usuario user = new Usuario();
 
         String tipo = user.validarUsuario(id_usuario, password);
-        
+        System.out.println(tipo);
         if (tipo.equalsIgnoreCase("Gerente")) {
             id_usuario_global = id_usuario;
             gerenteJFrame.setEnabled(true);
@@ -3436,6 +3448,7 @@ public class loginInterface extends javax.swing.JFrame {
                 ex.printStackTrace();
             }
         }
+        //new Venta().generarFactura(16);
         tfLogin.setText("");
         jPasswordField.setText("");
 /*        vendedorJFrame.setVisible(true);
@@ -4154,6 +4167,9 @@ public class loginInterface extends javax.swing.JFrame {
             }
         }
         
+        sedesOpcionesReporte.setEnabled(true);
+        empresaOpcionesReportes.setEnabled(true);
+        sedesOpcionesReporte.setEnabled(true);
         frameOpcionesReporte.setVisible(false);
         sedesOpcionesReportes.setSelected(false);
         empresaOpcionesReportes.setSelected(false);
@@ -4267,7 +4283,14 @@ public class loginInterface extends javax.swing.JFrame {
         }
         
         limpiarCrearVenta();
+        JOptionPane.showMessageDialog(null, "Factura generada!", "Factura", JOptionPane.INFORMATION_MESSAGE);
+        int codVenta = Integer.parseInt(codVentaVender.getText());
+        double valorTotal = new Vehiculo().valorVehiculoIVA(id_vehiculo);
+        venta.generarFactura(codVenta, valorTotal);
         codVentaVender.setText(venta.buscarUltimoCodigo());
+        
+        
+        
     }//GEN-LAST:event_ventaCrearVentaButtonActionPerformed
 
     private void vehiculosDispVenderItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_vehiculosDispVenderItemStateChanged
@@ -4442,6 +4465,7 @@ public class loginInterface extends javax.swing.JFrame {
         cl.show(panelContenedor, "Reporte");
         panelReporte.add(panel);
         panelReporte.updateUI();
+        tipoReporte = PERSONAL;
     }//GEN-LAST:event_reportePersonalActionPerformed
 
     private void gestionVehiculosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gestionVehiculosActionPerformed
@@ -4538,6 +4562,21 @@ public class loginInterface extends javax.swing.JFrame {
         limpiarCrearOrden();
         clJefe.show(panelContenedorJefe, "Inicio");
     }//GEN-LAST:event_cancelarCrearOrdenActionPerformed
+
+    private void exportarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exportarButtonActionPerformed
+        // TODO add your handling code here:
+        JOptionPane.showMessageDialog(null, "Reporte generado", "Reporte", JOptionPane.INFORMATION_MESSAGE);
+    }//GEN-LAST:event_exportarButtonActionPerformed
+
+    private void frameOpcionesReporteWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_frameOpcionesReporteWindowClosing
+        // TODO add your handling code here:
+        sedesOpcionesReporte.setEnabled(true);
+        empresaOpcionesReportes.setEnabled(true);
+        sedesOpcionesReporte.setEnabled(true);
+        diaOpcionesReportes.setEnabled(true);
+        mesOpcionesReportes.setEnabled(true);
+        yearOpcionesReportes.setEnabled(true);
+    }//GEN-LAST:event_frameOpcionesReporteWindowClosing
     
     private void limpiarCrearSede(){
         String id = new Operaciones().obtenerUltimoCodigoSede();
