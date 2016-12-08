@@ -795,7 +795,7 @@ public class loginInterface extends javax.swing.JFrame {
         jefeJFrame.setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         jefeJFrame.setTitle("ABC Corp. - Jefe de Taller");
         jefeJFrame.setBackground(new java.awt.Color(255, 255, 255));
-        jefeJFrame.setLocation(new java.awt.Point(300, 100));
+        jefeJFrame.setLocation(new java.awt.Point(300, 0));
         jefeJFrame.setMinimumSize(new java.awt.Dimension(830, 715));
         jefeJFrame.addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
@@ -3439,7 +3439,7 @@ public class loginInterface extends javax.swing.JFrame {
             } catch (SQLException ex) {
                 ex.printStackTrace();
             }
-        } else if (tipo.equalsIgnoreCase("Jefe")) {
+        } else if (tipo.equalsIgnoreCase("Jefe de taller")) {
             id_usuario_global = id_usuario;
             jefeJFrame.setEnabled(true);
             jefeJFrame.setVisible(true);
@@ -3540,6 +3540,7 @@ public class loginInterface extends javax.swing.JFrame {
         panelContenedorJefe.setVisible(true);
         String ultimoCod = new Ordenes().obtenerUltimoCodigoOrden();
         codOrdenCrearOrdenTF.setText(ultimoCod);
+        codJefeTallerCrearOrdenTF.setText(id_usuario_global);
         clJefe.show(panelContenedorJefe, "Crear orden");
     }//GEN-LAST:event_crearOrdenButtonActionPerformed
 
@@ -4382,10 +4383,6 @@ public class loginInterface extends javax.swing.JFrame {
         if (!(codigoJefe.equals("") && codigoParte.equals("") && codigoVehiculo.equals("") && resumen.equals(""))) {
             Ordenes objeto = new Ordenes();
             if (objeto.generarOrden(codigoVehiculo, codigoParte, codigoJefe, resumen, cantidad)) {
-                codVehiculoCrearOrdenTF.setText("");
-                codParteCrearOrdenTF.setText("");
-                codJefeTallerCrearOrdenTF.setText("");
-                resumenCrearOrdenTA.setText("");
                 JOptionPane.showMessageDialog(gerenteJPanel, "Orden generada con exito");
                 String ordenCod = objeto.obtenerUltimoCodigoOrden();
                 codOrdenCrearOrdenTF.setText(ordenCod);
@@ -4786,14 +4783,11 @@ public class loginInterface extends javax.swing.JFrame {
     private void limpiarCrearOrden(){
         codVehiculoCrearOrdenTF.setText("");
         codParteCrearOrdenTF.setText("");
-        codJefeTallerCrearOrdenTF.setText("");
+        //codJefeTallerCrearOrdenTF.setText("");
         resumenCrearOrdenTA.setText("");
         spinnerCantidad.setValue(0);
     }
     
-    private void limpiarCrearCotizacion(){
-        
-    }
     
     private void limpiarCrearVenta(){
         //codVendedorVender.setText("");
