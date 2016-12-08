@@ -16,8 +16,8 @@ public class Fachada {
     //Constructor
     public Fachada(){
         this.usuario = "Juan";
-        this.password = "1218";
-        this.url = "jdbc:postgresql://localhost:5432/desarrollo";
+        this.password = "1234";
+        this.url = "jdbc:postgresql://localhost:5432/Desarrollo";
     }
     
     public Connection conectarBD(){

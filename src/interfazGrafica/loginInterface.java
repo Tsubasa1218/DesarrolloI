@@ -5,6 +5,7 @@
  */
 package interfazGrafica;
 
+import Cotizaciones.Cotizaciones;
 import Ordenes.Ordenes;
 import Reportes.Reporte;
 import Usuarios.Usuario;
@@ -23,6 +24,7 @@ import static java.awt.image.ImageObserver.WIDTH;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JScrollPane;
@@ -57,12 +59,14 @@ public class loginInterface extends javax.swing.JFrame {
     final int PERSONAL = 8;
     final int CANTIDAD_VEHICULOS = 9;
     String id_usuario_global;
+
     /**
      * Creates new form loginInterface
      */
 
     public loginInterface() {
         initComponents();
+
         id_usuario_global = "";
         tipoReporte = -1;
         //Inicializacion de paneles como no visibles
@@ -246,12 +250,13 @@ public class loginInterface extends javax.swing.JFrame {
         passwordCrear = new javax.swing.JTextField();
         nombresCrear = new javax.swing.JTextField();
         apellidosCrear = new javax.swing.JTextField();
-        CrearUsuarioSedesCB = new javax.swing.JComboBox<String>();
-        tipoUsuarioCB = new javax.swing.JComboBox<String>();
+        CrearUsuarioSedesCB = new javax.swing.JComboBox<>();
+        tipoUsuarioCB = new javax.swing.JComboBox<>();
         jLabel75 = new javax.swing.JLabel();
         emailUsuarioCrearTF = new javax.swing.JTextField();
         jLabel76 = new javax.swing.JLabel();
         telefonoUsuarioCrearTF = new javax.swing.JTextField();
+        jLabel92 = new javax.swing.JLabel();
         panelModificarUsuario = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
@@ -264,8 +269,8 @@ public class loginInterface extends javax.swing.JFrame {
         modificarNombreTF = new javax.swing.JTextField();
         modificarActivoRB = new javax.swing.JRadioButton();
         modificarInactivoRB = new javax.swing.JRadioButton();
-        modificarTipoUsuarioCB = new javax.swing.JComboBox<String>();
-        modificarSedeUsuarioCB = new javax.swing.JComboBox<String>();
+        modificarTipoUsuarioCB = new javax.swing.JComboBox<>();
+        modificarSedeUsuarioCB = new javax.swing.JComboBox<>();
         confirmarModificarUsuarioB = new javax.swing.JButton();
         jLabel77 = new javax.swing.JLabel();
         emailUsuarioModificarTF = new javax.swing.JTextField();
@@ -287,8 +292,9 @@ public class loginInterface extends javax.swing.JFrame {
         jLabel71 = new javax.swing.JLabel();
         emailSedeCrearTF = new javax.swing.JTextField();
         cancelarCrearSede = new javax.swing.JButton();
+        jLabel91 = new javax.swing.JLabel();
         panelModificarSede = new javax.swing.JPanel();
-        modificarSedeSedesCB = new javax.swing.JComboBox<String>();
+        modificarSedeSedesCB = new javax.swing.JComboBox<>();
         jLabel9 = new javax.swing.JLabel();
         nuevoNombreTF = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
@@ -313,7 +319,7 @@ public class loginInterface extends javax.swing.JFrame {
         jLabel25 = new javax.swing.JLabel();
         crearCantidadVehiculoTF = new javax.swing.JTextField();
         jLabel26 = new javax.swing.JLabel();
-        crearSedeVehiculoCB = new javax.swing.JComboBox<String>();
+        crearSedeVehiculoCB = new javax.swing.JComboBox<>();
         confirmarAgregarVehiculoB = new javax.swing.JButton();
         jLabel51 = new javax.swing.JLabel();
         crearValorVehiculoTF = new javax.swing.JTextField();
@@ -327,7 +333,7 @@ public class loginInterface extends javax.swing.JFrame {
         jLabel39 = new javax.swing.JLabel();
         crearCantidadPartesTF = new javax.swing.JTextField();
         confirmarCrearParteB = new javax.swing.JButton();
-        crearParteSedeCB = new javax.swing.JComboBox<String>();
+        crearParteSedeCB = new javax.swing.JComboBox<>();
         cancelarAgregarParte = new javax.swing.JButton();
         panelModificarPartes = new javax.swing.JPanel();
         jLabel40 = new javax.swing.JLabel();
@@ -337,10 +343,10 @@ public class loginInterface extends javax.swing.JFrame {
         modificarCantidadPartesTF = new javax.swing.JTextField();
         jLabel44 = new javax.swing.JLabel();
         confirmarModificarParteB = new javax.swing.JButton();
-        modificarParteSedeCB = new javax.swing.JComboBox<String>();
+        modificarParteSedeCB = new javax.swing.JComboBox<>();
         jLabel55 = new javax.swing.JLabel();
         modificarValorParteTF = new javax.swing.JTextField();
-        parteModificarCB = new javax.swing.JComboBox<String>();
+        parteModificarCB = new javax.swing.JComboBox<>();
         modificarParteID = new javax.swing.JTextField();
         jLabel24 = new javax.swing.JLabel();
         cancelarModParte = new javax.swing.JButton();
@@ -358,7 +364,7 @@ public class loginInterface extends javax.swing.JFrame {
         ordenesReportePanel = new javax.swing.JPanel();
         ordenesReporteBoton = new javax.swing.JButton();
         panelModificarVehiculo = new javax.swing.JPanel();
-        modificarSedeVehiculoCB = new javax.swing.JComboBox<String>();
+        modificarSedeVehiculoCB = new javax.swing.JComboBox<>();
         jLabel27 = new javax.swing.JLabel();
         modificarVehiculoNuevoRB = new javax.swing.JRadioButton();
         modificarVehiculoUsadoRB = new javax.swing.JRadioButton();
@@ -474,8 +480,8 @@ public class loginInterface extends javax.swing.JFrame {
         gerenteJFrame.setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         gerenteJFrame.setTitle("ABC Corp. - Gerente");
         gerenteJFrame.setBackground(new java.awt.Color(255, 255, 255));
-        gerenteJFrame.setLocation(new java.awt.Point(300, 100));
-        gerenteJFrame.setMinimumSize(new java.awt.Dimension(1015, 756));
+        gerenteJFrame.setLocation(new java.awt.Point(200, 100));
+        gerenteJFrame.setMinimumSize(new java.awt.Dimension(1003, 760));
         gerenteJFrame.setResizable(false);
         gerenteJFrame.addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
@@ -722,7 +728,7 @@ public class loginInterface extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelBannerLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(logoLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 439, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 419, Short.MAX_VALUE)
                 .addGroup(panelBannerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(salirLabel, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(nombreUserLabel, javax.swing.GroupLayout.Alignment.TRAILING)
@@ -745,19 +751,20 @@ public class loginInterface extends javax.swing.JFrame {
                         .addComponent(sedeCargoLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(salirLabel)))
-                .addContainerGap(29, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         panelContenedor.setBackground(new java.awt.Color(255, 255, 255));
-        panelContenedor.setMaximumSize(new java.awt.Dimension(780, 813));
-        panelContenedor.setMinimumSize(new java.awt.Dimension(780, 813));
+        panelContenedor.setMaximumSize(new java.awt.Dimension(760, 623));
+        panelContenedor.setMinimumSize(new java.awt.Dimension(760, 623));
         panelContenedor.setName(""); // NOI18N
+        panelContenedor.setPreferredSize(new java.awt.Dimension(760, 623));
 
         javax.swing.GroupLayout panelContenedorLayout = new javax.swing.GroupLayout(panelContenedor);
         panelContenedor.setLayout(panelContenedorLayout);
         panelContenedorLayout.setHorizontalGroup(
             panelContenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 780, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
         panelContenedorLayout.setVerticalGroup(
             panelContenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -772,8 +779,7 @@ public class loginInterface extends javax.swing.JFrame {
             .addGroup(gerenteJFrameLayout.createSequentialGroup()
                 .addComponent(gerenteJPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(panelContenedor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(panelContenedor, javax.swing.GroupLayout.DEFAULT_SIZE, 770, Short.MAX_VALUE))
         );
         gerenteJFrameLayout.setVerticalGroup(
             gerenteJFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -782,7 +788,7 @@ public class loginInterface extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(gerenteJFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(gerenteJPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(panelContenedor, javax.swing.GroupLayout.PREFERRED_SIZE, 623, Short.MAX_VALUE))
+                    .addComponent(panelContenedor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -944,8 +950,9 @@ public class loginInterface extends javax.swing.JFrame {
         vendedorJFrame.setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         vendedorJFrame.setTitle("ABC Corp. - Vendedor");
         vendedorJFrame.setBackground(new java.awt.Color(255, 255, 255));
-        vendedorJFrame.setLocation(new java.awt.Point(300, 100));
-        vendedorJFrame.setMinimumSize(new java.awt.Dimension(900, 832));
+        vendedorJFrame.setLocation(new java.awt.Point(100, 0));
+        vendedorJFrame.setMinimumSize(new java.awt.Dimension(900, 749));
+        vendedorJFrame.setPreferredSize(new java.awt.Dimension(900, 749));
         vendedorJFrame.addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 vendedorJFrameWindowClosing(evt);
@@ -1049,7 +1056,7 @@ public class loginInterface extends javax.swing.JFrame {
                 .addComponent(manejoOrdenesJPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(manejoOrdenesJPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(428, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         panelContenedorVendedor.setBackground(new java.awt.Color(255, 255, 255));
@@ -1100,7 +1107,7 @@ public class loginInterface extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelBanner4Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(logoLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 538, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 324, Short.MAX_VALUE)
                 .addGroup(panelBanner4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(sedeCargoLabel4, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(nombreUserLabel4, javax.swing.GroupLayout.Alignment.TRAILING)
@@ -1137,7 +1144,7 @@ public class loginInterface extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(vendedorJPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(panelContenedorVendedor, javax.swing.GroupLayout.DEFAULT_SIZE, 886, Short.MAX_VALUE))
+                .addComponent(panelContenedorVendedor, javax.swing.GroupLayout.DEFAULT_SIZE, 672, Short.MAX_VALUE))
             .addComponent(panelBanner4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         vendedorJFrameLayout.setVerticalGroup(
@@ -1145,10 +1152,10 @@ public class loginInterface extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, vendedorJFrameLayout.createSequentialGroup()
                 .addComponent(panelBanner4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(vendedorJFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(vendedorJFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(vendedorJPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(panelContenedorVendedor, javax.swing.GroupLayout.DEFAULT_SIZE, 665, Short.MAX_VALUE))
-                .addContainerGap())
+                    .addComponent(panelContenedorVendedor, javax.swing.GroupLayout.PREFERRED_SIZE, 523, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         frameOpcionesReporte.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -1224,29 +1231,27 @@ public class loginInterface extends javax.swing.JFrame {
                         .addComponent(jLabel31)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(sedesOpcionesReporte, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(semanalOpcionesReportes)
-                            .addGroup(jPanel4Layout.createSequentialGroup()
-                                .addComponent(jLabel37)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(diaOpcionesReportes, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jLabel41)))
-                        .addGap(4, 4, 4)
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel4Layout.createSequentialGroup()
-                                .addComponent(mesOpcionesReportes, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jLabel56)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(yearOpcionesReportes, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(todoOpcionesReportes, javax.swing.GroupLayout.Alignment.LEADING))))
-                .addContainerGap(46, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(generarReporteOpcionesButon)
-                .addContainerGap())
+                    .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(generarReporteOpcionesButon)
+                        .addGroup(jPanel4Layout.createSequentialGroup()
+                            .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(semanalOpcionesReportes)
+                                .addGroup(jPanel4Layout.createSequentialGroup()
+                                    .addComponent(jLabel37)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(diaOpcionesReportes, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(jLabel41)))
+                            .addGap(4, 4, 4)
+                            .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel4Layout.createSequentialGroup()
+                                    .addComponent(mesOpcionesReportes, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(jLabel56)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(yearOpcionesReportes, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(todoOpcionesReportes, javax.swing.GroupLayout.Alignment.LEADING)))))
+                .addContainerGap(109, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1282,7 +1287,7 @@ public class loginInterface extends javax.swing.JFrame {
         frameOpcionesReporte.getContentPane().setLayout(frameOpcionesReporteLayout);
         frameOpcionesReporteLayout.setHorizontalGroup(
             frameOpcionesReporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         frameOpcionesReporteLayout.setVerticalGroup(
             frameOpcionesReporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1292,7 +1297,7 @@ public class loginInterface extends javax.swing.JFrame {
         ingresarUsuarioFrame.setTitle("ABC Corp. - Registrar Cliente");
         ingresarUsuarioFrame.setBackground(new java.awt.Color(255, 255, 255));
         ingresarUsuarioFrame.setLocation(new java.awt.Point(500, 300));
-        ingresarUsuarioFrame.setMinimumSize(new java.awt.Dimension(282, 329));
+        ingresarUsuarioFrame.setMinimumSize(new java.awt.Dimension(402, 381));
 
         panelContIngresarUsuario.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -1436,7 +1441,7 @@ public class loginInterface extends javax.swing.JFrame {
             }
         });
 
-        tipoUsuarioCB.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Gerente", "Jefe de taller", "Vendedor" }));
+        tipoUsuarioCB.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Gerente", "Jefe de taller", "Vendedor" }));
         tipoUsuarioCB.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tipoUsuarioCBActionPerformed(evt);
@@ -1446,6 +1451,8 @@ public class loginInterface extends javax.swing.JFrame {
         jLabel75.setText("Email:");
 
         jLabel76.setText("Telefono:");
+
+        jLabel92.setText("@abc.com");
 
         javax.swing.GroupLayout panelCrearUsuarioLayout = new javax.swing.GroupLayout(panelCrearUsuario);
         panelCrearUsuario.setLayout(panelCrearUsuarioLayout);
@@ -1478,7 +1485,9 @@ public class loginInterface extends javax.swing.JFrame {
                         .addComponent(confirmarCrearUsuarioB, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(botonCancelarCrear, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(277, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel92, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(147, Short.MAX_VALUE))
         );
         panelCrearUsuarioLayout.setVerticalGroup(
             panelCrearUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1510,7 +1519,9 @@ public class loginInterface extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(panelCrearUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel75)
-                    .addComponent(emailUsuarioCrearTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(panelCrearUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(emailUsuarioCrearTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel92)))
                 .addGap(18, 18, 18)
                 .addGroup(panelCrearUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(telefonoUsuarioCrearTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1551,7 +1562,7 @@ public class loginInterface extends javax.swing.JFrame {
         modificarInactivoRB.setBackground(new java.awt.Color(255, 255, 255));
         modificarInactivoRB.setText("Inactivo");
 
-        modificarTipoUsuarioCB.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Vendedor", "Jefe de taller", "Gerente" }));
+        modificarTipoUsuarioCB.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Vendedor", "Jefe de taller", "Gerente" }));
         modificarTipoUsuarioCB.setMaximumSize(new java.awt.Dimension(88, 20));
 
         modificarSedeUsuarioCB.setMaximumSize(new java.awt.Dimension(28, 20));
@@ -1712,6 +1723,8 @@ public class loginInterface extends javax.swing.JFrame {
             }
         });
 
+        jLabel91.setText("@abc.com");
+
         javax.swing.GroupLayout panelCrearSedeLayout = new javax.swing.GroupLayout(panelCrearSede);
         panelCrearSede.setLayout(panelCrearSedeLayout);
         panelCrearSedeLayout.setHorizontalGroup(
@@ -1723,21 +1736,24 @@ public class loginInterface extends javax.swing.JFrame {
                         .addComponent(confirmarCrearSede)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(cancelarCrearSede))
-                    .addGroup(panelCrearSedeLayout.createSequentialGroup()
-                        .addGroup(panelCrearSedeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel69)
-                            .addComponent(jLabel70)
-                            .addComponent(jLabel71)
-                            .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelCrearSedeLayout.createSequentialGroup()
+                        .addGroup(panelCrearSedeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(panelCrearSedeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel69)
+                                .addComponent(jLabel70)
+                                .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jLabel71))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(panelCrearSedeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(emailSedeCrearTF, javax.swing.GroupLayout.DEFAULT_SIZE, 176, Short.MAX_VALUE)
+                            .addComponent(emailSedeCrearTF)
                             .addComponent(direccionSedeCrearTF)
                             .addComponent(nombreSedeTF)
                             .addComponent(codigoSedeTF)
                             .addComponent(telefonoSedeCrearTF, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 176, Short.MAX_VALUE))))
-                .addGap(274, 350, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel91)
+                .addContainerGap(296, Short.MAX_VALUE))
         );
         panelCrearSedeLayout.setVerticalGroup(
             panelCrearSedeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1756,12 +1772,13 @@ public class loginInterface extends javax.swing.JFrame {
                     .addComponent(jLabel69))
                 .addGap(18, 18, 18)
                 .addGroup(panelCrearSedeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel70)
-                    .addComponent(telefonoSedeCrearTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel71)
+                    .addComponent(emailSedeCrearTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel91))
                 .addGap(18, 18, 18)
                 .addGroup(panelCrearSedeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel71)
-                    .addComponent(emailSedeCrearTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel70)
+                    .addComponent(telefonoSedeCrearTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(panelCrearSedeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(confirmarCrearSede)
@@ -2718,9 +2735,7 @@ public class loginInterface extends javax.swing.JFrame {
         );
 
         panelCrearCotizacion.setBackground(new java.awt.Color(255, 255, 255));
-        panelCrearCotizacion.setMaximumSize(new java.awt.Dimension(617, 579));
-        panelCrearCotizacion.setMinimumSize(new java.awt.Dimension(617, 579));
-        panelCrearCotizacion.setPreferredSize(new java.awt.Dimension(617, 579));
+        panelCrearCotizacion.setPreferredSize(new java.awt.Dimension(552, 493));
 
         cancelarCrearCot.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfazGrafica/Imagenes/cancelar.png"))); // NOI18N
         cancelarCrearCot.setBorder(null);
@@ -2739,9 +2754,13 @@ public class loginInterface extends javax.swing.JFrame {
 
         jLabel68.setText("Código del vehiculo:");
 
-        codVehiculoCrearCot.setEnabled(false);
-
         jLabel54.setText("Marca del vehículo:");
+
+        vehiculosDispCrearCot.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                vehiculosDispCrearCotItemStateChanged(evt);
+            }
+        });
 
         tableCrearCot.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -2786,7 +2805,7 @@ public class loginInterface extends javax.swing.JFrame {
                         .addComponent(crearCotizacion)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(cancelarCrearCot))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 597, Short.MAX_VALUE))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 532, Short.MAX_VALUE))
                 .addContainerGap())
         );
         panelCrearCotizacionLayout.setVerticalGroup(
@@ -2809,30 +2828,33 @@ public class loginInterface extends javax.swing.JFrame {
                     .addComponent(jLabel54)
                     .addComponent(vehiculosDispCrearCot, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 336, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addGroup(panelCrearCotizacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(crearCotizacion)
                     .addComponent(cancelarCrearCot))
-                .addGap(0, 25, Short.MAX_VALUE))
+                .addGap(0, 35, Short.MAX_VALUE))
         );
 
         panelConsultarCotizacion.setBackground(new java.awt.Color(255, 255, 255));
-        panelConsultarCotizacion.setMaximumSize(new java.awt.Dimension(617, 579));
-        panelConsultarCotizacion.setMinimumSize(new java.awt.Dimension(617, 579));
-        panelConsultarCotizacion.setPreferredSize(new java.awt.Dimension(617, 579));
+        panelConsultarCotizacion.setPreferredSize(new java.awt.Dimension(499, 426));
 
         jLabel58.setText("Codigo de la cotización:");
 
         aceptarConsultarCot.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfazGrafica/Imagenes/aceptar.png"))); // NOI18N
         aceptarConsultarCot.setBorder(null);
+        aceptarConsultarCot.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                aceptarConsultarCotActionPerformed(evt);
+            }
+        });
 
-        jLabel86.setText("Codigo del vendedor:");
+        jLabel86.setText("Vendedor:");
 
         codVendedorConsultarCot.setEditable(false);
         codVendedorConsultarCot.setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabel87.setText("Codigo del comprador:");
+        jLabel87.setText("Comprador");
 
         codCompradorConsultarCot.setEditable(false);
         codCompradorConsultarCot.setBackground(new java.awt.Color(255, 255, 255));
@@ -2852,30 +2874,29 @@ public class loginInterface extends javax.swing.JFrame {
             panelConsultarCotizacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelConsultarCotizacionLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(panelConsultarCotizacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(panelConsultarCotizacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelConsultarCotizacionLayout.createSequentialGroup()
-                        .addComponent(jLabel89)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(valorTotalConsultarCot))
-                    .addGroup(panelConsultarCotizacionLayout.createSequentialGroup()
-                        .addComponent(jLabel58)
+                        .addGroup(panelConsultarCotizacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel89)
+                            .addGroup(panelConsultarCotizacionLayout.createSequentialGroup()
+                                .addComponent(jLabel58)
+                                .addGap(18, 18, 18)
+                                .addComponent(codCotConsultarCot, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(18, 18, 18)
-                        .addComponent(codCotConsultarCot))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelConsultarCotizacionLayout.createSequentialGroup()
-                        .addComponent(jLabel88)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(codVehiculoConsultarCot, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(panelConsultarCotizacionLayout.createSequentialGroup()
-                        .addComponent(jLabel87)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(codCompradorConsultarCot, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(panelConsultarCotizacionLayout.createSequentialGroup()
-                        .addComponent(jLabel86)
-                        .addGap(28, 28, 28)
-                        .addComponent(codVendedorConsultarCot, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
-                .addComponent(aceptarConsultarCot)
-                .addContainerGap(88, Short.MAX_VALUE))
+                        .addComponent(aceptarConsultarCot))
+                    .addGroup(panelConsultarCotizacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(valorTotalConsultarCot)
+                        .addGroup(panelConsultarCotizacionLayout.createSequentialGroup()
+                            .addGroup(panelConsultarCotizacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel86)
+                                .addComponent(jLabel87)
+                                .addComponent(jLabel88))
+                            .addGap(78, 78, 78)
+                            .addGroup(panelConsultarCotizacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(codCompradorConsultarCot, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 156, Short.MAX_VALUE)
+                                .addComponent(codVendedorConsultarCot)
+                                .addComponent(codVehiculoConsultarCot)))))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
         panelConsultarCotizacionLayout.setVerticalGroup(
             panelConsultarCotizacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2886,11 +2907,14 @@ public class loginInterface extends javax.swing.JFrame {
                         .addComponent(jLabel58)
                         .addComponent(codCotConsultarCot, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(aceptarConsultarCot))
-                .addGap(13, 13, 13)
-                .addGroup(panelConsultarCotizacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel86)
-                    .addComponent(codVendedorConsultarCot, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(21, 21, 21)
+                .addGroup(panelConsultarCotizacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelConsultarCotizacionLayout.createSequentialGroup()
+                        .addGap(16, 16, 16)
+                        .addComponent(jLabel86))
+                    .addGroup(panelConsultarCotizacionLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(codVendedorConsultarCot, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(23, 23, 23)
                 .addGroup(panelConsultarCotizacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel87)
                     .addComponent(codCompradorConsultarCot, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -2902,13 +2926,11 @@ public class loginInterface extends javax.swing.JFrame {
                 .addGroup(panelConsultarCotizacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel89)
                     .addComponent(valorTotalConsultarCot))
-                .addContainerGap(383, Short.MAX_VALUE))
+                .addContainerGap(230, Short.MAX_VALUE))
         );
 
         panelVender.setBackground(new java.awt.Color(255, 255, 255));
-        panelVender.setMaximumSize(new java.awt.Dimension(617, 579));
-        panelVender.setMinimumSize(new java.awt.Dimension(617, 579));
-        panelVender.setPreferredSize(new java.awt.Dimension(617, 579));
+        panelVender.setPreferredSize(new java.awt.Dimension(617, 518));
 
         jLabel59.setText("Código de la cotización:");
 
@@ -3038,12 +3060,12 @@ public class loginInterface extends javax.swing.JFrame {
                     .addComponent(jLabel64)
                     .addComponent(vehiculosDispVender, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addGroup(panelVenderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(ventaCrearVentaButton)
                     .addComponent(cancelarVender))
-                .addContainerGap(26, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         panelConsultas.setBackground(new java.awt.Color(255, 255, 255));
@@ -3447,6 +3469,8 @@ public class loginInterface extends javax.swing.JFrame {
             } catch (SQLException ex) {
                 ex.printStackTrace();
             }
+        }else{
+            JOptionPane.showMessageDialog(null, "Nombre de usuario y/o contraseña\nincorrecta", "Error", JOptionPane.ERROR_MESSAGE);
         }
         //new Venta().generarFactura(16);
         tfLogin.setText("");
@@ -3482,7 +3506,7 @@ public class loginInterface extends javax.swing.JFrame {
         String password_usuario = passwordCrear.getText().trim();
         String tipo_usuario = tipoUsuarioCB.getSelectedItem().toString().trim();
         String nombre_sede = CrearUsuarioSedesCB.getSelectedItem().toString().trim();
-        String email_usuario = emailUsuarioCrearTF.getText().trim();
+        String email_usuario = emailUsuarioCrearTF.getText().trim() + "@abc.com";
         String id_usuario = id_usuarioCrear.getText().trim();
         String telefono_usuario = telefonoUsuarioCrearTF.getText().trim();
         
@@ -3522,17 +3546,21 @@ public class loginInterface extends javax.swing.JFrame {
     private void crearCotizacionButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crearCotizacionButtonActionPerformed
         // TODO add your handling code here:
         panelContenedorVendedor.setVisible(true);
-        
+        OperacionesBD marcas = new OperacionesBD();
+        ResultSet listaMarcas = marcas.consultas("SELECT V.marca_vehiculo FROM vehiculos V WHERE cantidad_disponible_vehiculo = 1 GROUP BY V.marca_vehiculo;");
+        new Operaciones().agregarItemCombo(listaMarcas, vehiculosDispCrearCot);
         clVendedor.show(panelContenedorVendedor, "Crear cotizacion");
+        codVendedorCrearCot.setText(id_usuario_global);
     }//GEN-LAST:event_crearCotizacionButtonActionPerformed
 
     private void venderButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_venderButtonActionPerformed
         // TODO add your handling code here:
         OperacionesBD marcas = new OperacionesBD();
         codVentaVender.setText(new Venta().buscarUltimoCodigo());
-        ResultSet listaMarcas = marcas.consultas("SELECT V.marca_vehiculo FROM vehiculos V GROUP BY V.marca_vehiculo;");
+        ResultSet listaMarcas = marcas.consultas("SELECT V.marca_vehiculo FROM vehiculos V WHERE cantidad_disponible_vehiculo = 1 GROUP BY V.marca_vehiculo;");
         new Operaciones().agregarItemCombo(listaMarcas, vehiculosDispVender);
         panelContenedorVendedor.setVisible(true);
+        codVendedorVender.setText(id_usuario_global);
         clVendedor.show(panelContenedorVendedor, "Vender");
         
     }//GEN-LAST:event_venderButtonActionPerformed
@@ -3585,7 +3613,7 @@ public class loginInterface extends javax.swing.JFrame {
         panelContenedor.setVisible(true);
                 
         cl.show(panelContenedor, "Agregar Vehiculo");
-        
+        clInventario.show(panel, "Gestion");
     }//GEN-LAST:event_agregarVehiculosButtonActionPerformed
 
     private void modificarVehiculosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modificarVehiculosActionPerformed
@@ -3620,6 +3648,7 @@ public class loginInterface extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(loginInterface.class.getName()).log(Level.SEVERE, null, ex);
         }
+        clInventario.show(panel, "Gestion");
     }//GEN-LAST:event_modificarVehiculosActionPerformed
 
     private void agregarPartesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarPartesActionPerformed
@@ -3628,6 +3657,7 @@ public class loginInterface extends javax.swing.JFrame {
         new Operaciones().agregarItemCombo(listaSedes, crearParteSedeCB);
         panelContenedor.setVisible(true);
         cl.show(panelContenedor, "Agregar Partes");
+        clInventario.show(panel, "Gestion");
     }//GEN-LAST:event_agregarPartesActionPerformed
 
     private void modificarPartesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modificarPartesActionPerformed
@@ -3636,6 +3666,7 @@ public class loginInterface extends javax.swing.JFrame {
         new Operaciones().agregarItemCombo(listaSedes, modificarParteSedeCB);
         panelContenedor.setVisible(true);
         cl.show(panelContenedor, "Modificar Partes");
+        clInventario.show(panel, "Gestion");
     }//GEN-LAST:event_modificarPartesActionPerformed
 
     private void generarReporteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_generarReporteButtonActionPerformed
@@ -3684,7 +3715,7 @@ public class loginInterface extends javax.swing.JFrame {
         String nombre = nombreSedeTF.getText();       
         String direccion = direccionSedeCrearTF.getText().trim();
         String telefono = telefonoSedeCrearTF.getText().trim();
-        String email = emailSedeCrearTF.getText().trim();
+        String email = emailSedeCrearTF.getText().trim() + "@abc.com";
         Sede sede = new Sede();
         sede.agregarSede(nombre, direccion, telefono, email);
         
@@ -4233,19 +4264,23 @@ public class loginInterface extends javax.swing.JFrame {
         String codigoCotizacion = codCotVender.getText();
         ResultSet consulta = new Venta().buscarCotizacion(codigoCotizacion);
         try {
-            while (consulta.next()){
-                codCotVender.setText(codigoCotizacion);
-                codVendedorVender.setText(consulta.getString("id_usuario"));
-                codCompradorVender.setText(consulta.getString("id_comprador"));
-                
-                codVehiculoVender.setText(consulta.getString("id_vehiculo"));
-                
-                modificarValorVehiculoTF.setText(consulta.getString(7));
-                consulta.close();
+            while (consulta.next()) {
+                Date fechaCotizacion = consulta.getDate("fecha_cotizacion");
+                Date fechaVencimiento = new Cotizaciones().obtenerFechaVencimiento(fechaCotizacion);
+                Date fechaActual = new Date();
+
+                if (fechaActual.after(fechaCotizacion) && fechaActual.before(fechaVencimiento)) {
+                    codCotVender.setText(codigoCotizacion);
+                    codVendedorVender.setText(consulta.getString("id_usuario"));
+                    codCompradorVender.setText(consulta.getString("id_comprador"));
+
+                    codVehiculoVender.setText(consulta.getString("id_vehiculo"));
+
+                    modificarValorVehiculoTF.setText(consulta.getString(7));
+                } else {
+                    JOptionPane.showMessageDialog(null, "La cotización ha expirado", "Error", JOptionPane.ERROR_MESSAGE);
+                }
             }
-        
-        
-            
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error", "Eror", JOptionPane.ERROR_MESSAGE);
         }
@@ -4255,38 +4290,38 @@ public class loginInterface extends javax.swing.JFrame {
         // TODO add your handling code here:
         Venta venta = new Venta();
         Comprador comprador = new Comprador();
-        
+
         Operaciones operacion = new Operaciones();
-        String id_usuario = (String)codVendedorVender.getText();
-        String id_vehiculo = (String)codVehiculoVender.getText();
-        String id_comprador = (String)codCompradorVender.getText();
+        String id_usuario = (String) codVendedorVender.getText();
+        String id_vehiculo = (String) codVehiculoVender.getText();
+        String id_comprador = (String) codCompradorVender.getText();
         String fecha_venta = operacion.obtenerFecha();
-        Object[] options = {"Pagar","Cancelar"};
-        int n = JOptionPane.showOptionDialog(null, "Está a punto de confirmar la venta por un valor de: " + new Vehiculo().valorVehiculoIVA(id_vehiculo) 
+        Object[] options = {"Pagar", "Cancelar"};
+        int n = JOptionPane.showOptionDialog(null, "Está a punto de confirmar la venta por un valor de: " + new Vehiculo().valorVehiculoIVA(id_vehiculo)
                 + "\n¿Desea confirmar el pago?", "Confirmar pago", WIDTH, HEIGHT, null, options, options[1]);
         boolean bool;
         bool = (id_usuario.isEmpty() || id_vehiculo.isEmpty() || id_comprador.isEmpty());
-        if(!bool){
-            if(n == 0 ){
-            cedulaIngresarCliente.setText(id_comprador);
-                if(!comprador.existeComprador(id_comprador)){
+        if (!bool) {
+            if (n == 0) {
+                cedulaIngresarCliente.setText(id_comprador);
+                if (!comprador.existeComprador(id_comprador)) {
                     ingresarUsuarioFrame.setVisible(true);
                     JOptionPane.showMessageDialog(null, "El comprador no se encuentra registrado\nPor favor ingrese los datos.");
-                }else{
+                } else {
                     venta.crearVenta(id_usuario, id_vehiculo, id_comprador, fecha_venta);
+                    JOptionPane.showMessageDialog(null, "Factura generada!", "Factura", JOptionPane.INFORMATION_MESSAGE);
+                    int codVenta = Integer.parseInt(codVentaVender.getText());
+                    double valorTotal = new Vehiculo().valorVehiculoIVA(id_vehiculo);
+                    venta.generarFactura(codVenta, valorTotal);
+                    limpiarCrearVenta();
                 }
-            }else{
+            } else {
                 JOptionPane.showMessageDialog(null, "Error en el pago");
             }
-        }else{
+        } else {
             JOptionPane.showMessageDialog(null, "No deje espacios vacios");
         }
-        
-        limpiarCrearVenta();
-        JOptionPane.showMessageDialog(null, "Factura generada!", "Factura", JOptionPane.INFORMATION_MESSAGE);
-        int codVenta = Integer.parseInt(codVentaVender.getText());
-        double valorTotal = new Vehiculo().valorVehiculoIVA(id_vehiculo);
-        venta.generarFactura(codVenta, valorTotal);
+
         codVentaVender.setText(venta.buscarUltimoCodigo());
         
         
@@ -4378,11 +4413,51 @@ public class loginInterface extends javax.swing.JFrame {
             ex.printStackTrace();        
         }
         
-        
     }//GEN-LAST:event_aceptarConsultarOrdenActionPerformed
 
     private void crearCotizacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crearCotizacionActionPerformed
         // TODO add your handling code here:
+        Cotizaciones cotizacion = new Cotizaciones();
+        Comprador comprador = new Comprador();
+        
+        Operaciones operacion = new Operaciones();
+        String id_usuario = (String)codVendedorCrearCot.getText();
+        String id_vehiculo = (String)codVehiculoCrearCot.getText();
+        String id_comprador = (String)codCompradorCrearCot.getText();
+        String fecha_coti = operacion.obtenerFecha();
+        Object[] options = {"Cotizar","Cancelar"};
+        int n = JOptionPane.showOptionDialog(null, "Está a punto de confirmar la cotizacion por un valor de: " + new Vehiculo().valorVehiculoIVA(id_vehiculo) 
+                + "\n¿Desea confirmar la cotizacion ?", "Confirmar cotizacion", WIDTH, HEIGHT, null, options, options[1]);
+        boolean bool;
+        bool = (id_usuario.isEmpty() || id_vehiculo.isEmpty() || id_comprador.isEmpty());
+        if (!bool) {
+            if (n == 0) {
+                cedulaIngresarCliente.setText(id_comprador);
+                if (!comprador.existeComprador(id_comprador)) {
+                    ingresarUsuarioFrame.setVisible(true);
+                    JOptionPane.showMessageDialog(null, "El comprador no se encuentra registrado\nPor favor ingrese los datos.");
+                } else {
+                    cotizacion.crearCoti(id_usuario, id_vehiculo, id_comprador, fecha_coti);
+                    //codVendedorCrearCot.setText("");
+                    codVehiculoCrearCot.setText("");
+                    codCompradorCrearCot.setText("");
+                    JOptionPane.showMessageDialog(null, "Factura generada!", "Factura", JOptionPane.INFORMATION_MESSAGE);
+                    int codCot = Integer.parseInt(cotizacion.buscarUltimoCodigo());
+                    double valorTotal = new Vehiculo().valorVehiculoIVA(id_vehiculo);
+                    Date fecha = cotizacion.obtenerFechaVencimiento(new Date());
+                    cotizacion.generarFactura(--codCot, valorTotal, fecha);
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "Error en la cotizacion");
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Por favor complete todos los campos");
+        }
+        
+        //limpiarCrearVenta();   
+        //venta.generarFactura(codVenta, valorTotal);
+        //codVentaVender.setText(venta.buscarUltimoCodigo());
+        
     }//GEN-LAST:event_crearCotizacionActionPerformed
 
     private void ventasReporteBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ventasReporteBotonActionPerformed
@@ -4471,6 +4546,7 @@ public class loginInterface extends javax.swing.JFrame {
     private void gestionVehiculosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gestionVehiculosActionPerformed
         // TODO add your handling code here:
         clInventario.show(panel, "Vehiculos");
+        
     }//GEN-LAST:event_gestionVehiculosActionPerformed
 
     private void gestionPartesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gestionPartesActionPerformed
@@ -4490,7 +4566,7 @@ public class loginInterface extends javax.swing.JFrame {
 
         cedulaIngresarCliente.setText("");
         comprador.crearComprador(id_comprador, nombre_comprador, direccion_comprador, telefono_comprador, email_comprador);
-        frameOpcionesReporte.setVisible(false);
+        ingresarUsuarioFrame.setVisible(false);
         cedulaIngresarCliente.setText("");
         nombreIngresarCliente.setText("");
         direccionIngresarCliente.setText("");
@@ -4577,6 +4653,72 @@ public class loginInterface extends javax.swing.JFrame {
         mesOpcionesReportes.setEnabled(true);
         yearOpcionesReportes.setEnabled(true);
     }//GEN-LAST:event_frameOpcionesReporteWindowClosing
+
+    private void vehiculosDispCrearCotItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_vehiculosDispCrearCotItemStateChanged
+        // TODO add your handling code here:
+        panelConsultas.removeAll();
+        panelContenedor.setVisible(true);
+        String consultaSQL = "SELECT id_vehiculo, marca_vehiculo, modelo_vehiculo, color_vehiculo, "
+                + "nuevo_vehiculo, valor_vehiculo, id_sede FROM vehiculos WHERE marca_vehiculo = '" + (String)vehiculosDispCrearCot.getSelectedItem()
+                + "' AND cantidad_disponible_vehiculo = 1;";
+        ResultSet tabla = new OperacionesBD().consultas(consultaSQL);
+        DefaultTableModel dtm = new DefaultTableModel(0,0);
+        
+        try{
+            int count = 0;
+            while(tabla.next()){
+                count++;
+            }
+            
+            String[][] data = new String[count][7];
+            int i = 0;
+            tabla = new OperacionesBD().consultas(consultaSQL);
+            while(tabla.next()){
+                data[i][0] = "" + tabla.getInt("id_vehiculo");
+                data[i][1] = tabla.getString("marca_vehiculo");
+                data[i][2] = tabla.getString("modelo_vehiculo");
+                data[i][3] = tabla.getString("color_vehiculo");
+                data[i][4] = tabla.getString("nuevo_vehiculo");
+                data[i][5] = tabla.getString("valor_vehiculo");
+                data[i][6] = tabla.getString("id_sede");
+                i++;
+            }
+            String[] nombreColumnas = {"Codigo", "Marca", "Modelo", "Color", "Nuevo", "Valor", "Sede"};
+            dtm.setColumnIdentifiers(nombreColumnas);
+            tableCrearCot.setModel(dtm);
+            for (int j = 0; j < count; j++) {
+                dtm.addRow(data[j]);
+            }
+            
+            
+        }catch(SQLException exc){
+            JOptionPane.showMessageDialog(null, "Error al acceder a la base de datos");
+            exc.printStackTrace();
+        }
+    }//GEN-LAST:event_vehiculosDispCrearCotItemStateChanged
+
+    private void aceptarConsultarCotActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aceptarConsultarCotActionPerformed
+        // TODO add your handling code here:
+        try{
+            Cotizaciones cot = new Cotizaciones();
+            int codCot = Integer.parseInt(codCotConsultarCot.getText());
+            String codCotS = "" + codCot;
+            ResultSet tabla = cot.consultarCotizacion(codCotS);
+            while(tabla.next()){
+                codVendedorConsultarCot.setText(tabla.getString("nombre_usuario"));
+                codCompradorConsultarCot.setText(tabla.getString("nombre_comprador"));
+                codVehiculoConsultarCot.setText(tabla.getString("marca_vehiculo"));
+                double valor = tabla.getDouble("valor_vehiculo");
+                valor = valor + valor*0.16;
+                valorTotalConsultarCot.setText("" + valor);
+            }
+        }catch(SQLException ex){
+            ex.printStackTrace();
+        }catch(NumberFormatException ex){
+            JOptionPane.showMessageDialog(null, "El codigo de la cotizacion debe ser un numero", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        
+    }//GEN-LAST:event_aceptarConsultarCotActionPerformed
     
     private void limpiarCrearSede(){
         String id = new Operaciones().obtenerUltimoCodigoSede();
@@ -4654,7 +4796,7 @@ public class loginInterface extends javax.swing.JFrame {
     }
     
     private void limpiarCrearVenta(){
-        codVendedorVender.setText("");
+        //codVendedorVender.setText("");
         codVehiculoVender.setText("");
         codCompradorVender.setText("");
         codCotVender.setText("(Opcional)");
@@ -4882,6 +5024,8 @@ public class loginInterface extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel89;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JLabel jLabel90;
+    private javax.swing.JLabel jLabel91;
+    private javax.swing.JLabel jLabel92;
     private javax.swing.JLabel jLabelPassword;
     private javax.swing.JLabel jLabelUsuario;
     private javax.swing.JPanel jPanel2;

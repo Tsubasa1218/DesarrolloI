@@ -852,7 +852,7 @@ public class Reporte {
         
         if(reporte == PERSONAL){
             try {
-            JasperReport jasperReport=JasperCompileManager.compileReport("C:\\Users\\Juan Suaza\\Documents\\GitHub\\DesarrolloI-master\\src\\Reportes\\reporteCantidadEmpleados.jrxml");
+            JasperReport jasperReport=JasperCompileManager.compileReport("C:\\Users\\Familia Suaza\\Documents\\NetBeansProjects\\Desarrollo\\DesarrolloI\\src\\Reportes\\reporteCantidadEmpleados.jrxml");
             JRResultSetDataSource jasperReports = new JRResultSetDataSource(datos);
             JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, null, jasperReports);
             //JasperViewer.viewReport(jasperPrint);
@@ -868,7 +868,7 @@ public class Reporte {
     
         }else if(reporte == APORTE_SEDE){
             try {
-            JasperReport jasperReport=JasperCompileManager.compileReport("C:\\Users\\Juan Suaza\\Documents\\GitHub\\DesarrolloI-master\\src\\Reportes\\reporteAporte.jrxml");
+            JasperReport jasperReport=JasperCompileManager.compileReport("C:\\Users\\Familia Suaza\\Documents\\NetBeansProjects\\Desarrollo\\DesarrolloI\\src\\Reportes\\reporteAporte.jrxml");
             JRResultSetDataSource jasperReports = new JRResultSetDataSource(datos);
             JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport,null, jasperReports);
             //JasperViewer.viewReport(jasperPrint);
@@ -883,7 +883,7 @@ public class Reporte {
         }
         }else if(reporte == CANTIDAD_VEHICULOS){
             try {
-            JasperReport jasperReport=JasperCompileManager.compileReport("C:\\Users\\Juan Suaza\\Documents\\GitHub\\DesarrolloI-master\\src\\Reportes\\reporteCantidadVehiculos.jrxml");
+            JasperReport jasperReport=JasperCompileManager.compileReport("C:\\Users\\Familia Suaza\\Documents\\NetBeansProjects\\Desarrollo\\DesarrolloI\\src\\Reportes\\reporteCantidadVehiculos.jrxml");
             JRResultSetDataSource jasperReports = new JRResultSetDataSource(datos);
             JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport,null, jasperReports);
             //JasperViewer.viewReport(jasperPrint);
@@ -898,7 +898,7 @@ public class Reporte {
         }
         }else if(reporte == COTIZACIONES_SEDE){
             try {
-            JasperReport jasperReport=JasperCompileManager.compileReport("C:\\Users\\Juan Suaza\\Documents\\GitHub\\DesarrolloI-master\\src\\Reportes\\reporteCotizacionesSede.jrxml");
+            JasperReport jasperReport=JasperCompileManager.compileReport("C:\\Users\\Familia Suaza\\Documents\\NetBeansProjects\\Desarrollo\\DesarrolloI\\src\\Reportes\\reporteCotizacionesSede.jrxml");
             JRResultSetDataSource jasperReports = new JRResultSetDataSource(datos);
             JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport,null, jasperReports);
             //JasperViewer.viewReport(jasperPrint);
@@ -913,7 +913,7 @@ public class Reporte {
         }
         }else if(reporte == COTIZACIONES_EMPRESA){
             try {
-            JasperReport jasperReport=JasperCompileManager.compileReport("C:\\Users\\Juan Suaza\\Documents\\GitHub\\DesarrolloI-master\\src\\Reportes\\reporteCotizacionesEmpresa.jrxml");
+            JasperReport jasperReport=JasperCompileManager.compileReport("C:\\Users\\Familia Suaza\\Documents\\NetBeansProjects\\Desarrollo\\DesarrolloI\\src\\Reportes\\reporteCotizacionesEmpresa.jrxml");
             JRResultSetDataSource jasperReports = new JRResultSetDataSource(datos);
             JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport,null, jasperReports);
             //JasperViewer.viewReport(jasperPrint);
@@ -928,7 +928,7 @@ public class Reporte {
         }
         }else if(reporte == VEHICULOS_AGREGADOS){
             try {
-            JasperReport jasperReport=JasperCompileManager.compileReport("C:\\Users\\Juan Suaza\\Documents\\GitHub\\DesarrolloI-master\\src\\Reportes\\reporteVehiculosAgregados.jrxml");
+            JasperReport jasperReport=JasperCompileManager.compileReport("C:\\Users\\Familia Suaza\\Documents\\NetBeansProjects\\Desarrollo\\DesarrolloI\\src\\Reportes\\reporteVehiculosAgregados.jrxml");
             JRResultSetDataSource jasperReports = new JRResultSetDataSource(datos);
             JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport,null, jasperReports);
             //JasperViewer.viewReport(jasperPrint);
@@ -943,7 +943,7 @@ public class Reporte {
         }
         }else if(reporte == ORDENES_EMPRESA){
             try {
-            JasperReport jasperReport=JasperCompileManager.compileReport("C:\\Users\\Juan Suaza\\Documents\\GitHub\\DesarrolloI-master\\src\\Reportes\\reporteOrdenesEmpresa.jrxml");
+            JasperReport jasperReport=JasperCompileManager.compileReport("C:\\Users\\Familia Suaza\\Documents\\NetBeansProjects\\Desarrollo\\DesarrolloI\\src\\Reportes\\reporteOrdenesEmpresa.jrxml");
             JRResultSetDataSource jasperReports = new JRResultSetDataSource(datos);
             JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport,null, jasperReports);
             //JasperViewer.viewReport(jasperPrint);
@@ -958,7 +958,7 @@ public class Reporte {
         }
         }else if(reporte == ORDENES_SEDE){
             try {
-            JasperReport jasperReport=JasperCompileManager.compileReport("C:\\Users\\Juan Suaza\\Documents\\GitHub\\DesarrolloI-master\\src\\Reportes\\reporteOrdenesSede.jrxml");
+            JasperReport jasperReport=JasperCompileManager.compileReport("C:\\Users\\Familia Suaza\\Documents\\NetBeansProjects\\Desarrollo\\DesarrolloI\\src\\Reportes\\reporteOrdenesSede.jrxml");
             JRResultSetDataSource jasperReports = new JRResultSetDataSource(datos);
             JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport,null, jasperReports);
             //JasperViewer.viewReport(jasperPrint);
@@ -973,7 +973,7 @@ public class Reporte {
         }
         }else if(reporte == VENTAS_EMPRESA){
             try {
-            JasperReport jasperReport=JasperCompileManager.compileReport("C:\\Users\\Juan Suaza\\Documents\\GitHub\\DesarrolloI-master\\src\\Reportes\\reporteVentasEmpresa.jrxml");
+            JasperReport jasperReport=JasperCompileManager.compileReport("C:\\Users\\Familia Suaza\\Documents\\NetBeansProjects\\Desarrollo\\DesarrolloI\\src\\Reportes\\reporteVentasEmpresa.jrxml");
             JRResultSetDataSource jasperReports = new JRResultSetDataSource(datos);
             JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport,null, jasperReports);
             //JasperViewer.viewReport(jasperPrint);
@@ -988,7 +988,7 @@ public class Reporte {
         }
         }else if(reporte == VENTAS_SEDE){
             try {
-            JasperReport jasperReport=JasperCompileManager.compileReport("C:\\Users\\Juan Suaza\\Documents\\GitHub\\DesarrolloI-master\\src\\Reportes\\reporteVentasSede.jrxml");
+            JasperReport jasperReport=JasperCompileManager.compileReport("C:\\Users\\Familia Suaza\\Documents\\NetBeansProjects\\Desarrollo\\DesarrolloI\\src\\Reportes\\reporteVentasSede.jrxml");
             JRResultSetDataSource jasperReports = new JRResultSetDataSource(datos);
             JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport,null, jasperReports);
             //JasperViewer.viewReport(jasperPrint);

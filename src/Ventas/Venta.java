@@ -99,7 +99,7 @@ public class Venta {
     public void generarFactura(int id_venta, double valor_Total){
         
         try {
-            JasperReport jasperReport=JasperCompileManager.compileReport("C:\\Users\\Juan Suaza\\Documents\\GitHub\\DesarrolloI-master\\src\\Ventas\\facturaVenta.jrxml");
+            JasperReport jasperReport=JasperCompileManager.compileReport("C:\\Users\\Familia Suaza\\Documents\\NetBeansProjects\\Desarrollo\\DesarrolloI\\src\\Ventas\\facturaVenta.jrxml");
             HashMap map = new HashMap();
             Connection conn = new Fachada().conectarBD();
             System.out.println(""+id_venta);
@@ -111,7 +111,7 @@ public class Venta {
             JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, map, conn);
             //JasperViewer.viewReport(jasperPrint); 
             String filename=null;
-            filename="C:\\Users\\Juan Suaza\\Documents\\GitHub\\DesarrolloI-master\\Facturas\\facturaVenta"+id_venta+".pdf";
+            filename="facturaVenta"+id_venta+".pdf";
 
         //Report saved in specified path
             JasperExportManager.exportReportToPdfFile(jasperPrint,filename);

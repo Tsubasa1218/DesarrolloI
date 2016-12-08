@@ -9,18 +9,21 @@
 	<parameter name="valor_total" class="java.lang.Double">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
+	<parameter name="fechaValida" class="java.util.Date">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
 	<queryString>
-		<![CDATA[SELECT C.nombre_comprador, C.id_comprador, C.telefono_comprador, C.direccion_comprador, V.id_venta, V.fecha_venta, U.nombre_usuario, U.id_usuario, valor_vehiculo, marca_vehiculo, modelo_vehiculo, id_vehiculo
+		<![CDATA[SELECT C.nombre_comprador, C.id_comprador, C.telefono_comprador, C.direccion_comprador, V.id_cotizaciones, V.fecha_cotizacion, U.nombre_usuario, U.id_usuario, valor_vehiculo, marca_vehiculo, modelo_vehiculo, id_vehiculo
 
-FROM ventas_vehiculos AS V NATURAL JOIN comprador AS C NATURAL JOIN usuarios AS U NATURAL JOIN vehiculos 
-WHERE id_venta = $P{numero_factura};]]>
+FROM cotizaciones_realizadas AS V NATURAL JOIN comprador AS C NATURAL JOIN usuarios AS U NATURAL JOIN vehiculos 
+WHERE id_cotizaciones = $P{numero_factura};]]>
 	</queryString>
 	<field name="nombre_comprador" class="java.lang.String"/>
 	<field name="id_comprador" class="java.lang.String"/>
 	<field name="telefono_comprador" class="java.lang.String"/>
 	<field name="direccion_comprador" class="java.lang.String"/>
-	<field name="id_venta" class="java.lang.Integer"/>
-	<field name="fecha_venta" class="java.sql.Date"/>
+	<field name="id_cotizaciones" class="java.lang.Integer"/>
+	<field name="fecha_cotizacion" class="java.sql.Date"/>
 	<field name="nombre_usuario" class="java.lang.String"/>
 	<field name="id_usuario" class="java.lang.String"/>
 	<field name="valor_vehiculo" class="java.lang.Double"/>
@@ -34,7 +37,7 @@ WHERE id_venta = $P{numero_factura};]]>
 		<band height="114" splitType="Stretch">
 			<staticText>
 				<reportElement x="0" y="0" width="138" height="20" uuid="d5b2f75c-05b2-4930-a88a-bbe769393faf"/>
-				<text><![CDATA[FACTURA DE VENTA]]></text>
+				<text><![CDATA[COTIZACION]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="0" y="20" width="174" height="20" uuid="3a4d526d-12d3-4cbf-953b-712d5be36f4a"/>
@@ -85,16 +88,12 @@ WHERE id_venta = $P{numero_factura};]]>
 				<reportElement x="580" y="0" width="1" height="86" uuid="ca790d09-bc4e-4158-81bc-bd9408d73d96"/>
 			</line>
 			<staticText>
-				<reportElement x="591" y="10" width="100" height="20" uuid="09fd15c6-0da7-44f8-8581-f38df46f0b16"/>
-				<text><![CDATA[Factura Venta Noº]]></text>
+				<reportElement x="591" y="10" width="111" height="20" uuid="09fd15c6-0da7-44f8-8581-f38df46f0b16"/>
+				<text><![CDATA[Noº Cotización]]></text>
 			</staticText>
-			<textField>
-				<reportElement x="691" y="10" width="100" height="20" uuid="004cf8f6-68a9-4fb7-96aa-6701f8b6c1cc"/>
-				<textFieldExpression><![CDATA[$F{id_venta}]]></textFieldExpression>
-			</textField>
 			<staticText>
-				<reportElement x="591" y="30" width="100" height="20" uuid="1a442169-fbf1-4440-b144-fbe82b6160dc"/>
-				<text><![CDATA[Fecha Factura]]></text>
+				<reportElement x="591" y="30" width="111" height="20" uuid="1a442169-fbf1-4440-b144-fbe82b6160dc"/>
+				<text><![CDATA[Fecha de expedición]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="0" y="50" width="26" height="20" uuid="5affcfd6-9ce8-459c-8f6b-cf1e52789262"/>
@@ -104,9 +103,21 @@ WHERE id_venta = $P{numero_factura};]]>
 				<reportElement x="26" y="50" width="100" height="20" uuid="afd3eeea-6e28-4332-a316-f1936c94e8c7"/>
 				<textFieldExpression><![CDATA[$F{id_comprador}]]></textFieldExpression>
 			</textField>
-			<textField pattern="dd/MM/yyyy">
-				<reportElement x="691" y="30" width="100" height="20" uuid="49167f88-275d-48df-b29b-3826f9a58e1f"/>
-				<textFieldExpression><![CDATA[$F{fecha_venta}]]></textFieldExpression>
+			<staticText>
+				<reportElement x="591" y="50" width="111" height="20" uuid="56f8ad28-fad3-4ad1-a15f-492c0e8d1174"/>
+				<text><![CDATA[Válido hasta]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="702" y="50" width="89" height="20" uuid="bca7f8be-94ca-4756-85da-18e0fdf904e0"/>
+				<textFieldExpression><![CDATA[$P{fechaValida}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="702" y="10" width="100" height="20" uuid="2b98f916-27e7-473d-b58b-37b55ebc8200"/>
+				<textFieldExpression><![CDATA[$F{id_cotizaciones}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="703" y="30" width="100" height="20" uuid="ca47b292-251d-4e4f-a954-15ddcd5b3708"/>
+				<textFieldExpression><![CDATA[$F{fecha_cotizacion}]]></textFieldExpression>
 			</textField>
 		</band>
 	</pageHeader>

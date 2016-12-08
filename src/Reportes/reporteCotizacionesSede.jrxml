@@ -22,10 +22,6 @@
 					</textElement>
 					<text><![CDATA[Reporte: Cotizaciones por sede]]></text>
 				</staticText>
-				<image>
-					<reportElement x="354" y="0" width="241" height="110" uuid="411f864e-78f5-4e93-9311-0d98020c80cb"/>
-					<imageExpression><![CDATA["C:\\Users\\Juan Suaza\\Documents\\GitHub\\DesarrolloI-master\\src\\interfazGrafica\\Imagenes\\logo.png"]]></imageExpression>
-				</image>
 				<textField pattern="MMMMM dd, yyyy">
 					<reportElement x="20" y="92" width="120" height="20" forecolor="#FFFFFF" uuid="d429aa5c-4397-4f1b-a410-ce47f06d1979"/>
 					<box>
@@ -40,6 +36,10 @@
 					</textElement>
 					<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
 				</textField>
+				<image>
+					<reportElement x="334" y="21" width="241" height="110" uuid="49a1f3af-70e1-40c9-99c9-c085e742b9ad"/>
+					<imageExpression><![CDATA["C:\\Users\\Familia Suaza\\Documents\\NetBeansProjects\\Desarrollo\\DesarrolloI\\src\\interfazGrafica\\Imagenes\\logo.png"]]></imageExpression>
+				</image>
 			</frame>
 		</band>
 	</title>
