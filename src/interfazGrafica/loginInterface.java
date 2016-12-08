@@ -481,7 +481,9 @@ public class loginInterface extends javax.swing.JFrame {
         gerenteJFrame.setTitle("ABC Corp. - Gerente");
         gerenteJFrame.setBackground(new java.awt.Color(255, 255, 255));
         gerenteJFrame.setLocation(new java.awt.Point(200, 100));
+        gerenteJFrame.setMaximumSize(new java.awt.Dimension(1003, 760));
         gerenteJFrame.setMinimumSize(new java.awt.Dimension(1003, 760));
+        gerenteJFrame.setPreferredSize(new java.awt.Dimension(1003, 760));
         gerenteJFrame.setResizable(false);
         gerenteJFrame.addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
@@ -4472,6 +4474,7 @@ public class loginInterface extends javax.swing.JFrame {
             gerenteJFrame.setVisible(false);
             this.setVisible(true);
         }
+        cl.show(panelContenedor, "Inicio");
     }//GEN-LAST:event_salirLabelMouseClicked
 
     private void gerenteJFrameWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_gerenteJFrameWindowClosing
@@ -4483,7 +4486,7 @@ public class loginInterface extends javax.swing.JFrame {
             gerenteJFrame.setVisible(false);
             this.setVisible(true);
         }
-        
+        cl.show(panelContenedor, "Inicio");
     }//GEN-LAST:event_gerenteJFrameWindowClosing
 
     private void jefeJFrameWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_jefeJFrameWindowClosing
@@ -4495,6 +4498,7 @@ public class loginInterface extends javax.swing.JFrame {
             jefeJFrame.setVisible(false);
             this.setVisible(true);
         }
+        clJefe.show(panelContenedorJefe, "Inicio");
     }//GEN-LAST:event_jefeJFrameWindowClosing
 
     private void vendedorJFrameWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_vendedorJFrameWindowClosing
@@ -4506,6 +4510,7 @@ public class loginInterface extends javax.swing.JFrame {
             vendedorJFrame.setVisible(false);
             this.setVisible(true);
         }
+        clVendedor.show(panelContenedorVendedor, "Inicio");
     }//GEN-LAST:event_vendedorJFrameWindowClosing
 
     private void salirLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_salirLabel1MouseClicked
@@ -4517,6 +4522,7 @@ public class loginInterface extends javax.swing.JFrame {
             jefeJFrame.setVisible(false);
             this.setVisible(true);
         }
+        clJefe.show(panelContenedorJefe, "Inicio");
     }//GEN-LAST:event_salirLabel1MouseClicked
 
     private void salirLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_salirLabel2MouseClicked
@@ -4528,6 +4534,7 @@ public class loginInterface extends javax.swing.JFrame {
             vendedorJFrame.setVisible(false);
             this.setVisible(true);
         }
+        clVendedor.show(panelContenedorVendedor, "Inicio");
     }//GEN-LAST:event_salirLabel2MouseClicked
 
     private void reportePersonalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reportePersonalActionPerformed

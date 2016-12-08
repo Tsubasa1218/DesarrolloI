@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reporteAporte_subreport1" language="groovy" pageWidth="555" pageHeight="802" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="a234dec5-42eb-45da-a867-77ab1f6b6869">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT nombre_sede FROM sedes EXCEPT SELECT nombre_sede FROM ventas_vehiculos NATURAL JOIN vehiculos NATURAL JOIN sedes GROUP BY nombre_sede;]]>
+	</queryString>
+	<field name="nombre_sede" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="27" splitType="Stretch">
+			<staticText>
+				<reportElement x="219" y="0" width="100" height="20" uuid="55f7890f-51b4-4d07-bf5e-d552d80a85e3"/>
+				<text><![CDATA[0]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="0" y="0" width="100" height="20" uuid="7dd8ca5c-7ff5-4c1c-a8cb-005e548b5121"/>
+				<textFieldExpression><![CDATA[$F{nombre_sede}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>
