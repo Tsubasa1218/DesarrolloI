@@ -3799,18 +3799,19 @@ public class loginInterface extends javax.swing.JFrame {
             for (int i = 0; i < password.length; i++) {
                 password_usuario += password[i];
                 password_usuario2 += password_2[i];
-                String estado = "false";
-                if (modificarActivoRB.isSelected()) {
-                    estado = "true";
-                }
-                if (!password_usuario.equals(password_usuario2)) {
-                    JOptionPane.showMessageDialog(null, "Contraseñas no coinciden\nEscribelas nuevamente");
-                } else {
-                    Operaciones operaciones = new Operaciones();
-                    String id_sede = operaciones.codigoSedeDeNombre(sede);
-                    Usuario usuario = new Usuario();
-                    usuario.modificarUsuario(id_usuario, password_usuario, nombre_usuario, email_usuario, telefono_usuario, tipo_usuario, id_sede, estado);
-                }
+
+            }
+            String estado = "false";
+            if (modificarActivoRB.isSelected()) {
+                estado = "true";
+            }
+            if (!password_usuario.equals(password_usuario2)) {
+                JOptionPane.showMessageDialog(null, "Contraseñas no coinciden\nEscribelas nuevamente");
+            } else {
+                Operaciones operaciones = new Operaciones();
+                String id_sede = operaciones.codigoSedeDeNombre(sede);
+                Usuario usuario = new Usuario();
+                usuario.modificarUsuario(id_usuario, password_usuario, nombre_usuario, email_usuario, telefono_usuario, tipo_usuario, id_sede, estado);
             }
         } catch (ArrayIndexOutOfBoundsException ex) {
             JOptionPane.showMessageDialog(null, "Por favor, completa los campos de contraseña", "Error", JOptionPane.ERROR_MESSAGE);
@@ -4201,21 +4202,28 @@ public class loginInterface extends javax.swing.JFrame {
             }
         }
         
-        sedesOpcionesReporte.setEnabled(true);
+        sedesOpcionesReportes.setEnabled(true);
         empresaOpcionesReportes.setEnabled(true);
-        sedesOpcionesReporte.setEnabled(true);
-        frameOpcionesReporte.setVisible(false);
-        sedesOpcionesReportes.setSelected(false);
-        empresaOpcionesReportes.setSelected(false);
         sedesOpcionesReporte.removeAllItems();
-        semanalOpcionesReportes.setSelected(false);
-        todoOpcionesReportes.setSelected(false);
-        diaOpcionesReportes.setText("");
-        mesOpcionesReportes.setText("");
-        yearOpcionesReportes.setText("");
+        sedesOpcionesReporte.setEnabled(true);
+        semanalOpcionesReportes.setEnabled(true);
+        todoOpcionesReportes.setEnabled(true);
         diaOpcionesReportes.setEnabled(true);
         mesOpcionesReportes.setEnabled(true);
         yearOpcionesReportes.setEnabled(true);
+        
+        frameOpcionesReporte.setVisible(false);
+ 
+        sedesOpcionesReportes.setSelected(false);
+        empresaOpcionesReportes.setSelected(false);
+        
+        semanalOpcionesReportes.setSelected(false);
+        todoOpcionesReportes.setSelected(false);
+        
+        diaOpcionesReportes.setText("");
+        mesOpcionesReportes.setText("");
+        yearOpcionesReportes.setText("");
+
         panelReporte.updateUI();
     }//GEN-LAST:event_generarReporteOpcionesButonActionPerformed
 
@@ -4279,12 +4287,13 @@ public class loginInterface extends javax.swing.JFrame {
 
                     codVehiculoVender.setText(consulta.getString("id_vehiculo"));
 
-                    modificarValorVehiculoTF.setText(consulta.getString(7));
                 } else {
                     JOptionPane.showMessageDialog(null, "La cotización ha expirado", "Error", JOptionPane.ERROR_MESSAGE);
                 }
             }
         } catch (SQLException ex) {
+            
+            ex.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error", "Eror", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_venderBuscarCotButtonActionPerformed
